@@ -13,19 +13,19 @@ export default function InspectTag({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const currentTag = searchParams.get("tag");
-
-  const handleClick = (tag: string) => {
-    const newParams = new URLSearchParams(searchParams.toString())
-
-    newParams.set("tag", tag);
-    router.push(`${pathname}?${newParams.toString()}`)
-  }
+  
 
   const hoveredTag = useHoveredLiquidStore((state) => state.value)
   const offsetX = useHoveredLiquidStore((state) => state.offsetX)
   const width = useHoveredLiquidStore((state) => state.width)
   const setHoveredTag = useHoveredLiquidStore((state) => state.setValue);
+
+  const handleClick = (tag: string) => {
+    const newParams = new URLSearchParams(searchParams.toString())
+    newParams.set("tag", tag);
+    router.push(`${pathname}?${newParams.toString()}`)
+    console.log(hoveredTag)
+  }
 
   const updateHandlePosition = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -34,22 +34,24 @@ export default function InspectTag({
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const offsetX = Math.floor(rect.left);
     const width = rect.width;
-
     setHoveredTag(value, offsetX, width)
   };
 
   useEffect(() => {
-    if (!hoveredTag && currentTag) {
-      const el = document.getElementById(currentTag);
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const offsetX = Math.floor(rect.left);
-      const width = rect.width;
-
-      setHoveredTag(currentTag, offsetX, width)
+    if (!hoveredTag) {
+      setTimeout(() => {
+        const params = new URLSearchParams(window.location.search);
+        const currentTag = params.get("tag");
+        if (!currentTag) return;
+  
+        const el = document.getElementById(currentTag);
+        if (!el) return;
+  
+        const rect = el.getBoundingClientRect();
+        setHoveredTag(currentTag, Math.floor(rect.left), rect.width);
+      }, 30); // 10–20ms is usually enough
     }
-  }, [hoveredTag, currentTag, setHoveredTag])
+  }, [hoveredTag, setHoveredTag]);
 
   
 
@@ -65,7 +67,7 @@ export default function InspectTag({
           id={tag.value}
           className='h-7 px-3 flex items-center justify-center rounded-sm text-text-900 font-medium'
           onClick={() => handleClick(tag.value)}
-          onMouseEnter={(e) => updateHandlePosition(e, tag.value)}
+          onMouseOver={(e) => updateHandlePosition(e, tag.value)}
         >
           <label htmlFor={`${tag.value}-input`}>{tag.name}</label>
           <input
