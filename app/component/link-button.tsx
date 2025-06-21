@@ -16,12 +16,6 @@ export default function LinkButton({
   const pathname = usePathname();
 
   return (
-    <button
-      className={clsx(
-        "w-auto h-8 bg-button-100 px-4 py-5 flex items-center rounded-sm",
-        pathname === href && "bg-button-200",
-      )}
-    >
       <Link
         href={
           backbutton ?
@@ -29,8 +23,14 @@ export default function LinkButton({
           : href
         }
       >
+        <button
+          className={clsx(
+            "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-98 transition-[filter, colors] duration-300",
+            pathname === href ? "bg-button-200 font-bold" : "bg-button-100",
+          )}
+        >
           {name}
+        </button>
       </Link>
-    </button>
   )
 }

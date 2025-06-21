@@ -21,7 +21,7 @@ const settings = [
   },
   {
     value: 'music',
-    name: '배경음악',
+    name: '음악',
     options: [
       {
         value: "on",
@@ -37,7 +37,7 @@ const settings = [
 
 const components = [
   {
-    value: 'inspector',
+    value: 'note-inspector',
     name: '노트 탐색기',
   },
   {
@@ -48,7 +48,7 @@ const components = [
 
 export default function GlobalNav() {
   return (
-    <nav className="h-auto w-full flex flex-col gap-2 items-start">
+    <nav className="mt-24 h-auto w-full flex flex-col gap-1 items-start text-sm">
       <ExpandButton name="solmee.xyz">
         <LinkButton href="/" name="무작위" />
         <LinkButton href="/chron" name="작성일 순서" />
@@ -57,12 +57,12 @@ export default function GlobalNav() {
 
       <LinkButton href="/meta" name="대해서" backbutton={true} />
 
-      <ExpandButton name={<Settings className="w-5 h-5" />}>
+      <ExpandButton name={<Settings className="w-4 h-4" />}>
         {settings.map((field, idx) => (
           <SwitchField key={idx} value={field} />
         ))}
       </ExpandButton>
-      
+
       {components.map((cmp, idx) => 
         <EnableButton key={idx} value={cmp} />
       )}

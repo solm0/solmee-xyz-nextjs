@@ -8,9 +8,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-button-100: #F0F0F0;
+  --color-button-100: #EBEBEB;
   --color-button-200: #D1D1D1;
   --color-button-on: #B8FFCA;
+  --color-text-900: #3D4F58;
+  --color-text-800: #646464;
+  --color-text-700: #DADADA;
+  --color-selected-500: #00EB95;
 }
 
 /* @media (prefers-color-scheme: dark) {

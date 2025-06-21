@@ -21,13 +21,13 @@ export default function ExpandButton({
     <div>
       <button
         onClick={handleClick}
-        className="w-auto h-8 bg-button-100 px-4 py-5 flex items-center rounded-sm"
+        className="w-auto h-8 bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-98 transition-[filter] duration-300"
       >
         {name}
       </button>
       <div className={clsx(
-        "h-auto flex flex-col items-start gap-2 ml-8 overflow-clip transition-all",
-        isOpen ? "max-h-96 mt-2" : "max-h-0"
+        "h-auto flex flex-col items-start gap-1 ml-8 overflow-clip transition-all",
+        isOpen ? "max-h-96 mt-1" : "max-h-0"
       )}>
         {children}
       </div>
