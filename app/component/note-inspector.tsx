@@ -1,6 +1,11 @@
-import { Tag } from 'lucide-react';
+'use client'
+
+import { Tag, Search, Key } from 'lucide-react';
 import InspectTag from './inspect-tag';
+import InspectSearch from './inspect-search';
+import InspectKeyword from './inspect-keyword';
 import { Suspense } from 'react';
+import clsx from 'clsx';
 
 const tags = [
   {
@@ -25,21 +30,62 @@ const tags = [
   },
 ]
 
-export default function NoteInspector() {
+export function FilterComponents({
+  icon,
+  cmp,
+  children
+}: {
+  icon: React.ReactNode,
+  cmp: {value: string, name: string},
+  children: React.ReactNode
+}) {
   return (
-    <section className="mt-24 h-auto w-full flex flex-col gap-8 items-start text-sm">
+    <div className='flex flex-col gap-1 w-full items-start'>
+      <label
+        className='flex items-center gap-2 text-text-800'
+        htmlFor={`${cmp.value}-input`}
+      >
+        {icon}
+        {cmp.name}
+      </label>
+      {children}
+    </div>
+  )
+}
+
+export default function NoteInspector({
+  isEnabled,
+}: {
+  isEnabled: boolean;
+}) {
+  return (
+    <section
+      className={clsx(
+      "mt-24 h-auto w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] overflow-clip",
+      isEnabled ? 'translate-x-0' : '-translate-x-80'
+    )}>
       <Suspense>
-        <div>
-          <label
-            className='flex items-center gap-2 text-text-800'
-            htmlFor='tagInput'
-          >
-            <Tag className='w-3 h-3' />
-            태그
-          </label>
+        <FilterComponents
+          icon={<Tag className='w-3 h-3' />}
+          cmp={{ value: 'tag', name: '태그' }}
+        >
           <InspectTag tags={tags} />
-        
-        </div>
+        </FilterComponents>
+
+        <FilterComponents
+          icon={<Search className='w-3 h-3' />}
+          cmp={{ value: 'search', name: '문자열' }}
+        >
+          <InspectSearch />
+        </FilterComponents>
+
+        <FilterComponents
+          icon={<Key className='w-3 h-3' />}
+          cmp={{ value: 'keyword', name: '키워드' }}
+        >
+          <InspectKeyword />
+        </FilterComponents>
+
       </Suspense>
     </section>
   )

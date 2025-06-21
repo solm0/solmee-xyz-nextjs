@@ -25,7 +25,7 @@ export default function LinkButton({
       >
         <button
           className={clsx(
-            "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-98 transition-[filter, colors] duration-300",
+            "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300",
             pathname === href ? "bg-button-200 font-bold" : "bg-button-100",
           )}
         >

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import clsx from 'clsx';
+import { useIsSettingOpen } from "../lib/use-is-setting-open";
+import { useEffect } from "react";
 
 export default function ExpandButton({
   children,
@@ -17,11 +19,18 @@ export default function ExpandButton({
     setIsOpen(newOpen);
   }
 
+  const setIsSettingOpen = useIsSettingOpen((state) => state.setValue);
+  useEffect(() => {
+    if (typeof(name) !== "string") {
+      setIsSettingOpen(isOpen)
+    }
+  }, [isOpen])
+
   return (
     <div>
       <button
         onClick={handleClick}
-        className="w-auto h-8 bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-98 transition-[filter] duration-300"
+        className="w-auto h-8 bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[filter] duration-300"
       >
         {name}
       </button>

@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useState, useEffect } from "react";
 import usePersistentState from '../lib/use-persistent-state';
+import { useIsSettingOpen } from '../lib/use-is-setting-open';
 
 type HoverState = {
   offsetX: number | null;
@@ -12,10 +13,10 @@ type HoverState = {
 export default function SwitchField({
   value,
 }: {
-  value: {value: string, name: string, options: {value: string, name: string}[]}
+  value: {value: string, name: string, options: { value: string, name: string }[]}
 }) {
   return (
-    <div className="flex gap-1 text-text-900 items-center">
+    <div className="flex gap-2 text-text-900 items-center">
       <label htmlFor={value.value}>{value.name}:</label>
       <SwitchButton value={value.value} options={value.options} />
     </div>
@@ -29,27 +30,27 @@ export function SwitchButton({
   value: string,
   options: {value: string, name: string}[]
 }) {
-  const defaultState: HoverState = {
-    offsetX: null,
-    width: null,
-  };
-
+  const isSettingOpen = useIsSettingOpen((state) => state.value);
+  
   const [state, setstate] = usePersistentState(value, options[0].value);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [hoverState, setHoverState] = useState(defaultState)
+  const [hoverState, setHoverState] = useState<HoverState>({
+    offsetX: null,
+    width: null,
+  });
 
   useEffect(() => {
     if (hoverState.offsetX !== null && hoverState.width !== null) return;
   
     setTimeout(() => {
-      const el = document.getElementById(state);
+      const el = document.getElementById(`${value}-${state}`);
       if (!el) return;
   
       const rect = el.getBoundingClientRect();
       const offsetX = Math.floor(rect.left);
       const width = rect.width;
   
-      setHoverState({ offsetX, width });
+      setHoverState({ offsetX: offsetX, width: width });
     }, 0);
   }, [state, hoverState.offsetX, hoverState.width]);
 
@@ -82,7 +83,7 @@ export function SwitchButton({
       {options.map((option, idx) => (
         <div
           key={idx}
-          id={option.value}
+          id={`${value}-${option.value}`}
           className="h-8 px-3 flex items-center justify-center rounded-sm"
           onClick={() => handleClick(option.value)}
           onMouseEnter={(e) => updateHandlePosition(e)}
@@ -96,17 +97,21 @@ export function SwitchButton({
           />
         </div>
       ))}
-      <span
+      {<span
         className={clsx(
-          'relative h-8 rounded-sm bg-button-100 -z-10 transition-all duration-300 ease-in-out',
-          hoverState ? 'opacity-100' : 'opacity-0'
+          'absolute h-8 rounded-sm bg-button-100 -z-10 transition-all duration-300 ease-in-out',
+          hoverState ? 'opacity-100' : 'opacity-0',
+          value !== "base" && !isSettingOpen && 'hidden'
         )}
-        style={{
-          left: `${hoverState.offsetX! - 175}px`,
+        style={value === "base" ? {
+          left: `${hoverState.offsetX!-32}px`,
+          width: `${hoverState.width}px`,
+        } : {
+          left: `${hoverState.offsetX!}px`,
           width: `${hoverState.width}px`,
         }}
       >
-      </span>
+      </span>}
     </form> 
   )
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import GlobalNav from "./component/global-nav";
-import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
 
 export const metadata: Metadata = {
@@ -17,13 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${pretendard.className} antialiased`}
+        className={`${pretendard.className} antialiased font-normal`}
       >
         <div className="flex h-screen w-screen p-8 gap-4">
-          <aside className="h-full w-80 shrink-0">
-            <GlobalNav />
-            <NoteInspector />
-          </aside>
+          <GlobalNav />
           <main className="bg-gray-200 h-full w-full flex flex-col items-center">
             {children}
           </main>
