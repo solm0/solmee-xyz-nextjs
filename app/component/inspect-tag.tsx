@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useHoveredLiquidStore } from '../lib/use-hovered-liquid-store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function InspectTag({
   tags
@@ -14,17 +14,19 @@ export default function InspectTag({
   const searchParams = useSearchParams();
   const router = useRouter();
   
-
   const hoveredTag = useHoveredLiquidStore((state) => state.value)
   const offsetX = useHoveredLiquidStore((state) => state.offsetX)
   const width = useHoveredLiquidStore((state) => state.width)
   const setHoveredTag = useHoveredLiquidStore((state) => state.setValue);
 
+  // optimistic ui
+  const [tag, setTag] = useState<string | null>(null);
+
   const handleClick = (tag: string) => {
+    setTag(tag);
     const newParams = new URLSearchParams(searchParams.toString())
     newParams.set("tag", tag);
     router.push(`${pathname}?${newParams.toString()}`)
-    console.log(hoveredTag)
   }
 
   const updateHandlePosition = (
@@ -38,22 +40,14 @@ export default function InspectTag({
   };
 
   useEffect(() => {
-    if (!hoveredTag) {
-      setTimeout(() => {
-        const params = new URLSearchParams(window.location.search);
-        const currentTag = params.get("tag");
-        if (!currentTag) return;
-  
-        const el = document.getElementById(currentTag);
-        if (!el) return;
-  
-        const rect = el.getBoundingClientRect();
-        setHoveredTag(currentTag, Math.floor(rect.left), rect.width);
-      }, 30); // 10–20ms is usually enough
-    }
-  }, [hoveredTag, setHoveredTag]);
+    if (!hoveredTag && tag) {
+      const el = document.getElementById(tag);
+      if (!el) return;
 
-  
+      const rect = el.getBoundingClientRect();
+      setHoveredTag(tag, Math.floor(rect.left), rect.width);
+    } else return;
+  }, [hoveredTag]);
 
   return (
     <div
@@ -65,7 +59,7 @@ export default function InspectTag({
         <div
           key={idx}
           id={tag.value}
-          className='h-7 px-3 flex items-center justify-center rounded-sm text-text-900 font-medium'
+          className='h-8 px-3 flex items-center justify-center rounded-sm text-text-900 font-medium'
           onClick={() => handleClick(tag.value)}
           onMouseOver={(e) => updateHandlePosition(e, tag.value)}
         >
@@ -80,7 +74,7 @@ export default function InspectTag({
       ))}
       <span
         className={clsx(
-          'absolute h-7 rounded-sm bg-selected-500 -z-10 pl-1 transition-all duration-300 ease-in-out',
+          'absolute h-8 rounded-sm bg-selected-500 -z-10 pl-1 transition-all duration-300 ease-in-out',
           hoveredTag ? 'opacity-100' : 'opacity-0'
         )}
         style={{
