@@ -52,7 +52,7 @@ export default function GlobalNav() {
   return (
     <nav className="h-auto w-full flex flex-col gap-1 items-start text-sm">
       <ExpandButton name="solmee.xyz">
-        <LinkButton href="/" name="무작위" />
+        <LinkButton href="/rand" name="무작위" />
         <LinkButton href="/chron" name="작성일 순서" />
         <LinkButton href="/graphic" name="그래픽만" />
       </ExpandButton>

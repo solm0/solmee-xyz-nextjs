@@ -3,6 +3,7 @@ import "./globals.css";
 import GlobalNav from "./component/global-nav";
 import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
+import ApolloWrapper from "./lib/ApolloWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +26,9 @@ export default function RootLayout({
             <NoteInspector />
           </aside>
           <main className="h-full flex-1 flex flex-col items-center overflow-hidden">
-            {children}
+            <ApolloWrapper>
+              {children}
+            </ApolloWrapper>
           </main>
         </div>
       </body>
