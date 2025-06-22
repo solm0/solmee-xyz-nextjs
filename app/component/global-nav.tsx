@@ -50,7 +50,7 @@ const components = [
 
 export default function GlobalNav() {
   return (
-    <nav className="mt-1 h-auto w-full flex flex-col gap-1 items-start text-sm">
+    <nav className="h-auto w-full flex flex-col gap-1 items-start text-sm">
       <ExpandButton name="solmee.xyz">
         <LinkButton href="/" name="무작위" />
         <LinkButton href="/chron" name="작성일 순서" />

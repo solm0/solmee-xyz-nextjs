@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "홈",
 };
 
-export default function Meta() {
+export default function Chron() {
   return (
     <div>작성일 순서 페이지</div>
   )

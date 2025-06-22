@@ -19,12 +19,12 @@ export default function RootLayout({
       <body
         className={`${pretendard.className} antialiased font-normal`}
       >
-        <div className="flex h-screen w-screen p-8 gap-4">
+        <div className="flex h-screen w-full p-8 gap-4">
           <aside className="h-full w-80 shrink-0">
             <GlobalNav />
             <NoteInspector />
           </aside>
-          <main className="bg-gray-200 h-full w-full flex flex-col items-center">
+          <main className="h-full flex-1 flex flex-col items-center overflow-hidden">
             {children}
           </main>
         </div>

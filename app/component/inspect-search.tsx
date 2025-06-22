@@ -50,15 +50,22 @@ export default function InspectSearch() {
         placeholder="문자열을 입력하세요."
         spellCheck="false"
       />
-      <button
-        onClick={handleClear}
+      <div
         className={clsx(
-          "w-auto h-8 bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[filter, opacity] duration-300 self-start",
-          value ? 'opacity-100' : 'opacity-0'
+          "w-auto transition-all duration-300 self-start overflow-clip",
+          value ? 'h-8' : 'h-0'
         )}
       >
-        지우기
-      </button>
+        <button
+          onClick={handleClear}
+          className={clsx(
+            "w-auto h-full bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[opacity] duration-300 delay-200",
+            value ? 'opacity-100' : 'opacity-0'
+          )}
+        >
+          지우기
+        </button>
+      </div>
     </div>
   )
 }
