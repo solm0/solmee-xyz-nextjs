@@ -19,7 +19,7 @@ export default function InspectTag({
   const width = useHoveredLiquidStore((state) => state.width)
   const setHoveredTag = useHoveredLiquidStore((state) => state.setValue);
 
-  // optimistic ui
+  // 클릭한 태그 저장
   const [tag, setTag] = useState<string | null>(null);
 
   const handleClick = (tag: string) => {
@@ -29,6 +29,7 @@ export default function InspectTag({
     router.push(`${pathname}?${newParams.toString()}`)
   }
 
+  // 호버한 태그
   const updateHandlePosition = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     value: string
@@ -39,6 +40,7 @@ export default function InspectTag({
     setHoveredTag(value, offsetX, width)
   };
 
+  // 현재 호버중인 태그 없으면 직전에 클릭했던 태그
   useEffect(() => {
     if (!hoveredTag && tag) {
       const el = document.getElementById(tag);
@@ -48,6 +50,23 @@ export default function InspectTag({
       setHoveredTag(tag, Math.floor(rect.left), rect.width);
     } else return;
   }, [hoveredTag]);
+
+  // 그것도 없으면 url에 있는 태그
+  useEffect(() => {
+    if (!hoveredTag && !tag) {
+      setTimeout(() => {
+        const params = new URLSearchParams(window.location.search);
+        const currentTag = params.get("tag");
+        if (!currentTag) return;
+  
+        const el = document.getElementById(currentTag);
+        if (!el) return;
+  
+        const rect = el.getBoundingClientRect();
+        setHoveredTag(currentTag, Math.floor(rect.left), rect.width);
+      }, 30);
+    }
+  }, [hoveredTag, setHoveredTag]);
 
   return (
     <div

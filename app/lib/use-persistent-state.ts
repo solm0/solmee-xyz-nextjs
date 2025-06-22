@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function usePersistentState<T>(key: string, defaultValue: T) {
+export default function usePersistentState<T>(key: string, defaultValue?: T) {
   const [value, setValue] = useState<T>(() => {
     if (typeof window === 'undefined') return defaultValue;
     try {

@@ -4,8 +4,9 @@ import { Tag, Search, Key } from 'lucide-react';
 import InspectTag from './inspect-tag';
 import InspectSearch from './inspect-search';
 import InspectKeyword from './inspect-keyword';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import clsx from 'clsx';
+import { useToggleStore } from '../lib/use-enabled';
 
 const tags = [
   {
@@ -53,11 +54,15 @@ export function FilterComponents({
   )
 }
 
-export default function NoteInspector({
-  isEnabled,
-}: {
-  isEnabled: boolean;
-}) {
+export default function NoteInspector() {
+  const initializeToggles = useToggleStore((s) => s.initializeToggles);
+
+  useEffect(() => {
+    initializeToggles();
+  }, [initializeToggles]);
+
+  const isEnabled = useToggleStore((s) => s.toggles['noteInspector'])
+
   return (
     <section
       className={clsx(
