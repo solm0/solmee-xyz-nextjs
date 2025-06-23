@@ -3,6 +3,7 @@
 
 import { gql, GraphQLClient } from "graphql-request";
 import MainLayout from "../component/main-layout";
+import { Suspense } from "react";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -34,10 +35,15 @@ export default async function RootLayout({
       return "";
     }
   })
+  
+  // meta를 위한 필터링 -> path가 meta면 posts={metaPosts}
+  // const metaPosts = posts.filter((post) => ... )
 
   return (
-    <MainLayout posts={posts}>
-      {children}
-    </MainLayout>
+    <Suspense>
+      <MainLayout posts={posts}>
+        {children}
+      </MainLayout>
+    </Suspense>
   )
 }

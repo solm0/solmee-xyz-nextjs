@@ -9,7 +9,20 @@ export default function NoteSection({
 }: {
   children: React.ReactNode
 }) {
-  const subPath = usePathname().split('/').slice(2, 3).toString();
+  const pathname = usePathname()
+  const rootPath = pathname.split('/').slice(1, 2).toString();
+
+  let subPath = false;
+
+  if (rootPath === 'meta') {
+    if (pathname.split('/').slice(2, 3).toString()) {
+      subPath = true;
+    }
+  } else if (rootPath === 'graph') {
+    return;
+  } else if (rootPath) {
+    subPath = true;
+  } else return;
 
   return (
     // isFull -> 스크롤여부, 높이

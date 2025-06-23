@@ -10,7 +10,6 @@ export default function RandSection({
   goUp: boolean,
   children: React.ReactNode,
 }) {
-
   return (
     <section className={clsx (
       `${maruburi.className}`,

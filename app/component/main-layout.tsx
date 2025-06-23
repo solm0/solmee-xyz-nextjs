@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import RandSectionWrapper from "@/app/component/rand-section-wrapper";
 import NoteSection from "@/app/component/note-section";
 
@@ -11,11 +11,13 @@ export default function MainLayout({
   children: React.ReactNode;
   posts: { title: string; id: string; preview: string }[];
 }) {
-  const path = usePathname().split('/').slice(1, 2).toString();
+  const newParams = new URLSearchParams(useSearchParams().toString());
+  const view = newParams.get("view");
+  console.log(view)
   
-  switch(path) {
+  switch(view) {
 
-    case 'rand':
+    case 'rand': 
       return (
         <>
           <RandSectionWrapper posts={posts} />

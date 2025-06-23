@@ -3,8 +3,10 @@
 import { Settings } from 'lucide-react'
 import ExpandButton from "./expand-button";
 import LinkButton from "./link-button";
+import ParamButton from './param-button';
 import SwitchField from "./switch-button";
 import EnableButton from "./enable-button";
+import { Suspense } from 'react';
 
 const settings = [
   {
@@ -47,17 +49,20 @@ const components = [
     name: '하이퍼링크 지도',
   }
 ]
-
 export default function GlobalNav() {
   return (
     <nav className="h-auto w-full flex flex-col gap-1 items-start text-sm">
       <ExpandButton name="solmee.xyz">
-        <LinkButton href="/rand" name="무작위" />
-        <LinkButton href="/chron" name="작성일 순서" />
-        <LinkButton href="/graphic" name="그래픽만" />
+        <Suspense>
+          <ParamButton param="rand" name="무작위" />
+          <ParamButton param="chron" name="작성일 순서" />
+          <ParamButton param="graphic" name="그래픽만" />
+        </Suspense>
       </ExpandButton>
 
-      <LinkButton href="/meta" name="대해서" backbutton={true} />
+      <Suspense>
+        <LinkButton href="meta" name="대해서" backbutton={true} />
+      </Suspense>
 
       <ExpandButton name={<Settings className="w-4 h-4" />}>
         {settings.map((field, idx) => (

@@ -25,28 +25,45 @@ export default function RandList({
 
   const searchParams = useSearchParams();
   const router = useRouter();
-  const subPath = usePathname().split('/').slice(2, 3).toString();
+  const pathname = usePathname();
+
+  const rootPath = pathname.split('/').slice(1, 2).toString();
+  console.log("rootpath", rootPath)
+
+  // let documentPath: string | null = null;
+
+  // if (rootPath === 'meta') {
+  //   documentPath = pathname.split('/').slice(2, 3).toString();
+  // } else if (rootPath) {
+  //   documentPath = rootPath;
+  // }
 
   const handleClick = (href: string) => {
     const newParams = new URLSearchParams(searchParams.toString())
 
     // 현재 path와 같고 false면(위에있으면) 아래로 내리기, 라우팅 /:id
     if (goUp === true) {
-      if (subPath === href) {
+      if (rootPath === href) {
         const newUp = !goUp
         setGoUp(newUp);
 
-        router.push(`/rand?${newParams.toString()}`);
+        router.push(`/?${newParams.toString()}`);
       } else {
-        router.push(`/rand/${href}?${newParams.toString()}`);
+        router.push(`/${href}?${newParams.toString()}`);
       }
+    } else if (!rootPath) {
+      const newUp = !goUp
+      setGoUp(newUp);
+      router.push(`/${href}?${newParams.toString()}`);
     } else {
       const newUp = !goUp
       setGoUp(newUp);
 
-      router.push(`/rand/${href}?${newParams.toString()}`);
+      router.push(`/${href}?${newParams.toString()}`);
     }
   }
+
+  // meta면 meta 지우고 그자리 href
 
   return (
     <div
@@ -59,7 +76,7 @@ export default function RandList({
       onMouseLeave={onMouseLeave}
       onClick={() => handleClick(note.id)}
     >
-      {subPath === note.id &&
+      {rootPath === note.id &&
         <ChevronRight className={clsx(
           "absolute left-0 text-text-900 border-r-0 w-4 h-4",
           hovered && hovered !== note.id && "text-text-700",

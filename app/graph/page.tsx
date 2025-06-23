@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "solmee.xyz",
-  description: "홈",
+  title: "그래프",
+  description: "그래프",
 };
 
 export default function Meta() {
   return (
-    <div>그래픽 페이지</div>
+    <div>그래프 페이지</div>
   )
 }

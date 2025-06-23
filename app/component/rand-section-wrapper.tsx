@@ -12,14 +12,30 @@ export default function RandSectionWrapper({
   posts: { title: string; id: string; preview: string }[]
 }) {
   const [goUp, setGoUp] = useState(false);
-  const subPath = usePathname().split('/').slice(2, 3).toString();
   const [hovered, setHovered] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  const rootPath = pathname.split('/').slice(1, 2).toString();
+
+  let subPath = false;
+
+  if (rootPath === 'meta') {
+    if (pathname.split('/').slice(2, 3).toString()) {
+      subPath = true;
+    }
+  } else if (rootPath === 'graph') {
+    subPath = false;
+  } else if (rootPath) {
+    subPath = true;
+  } else {
+    subPath = false;
+  }
 
   useEffect(() => {
     if (subPath) {
       setGoUp(true)
     }
-  }, [])
+  }, [subPath]);
 
   return (
     <RandSection goUp={goUp}>
