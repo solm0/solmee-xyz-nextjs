@@ -3,7 +3,7 @@
 
 import { gql, GraphQLClient } from 'graphql-request';
 
-const client = new GraphQLClient(process.env.GRAPHQL_API_URL || 'http://localhost:3000/api/graphql');
+const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
 const GET_POST_BY_ID = gql`
   query PostById($id: ID!) {

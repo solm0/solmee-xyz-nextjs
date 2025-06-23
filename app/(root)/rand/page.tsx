@@ -1,8 +1,10 @@
-'use client'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
-import { gql, useQuery } from "@apollo/client";
+import { gql, GraphQLClient } from "graphql-request";
 import Link from "next/link";
-import { useEffect } from "react";
+
+const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
 const GET_ALL_POSTS = gql`
   query {
@@ -22,37 +24,15 @@ const GET_ALL_POSTS = gql`
 
 
 
-export default function Rand() {
-  const { loading, error, data } = useQuery(GET_ALL_POSTS);
-  useEffect(() => {
-    fetch('http://temp.solmee.xyz:3000/api/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        query: `
-          query {
-            posts {
-              id
-              title
-            }
-          }
-        `
-      })
-    })
-      .then(res => res.json())
-      .then(console.log)
-      .catch(console.error);
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
+export default async function Rand() {
+  const data = await client.request(GET_ALL_POSTS);
+  const posts = data.posts;
 
   return (
     <div className="absolute top-0 left-52">
       <h2>All Posts</h2>
       <ul className="list-disc ml-5">
-        {data.posts.map((post: { id: string; title: string }) => (
+        {posts.map((post: { id: string; title: string }) => (
           <li key={post.id}>
             <Link href={`/rand/${post.id}`}>
               {post.title}{post.id}
