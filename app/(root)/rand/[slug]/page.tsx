@@ -31,12 +31,16 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug) throw new Error("Missing ID param");
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
   const post = data.post;
 
-  return <div>My Post: {post?.title}</div>
+  return (
+    <div>
+      My Post: {post?.title}
+    </div>
+  )
 }
