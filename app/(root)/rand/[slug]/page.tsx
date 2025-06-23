@@ -14,6 +14,23 @@ const GET_POST_BY_ID = gql`
   }
 `;
 
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params;
+  if (!slug) throw new Error("Missing ID param");
+
+  const data = await client.request(GET_POST_BY_ID, { id: slug });
+  const post = data.post;
+
+  return {
+    title: `${post?.title} | solmee.xyz`,
+    description: `${post?.title}`,
+  };
+}
+
 export async function generateStaticParams() {
   const data = await client.request(gql`
     query {
@@ -32,7 +49,6 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params;
-
   if (!slug) throw new Error("Missing ID param");
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });

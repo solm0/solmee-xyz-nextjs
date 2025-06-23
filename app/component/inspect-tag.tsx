@@ -19,14 +19,23 @@ export default function InspectTag({
   const width = useHoveredLiquidStore((state) => state.width)
   const setHoveredTag = useHoveredLiquidStore((state) => state.setValue);
 
+  const currentTag = searchParams.get("tag");
+
   // 클릭한 태그 저장
   const [tag, setTag] = useState<string | null>(null);
 
   const handleClick = (tag: string) => {
-    setTag(tag);
-    const newParams = new URLSearchParams(searchParams.toString())
-    newParams.set("tag", tag);
-    router.push(`${pathname}?${newParams.toString()}`)
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (tag === currentTag) {
+      setTag(null);
+      newParams.delete("tag");
+      router.push(`${pathname}?${newParams.toString()}`);
+    } else {
+      setTag(tag);
+      newParams.set("tag", tag);
+      router.push(`${pathname}?${newParams.toString()}`);
+    }
   }
 
   // 호버한 태그
