@@ -2,6 +2,8 @@
 // @ts-nocheck
 
 import { gql, GraphQLClient } from 'graphql-request';
+import Note from '@/app/component/note';
+import Footer from '@/app/component/footer';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -10,6 +12,9 @@ const GET_POST_BY_ID = gql`
     post(where: { id: $id }) {
       id
       title
+      content {
+        document
+      }
     }
   }
 `;
@@ -53,10 +58,12 @@ export default async function Page({
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
   const post = data.post;
+  console.log('from page.tsx', post)
 
   return (
-    <div>
-      My Post: {post?.title}
-    </div>
+    <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
+      <Note post={post} />
+      <Footer />
+    </article>
   )
 }

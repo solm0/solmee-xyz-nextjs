@@ -12,6 +12,7 @@ const GET_ALL_POSTS = gql`
     posts {
       id
       title
+      meta
       content {
         document
       }
@@ -35,9 +36,6 @@ export default async function RootLayout({
       return "";
     }
   })
-  
-  // meta를 위한 필터링 -> path가 meta면 posts={metaPosts}
-  // const metaPosts = posts.filter((post) => ... )
 
   return (
     <Suspense>

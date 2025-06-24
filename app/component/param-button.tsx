@@ -18,23 +18,23 @@ export default function ParamButton({
   const pathname = usePathname();
   
   useEffect(() => {
-    newParams.set("view", 'rand');
+    newParams.set("menu", 'rand');
     router.push(`${pathname}?${newParams.toString()}`);
   }, [])
 
-  const view = newParams.get("view");
+  const menu = newParams.get("menu");
 
   let path: string;
 
   const handleClick = (param: string) => {
-    if (view === param) {
+    if (menu === param) {
       if (backbutton) {
-        newParams.delete("view");
+        newParams.set("menu", 'rand');
       } else {
-        newParams.set("view", param);
+        newParams.set("menu", param);
       }
     } else {
-      newParams.set("view", param);
+      newParams.set("menu", param);
     }
 
     if (pathname) {
@@ -51,7 +51,7 @@ export default function ParamButton({
       onClick={() => handleClick(param)}
       className={clsx(
         "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300",
-        view === param ? "bg-button-200 font-semibold" : "bg-button-100",
+        menu === param ? "bg-button-200 font-semibold" : "bg-button-100",
       )}
     >
       {name}

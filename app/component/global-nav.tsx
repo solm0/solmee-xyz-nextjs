@@ -2,7 +2,6 @@
 
 import { Settings } from 'lucide-react'
 import ExpandButton from "./expand-button";
-import LinkButton from "./link-button";
 import ParamButton from './param-button';
 import SwitchField from "./switch-button";
 import EnableButton from "./enable-button";
@@ -61,7 +60,7 @@ export default function GlobalNav() {
       </ExpandButton>
 
       <Suspense>
-        <LinkButton href="meta" name="대해서" backbutton={true} />
+        <ParamButton param="meta" name="대해서" backbutton={true} />
       </Suspense>
 
       <ExpandButton name={<Settings className="w-4 h-4" />}>

@@ -9,7 +9,7 @@ export default function RandList({
   goUp, setGoUp,
   hovered, setHovered,
 }: {
-  note: { title: string, id: string, preview: string},
+  note: { title: string, id: string, preview: string, meta: boolean},
   goUp: boolean,
   setGoUp: (value: boolean) => void,
   hovered: string | null;
@@ -28,15 +28,7 @@ export default function RandList({
   const pathname = usePathname();
 
   const rootPath = pathname.split('/').slice(1, 2).toString();
-  console.log("rootpath", rootPath)
 
-  // let documentPath: string | null = null;
-
-  // if (rootPath === 'meta') {
-  //   documentPath = pathname.split('/').slice(2, 3).toString();
-  // } else if (rootPath) {
-  //   documentPath = rootPath;
-  // }
 
   const handleClick = (href: string) => {
     const newParams = new URLSearchParams(searchParams.toString())
@@ -62,8 +54,6 @@ export default function RandList({
       router.push(`/${href}?${newParams.toString()}`);
     }
   }
-
-  // meta면 meta 지우고 그자리 href
 
   return (
     <div

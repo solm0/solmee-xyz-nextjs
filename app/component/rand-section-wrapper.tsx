@@ -9,7 +9,7 @@ import { Suspense } from "react";
 export default function RandSectionWrapper({
   posts
 }: {
-  posts: { title: string; id: string; preview: string }[]
+  posts: { title: string; id: string; preview: string; meta: boolean }[]
 }) {
   const [goUp, setGoUp] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);

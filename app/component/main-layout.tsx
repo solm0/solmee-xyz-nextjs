@@ -9,13 +9,14 @@ export default function MainLayout({
   posts,
 }: {
   children: React.ReactNode;
-  posts: { title: string; id: string; preview: string }[];
+  posts: { title: string; id: string; preview: string, meta: boolean }[];
 }) {
   const newParams = new URLSearchParams(useSearchParams().toString());
-  const view = newParams.get("view");
-  console.log(view)
+  const menu = newParams.get("menu");
+
+  const metaPosts = posts.filter((post) => post.meta === true);
   
-  switch(view) {
+  switch(menu) {
 
     case 'rand': 
       return (
@@ -43,6 +44,17 @@ export default function MainLayout({
         </div>
       );
       break;
+
+    case 'meta':
+      return (
+        <>
+          <RandSectionWrapper posts={metaPosts} />
+          <NoteSection>
+            {children}
+          </NoteSection>
+        </>
+      );
+      break
   }
 
 }

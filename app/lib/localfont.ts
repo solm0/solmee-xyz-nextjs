@@ -18,12 +18,17 @@ export const pretendard = localFont({
 export const maruburi = localFont({
   src: [
     {
-      path: '../fonts/maruburi-bold.otf',
-      style: 'bold',
-    },
-    {
       path: '../fonts/maruburi-semibold.otf',
       style: 'semibold',
+    },
+  ]
+})
+
+export const maruburi_bold = localFont({
+  src: [
+    {
+      path: '../fonts/maruburi-bold.otf',
+      style: 'bold',
     },
   ]
 })
