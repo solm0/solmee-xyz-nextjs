@@ -9,7 +9,6 @@ export default function Note({
 }: {
   post: Post
 }) {
-  console.log(post)
   return (
     <>
       <h1 className={`text-3xl ${maruburi_bold.className}`}>{post?.title}</h1>

@@ -7,12 +7,18 @@ export type Tag = {
 export type Post = {
   id: string;
   title: string;
-  publishedAt?: string | null;
+  preview?: string;
+  publishedAt: string | number | Date;
   content?: DocumentField | null;
   author?: User | null;
   tags: Tag[];
   meta: boolean;
   status: 'published' | 'draft';
+  chron: {
+    year?: string;
+    month?: string;
+    day?: string;
+  }
 };
 
 export type User = {

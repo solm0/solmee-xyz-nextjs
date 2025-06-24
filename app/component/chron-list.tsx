@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { Post } from "../lib/type";
 
-export default function RandList({ 
+export default function ChronList({ 
   note,
   goUp, setGoUp,
   hovered, setHovered,
@@ -16,6 +16,7 @@ export default function RandList({
   hovered: string | null;
   setHovered: (id: string | null) => void,
 }) {
+  
   const onMouseEnter = (id: string) => {
     setHovered(id);
   }
@@ -60,7 +61,8 @@ export default function RandList({
       key={note.id}
       className={clsx (
         "text-nowrap h-12 w-full transition-[opacity] duration-300 hover:cursor-pointer flex items-center",
-        hovered && hovered !== note.id && "opacity-40!"
+        hovered && hovered !== note.id && "opacity-40!",
+        "flex gap-4"
       )}
       onMouseEnter={() => onMouseEnter(note.id)}
       onMouseLeave={onMouseLeave}
@@ -72,17 +74,10 @@ export default function RandList({
           hovered && hovered !== note.id && "text-text-700",
         )} />
       }
-      <p className="w-full text-text-700 truncate">
-        <span className="text-text-900">{note.title}</span>
-        <span className={clsx (
-          "ml-2 text-text-800 opacity-40",
-          hovered && hovered !== note.id && 'opacity-0!',
-          hovered && hovered === note.id && 'text-selected-500! opacity-100'
-        )}
-        >
-          {note.preview}
-        </span>
-      </p>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.year && `${note.chron.year}년`}</div>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.month && `${note.chron.month}월`}</div>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.day && `${note.chron.day}일`}</div>
+      <p className="col-span-11 w-full text-text-900 truncate">{note.title}</p>
     </div>
   )
 }

@@ -4,6 +4,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import MainLayout from "../component/main-layout";
 import { Suspense } from "react";
+import GenerateChron from "../lib/gererate-chron";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -12,6 +13,7 @@ const GET_ALL_POSTS = gql`
     posts {
       id
       title
+      publishedAt
       meta
       content {
         document
@@ -37,9 +39,11 @@ export default async function RootLayout({
     }
   })
 
+  const chronPosts = GenerateChron(posts);
+
   return (
     <Suspense>
-      <MainLayout posts={posts}>
+      <MainLayout posts={chronPosts}>
         {children}
       </MainLayout>
     </Suspense>

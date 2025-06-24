@@ -4,12 +4,16 @@ import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation";
 import RandSection from "./rand-section";
 import RandList from "./rand-list";
+import ChronList from "./chron-list";
 import { Suspense } from "react";
+import { Post } from "../lib/type";
 
 export default function RandSectionWrapper({
-  posts
+  posts,
+  menu
 }: {
-  posts: { title: string; id: string; preview: string; meta: boolean }[]
+  posts: Post[];
+  menu?: string;
 }) {
   const [goUp, setGoUp] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -17,37 +21,35 @@ export default function RandSectionWrapper({
 
   const rootPath = pathname.split('/').slice(1, 2).toString();
 
-  let subPath = false;
-
-  if (rootPath === 'meta') {
-    if (pathname.split('/').slice(2, 3).toString()) {
-      subPath = true;
-    }
-  } else if (rootPath === 'graph') {
-    subPath = false;
-  } else if (rootPath) {
-    subPath = true;
-  } else {
-    subPath = false;
-  }
-
   useEffect(() => {
-    if (subPath) {
-      setGoUp(true)
+    if (rootPath) {
+      setGoUp(true);
+    } else {
+      setGoUp(false);
     }
-  }, [subPath]);
+  }, [rootPath]);
 
   return (
     <RandSection goUp={goUp}>
       <Suspense>
-        {posts.map((note) => (
-          <RandList
-            key={note.id}
-            note={note}
-            goUp={goUp} setGoUp={setGoUp}
-            hovered={hovered} setHovered={setHovered}
-          />
-        ))}
+        {posts.map((note) => {
+          if (menu === 'chron') return (
+              <ChronList
+                key={note.id}
+                note={note}
+                goUp={goUp} setGoUp={setGoUp}
+                hovered={hovered} setHovered={setHovered}
+              />
+            )
+          else return (
+            <RandList
+                key={note.id}
+                note={note}
+                goUp={goUp} setGoUp={setGoUp}
+                hovered={hovered} setHovered={setHovered}
+              />
+          )
+        })}
       </Suspense>
     </RandSection>
   )
