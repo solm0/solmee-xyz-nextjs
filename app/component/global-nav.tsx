@@ -55,7 +55,7 @@ export default function GlobalNav() {
         <Suspense>
           <ParamButton param="rand" name="무작위" />
           <ParamButton param="chron" name="작성일 순서" />
-          <ParamButton param="graphic" name="그래픽만" />
+          <ParamButton param="curation" name="큐레이션" />
         </Suspense>
       </ExpandButton>
 
