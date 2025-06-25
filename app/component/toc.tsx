@@ -1,56 +1,124 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Post } from "../lib/type"
 import clsx from "clsx";
 import { pretendard } from "../lib/localfont";
+
+type Heading = {
+  slug: string;
+  text: string;
+};
+
+export function useIntersectionObserver(
+  headings: Heading[] | undefined,
+  setActiveHeading: (id: string | null) => void
+) {
+  const headingRef = useRef<Record<string, IntersectionObserverEntry>>({});
+
+  useEffect(() => {
+    if (!headings) return;
+    const headingElements: HTMLElement[] = headings
+      .map(({ slug }) => document.getElementById(slug))
+      .filter((el): el is HTMLElement => el !== null); // Type narrowing
+
+    const callback: IntersectionObserverCallback = (entries) => {
+      headingRef.current = entries.reduce((map, entry) => {
+        map[entry.target.id] = entry;
+        return map;
+      }, {} as Record<string, IntersectionObserverEntry>);
+
+      const visibleHeadings = entries.filter((entry) => entry.isIntersecting);
+
+      if (visibleHeadings.length >= 1) {
+        setActiveHeading(visibleHeadings[0].target.id);
+      }
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      rootMargin: "0px 0px -40% 0px",
+    });
+
+    headingElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, [headings, setActiveHeading]);
+}
 
 export default function Toc({
   post,
 }: {
   post: Post;
 }) {
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+  }
+
   // heading 뽑아내서 매핑하기
-  const headings: string[] = [];
-
-  post.content?.document.map((doc) => {
-    if (doc.type === "heading") {
-      headings.push(doc.children?.[0]?.text || 'undefined heading')
-    }
-  })
-
-  // 근데 링크를 할려면 heading마다 id를 만들어줘야 하는데 text, level, type밖에 없으니...
-  // keystone으로 heading에 id를 만들어줄 수 있나? 아니지 노트 컴포넌트에서 상태 이용해 id 달아주면 되지
-
-  // active heading 감지, 적용
-
-  // hover 감지, 적용
+  const headings: Heading[] | undefined = post.content?.document
+  .filter(doc => doc.type === "heading")
+  .map(doc => {
+    const text = doc.children?.[0]?.text || 'undefined-heading';
+    return {
+      slug: slugify(text),
+      text: text
+    };
+  });
 
   const [isVisible, setIsVisible] = useState(false);
+  const [hoverHeading, setHoverHeading] = useState<string | null>();
+
+  // active heading 감지, 스크롤
+  const [activeHeading, setActiveHeading] = useState<string | null>();
+  
+  useIntersectionObserver(headings, setActiveHeading);
 
   return (
     <nav
       className={clsx(
-        `${pretendard.className} text-sm`,
-        "w-auto h-auto fixed top-[calc(50vh+3rem)] right-3 z-90",
+        `${pretendard.className} text-xs`,
+        "w-20 overflow-visible flex flex-col h-auto fixed top-[calc(50vh+3rem)] right-3 z-90 text-text-90",
       )}
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >
-      {headings.map((heading, idx) => (
-        <div key={idx} className="flex items-center gap-4 justify-end">
+      {headings && headings.map(({ slug, text }, idx) => (
+        <div
+          key={slug}
+          className="absolute right-0 w-auto flex items-center gap-4 justify-end"
+          style={{ top: `calc(2rem * ${idx})` }}
+          onMouseEnter={() => setHoverHeading(slug)}
+          onMouseLeave={() => setHoverHeading(null)}
+          onClick={(e) => {
+            e.preventDefault();
+            console.log('click')
+            document.getElementById(slug)?.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }}
+        >
           <p
             className={clsx(
-              "transition-opacity duration-300 leading-8 truncate bg-background rounded-sm px-2",
-              isVisible ? "opacity-100" : 'opacity-0'
+              "leading-8 truncate bg-background rounded-sm px-2 transition-all duration-300",
+              !isVisible ? 'opacity-0' : 
+              slug === hoverHeading ? 'opacity-100': 'text-neutral-400'
             )}
           >
-            {heading}
+            {text}
           </p>
-          <div
-            className="w-2 h-2 bg-button-200 rounded-full"
-            
-          ></div>
+          <div className="flex items-center justify-center w-3 h-3">
+            <div
+              className={clsx(
+                "rounded-full transition-all duration-300",
+                slug === hoverHeading ? 'bg-selected-500' : 'bg-button-200',
+                slug === activeHeading ? 'w-[12px] h-[12px]': 'w-[5px] h-[5px]'
+              )}
+            ></div>
+          </div>
         </div>
       ))}
     </nav>

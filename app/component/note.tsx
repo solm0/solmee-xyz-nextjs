@@ -9,21 +9,34 @@ export default function Note({
 }: {
   post: Post
 }) {
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')     // remove special chars
+      .replace(/\s+/g, '-')         // replace spaces with -
+  }
+
   return (
-    <div>
-      <div>{post.content?.document.map((document, idx) => (
-        <div
-          key={idx}
-          className={clsx(
-            "text-[17px]",
-            document.type === "heading" && document.level === 2 && `!text-xl mb-2 ${maruburi_bold.className}`,
-          )}
-        >
-          {document.children?.[0]?.text}
-        </div>
-      ))}</div>
+    <div className="flex flex-col">
+      {post.content?.document.map((document, idx) => {
+        const text = document.children?.[0]?.text || '';
+        const id = document.type === "heading" ? slugify(text) : undefined;
+
+        return (
+          <div
+            id={id}
+            key={idx}
+            className={clsx(
+              "text-[17px]",
+              document.type === "heading" && document.level === 2 && `!text-xl mb-2 ${maruburi_bold.className}`,
+              document.type === "paragraph" && 'pb-8'
+            )}
+          >
+            {text}
+          </div>
+        );
+      })}
     </div>
   )
 }
-
-// post.content?.document?.[0]?.children?.[0]?.text
