@@ -1,7 +1,7 @@
 export type Tag = {
   id: string;
   name: string;
-  posts?: Post[]; // optional to allow partial loading
+  posts?: Post[];
 };
 
 export type Post = {

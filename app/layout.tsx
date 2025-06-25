@@ -4,6 +4,7 @@ import GlobalNav from "./component/global-nav";
 import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
 import ApolloWrapper from "./lib/ApolloWrapper";
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +23,9 @@ export default function RootLayout({
       >
         <div className="flex h-screen w-full p-8 gap-4">
           <aside className="h-full w-80 shrink-0">
-            <GlobalNav />
+            <Suspense>
+              <GlobalNav />
+            </Suspense>
             <NoteInspector />
           </aside>
           <main className="h-full flex-1 flex flex-col items-center overflow-hidden">

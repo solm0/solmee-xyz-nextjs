@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 import clsx from 'clsx';
 
 export default function ParamButton({
@@ -17,11 +16,6 @@ export default function ParamButton({
   const router = useRouter();
   const pathname = usePathname();
   
-  useEffect(() => {
-    newParams.set("menu", 'rand');
-    router.push(`${pathname}?${newParams.toString()}`);
-  }, [])
-
   const menu = newParams.get("menu");
 
   let path: string;

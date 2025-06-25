@@ -5,6 +5,8 @@ import { gql, GraphQLClient } from 'graphql-request';
 import Note from '@/app/component/note';
 import Footer from '@/app/component/footer';
 import Toc from '@/app/component/toc';
+import Metadata from '@/app/component/metadata';
+import { maruburi_bold } from '@/app/lib/localfont';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -13,8 +15,14 @@ const GET_POST_BY_ID = gql`
     post(where: { id: $id }) {
       id
       title
+      publishedAt
+      meta
       content {
         document
+      }
+      tags {
+        id
+        name
       }
     }
   }
@@ -59,12 +67,14 @@ export default async function Page({
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
   const post = data.post;
+  console.log(post)
 
   return (
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
+      <h1 className={`text-3xl ${maruburi_bold.className}`}>{post?.title}</h1>
+      <Metadata post={post} />
       <Note post={post} />
       <Toc post={post} />
-      <div className='h-[500px]'>메타데이터</div>
       <div className='h-[500px]'>댓글</div>
       <Footer />
     </article>

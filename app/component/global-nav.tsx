@@ -5,7 +5,8 @@ import ExpandButton from "./expand-button";
 import ParamButton from './param-button';
 import SwitchField from "./switch-button";
 import EnableButton from "./enable-button";
-import { Suspense } from 'react';
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useEffect } from 'react';
 
 const settings = [
   {
@@ -49,19 +50,24 @@ const components = [
   }
 ]
 export default function GlobalNav() {
+  const newParams = new URLSearchParams(useSearchParams().toString());
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    newParams.set("menu", 'rand');
+    router.push(`${pathname}?${newParams.toString()}`);
+  }, [])
+
   return (
     <nav className="h-auto w-full flex flex-col gap-1 items-start text-sm">
       <ExpandButton name="solmee.xyz">
-        <Suspense>
-          <ParamButton param="rand" name="무작위" />
-          <ParamButton param="chron" name="작성일 순서" />
-          <ParamButton param="curation" name="큐레이션" />
-        </Suspense>
+        <ParamButton param="rand" name="무작위" />
+        <ParamButton param="chron" name="작성일 순서" />
+        <ParamButton param="curation" name="큐레이션" />
       </ExpandButton>
 
-      <Suspense>
-        <ParamButton param="meta" name="대해서" backbutton={true} />
-      </Suspense>
+      <ParamButton param="meta" name="대해서" backbutton={true} />
 
       <ExpandButton name={<Settings className="w-4 h-4" />}>
         {settings.map((field, idx) => (
