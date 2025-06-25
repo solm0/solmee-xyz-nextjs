@@ -64,7 +64,7 @@ export default function GlobalNav() {
       <ExpandButton name="solmee.xyz">
         <ParamButton param="rand" name="무작위" />
         <ParamButton param="chron" name="작성일 순서" />
-        <ParamButton param="curation" name="큐레이션" />
+        <ParamButton param="graphic" name="그래픽" />
       </ExpandButton>
 
       <ParamButton param="meta" name="대해서" backbutton={true} />

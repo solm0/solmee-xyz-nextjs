@@ -89,7 +89,7 @@ export default function Toc({
       {headings && headings.map(({ slug, text }, idx) => (
         <div
           key={slug}
-          className="absolute right-0 w-auto flex items-center gap-4 justify-end"
+          className="absolute right-0 w-auto flex items-center gap-4 justify-end cursor-pointer"
           style={{ top: `calc(2rem * ${idx})` }}
           onMouseEnter={() => setHoverHeading(slug)}
           onMouseLeave={() => setHoverHeading(null)}

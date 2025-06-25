@@ -74,7 +74,6 @@ export default async function Page({
       <Metadata post={post} />
       <Note post={post} />
       <Toc post={post} />
-      <div className='h-[500px]'>댓글</div>
       <Footer />
     </article>
   )
