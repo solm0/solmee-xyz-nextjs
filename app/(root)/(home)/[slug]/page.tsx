@@ -67,7 +67,6 @@ export default async function Page({
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
   const post = data.post;
-  console.log(post)
 
   return (
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>

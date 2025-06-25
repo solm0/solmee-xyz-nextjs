@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { maruburi } from "@/app/lib/localfont";
 import HyperlinkMap from "./hyperlink-map";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function NoteSection({
@@ -14,12 +14,22 @@ export default function NoteSection({
 }) {
   const rootPath = usePathname().split('/').slice(1, 2).toString();
   const [isFullPage, setIsFullPage] = useState(false);
+
+  useEffect(() => {
+    const page: HTMLElement | null = document.getElementById('note_section');
+    if (!page) return;
+
+    page.scrollTo({
+      top: 0,
+    });
+  }, [rootPath]);
   
   return (
     <section
+      id="note_section"
       className={clsx(
         `${maruburi.className}`,
-        "absolute right-8 w-[calc(100%-25rem)] border-t border-text-700 overflow-y-scroll overflow-visible pt-8 pl-8 bg-background transition-all duration-1000 ease-in-out",
+        "absolute right-8 w-[calc(100%-25rem)] border-t border-text-700 overflow-y-scroll pt-8 pl-8 bg-background transition-all duration-1000 ease-in-out",
         rootPath ? 'block' : 'hidden',
         isFullPage ? 'h-[calc(100%-8rem)] top-[8rem]' : 'h-1/2 top-1/2',
       )}

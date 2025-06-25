@@ -30,14 +30,10 @@ export default function Metadata({
           <p>{day}일</p>
         </div>
       </div>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 h-8 items-center">
         <Tag className='w-3 h-3' />
-        <div className="flex gap-1 h-8 flex-wrap">
-          {post.tags.map((tag) => (
-            <div key={tag.id} className="w-auto h-full bg-button-100 px-3 flex items-center gap-1 rounded-sm hover:brightness-97 transition-[filter] duration-300">
-              {tag.name}
-            </div>
-          ))}
+        <div key={post.tags.id} className="w-auto h-full bg-button-100 px-3 flex items-center gap-1 rounded-sm">
+          {post.tags.name}
         </div>
       </div>
       <div className="flex gap-3 items-start">

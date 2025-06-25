@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useHoveredLiquidStore } from '../lib/use-hovered-liquid-store';
 import { useEffect, useState } from 'react';
+import { Tag } from '../lib/type';
 
 export default function InspectTag({
   tags
 }: {
-  tags: {value: string; name: string}[]
+  tags: Tag[];
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -77,6 +78,8 @@ export default function InspectTag({
     }
   }, [hoveredTag, setHoveredTag]);
 
+  
+
   return (
     <div
       id='tag-input'
@@ -86,16 +89,16 @@ export default function InspectTag({
       {tags.map((tag, idx) => (
         <div
           key={idx}
-          id={tag.value}
+          id={tag.name}
           className='h-8 px-3 flex items-center justify-center rounded-sm text-text-900 font-medium'
-          onClick={() => handleClick(tag.value)}
-          onMouseOver={(e) => updateHandlePosition(e, tag.value)}
+          onClick={() => handleClick(tag.name)}
+          onMouseOver={(e) => updateHandlePosition(e, tag.name)}
         >
-          <label htmlFor={`${tag.value}-input`}>{tag.name}</label>
+          <label htmlFor={`${tag.name}-input`}>{tag.name}</label>
           <input
-            id={`${tag.value}-input`}
+            id={`${tag.name}-input`}
             type='radio'
-            value={tag.value}
+            value={tag.name}
             className='opacity-0 hidden'
           />
         </div>

@@ -1,5 +1,5 @@
 export type Tag = {
-  id: string;
+  id?: string;
   name: string;
   posts?: Post[];
 };
@@ -11,7 +11,7 @@ export type Post = {
   publishedAt: string | number | Date;
   content?: DocumentField | null;
   author?: User | null;
-  tags: Tag[];
+  tags: Tag;
   meta: boolean;
   status: 'published' | 'draft';
   chron: {

@@ -6,7 +6,7 @@ import MainLayout from "../component/main-layout";
 import { Suspense } from "react";
 import GenerateChron from "../lib/gererate-chron";
 
-const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
+const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
 const GET_ALL_POSTS = gql`
   query {

@@ -1,35 +1,13 @@
 'use client'
 
-import { Tag, Search, Key } from 'lucide-react';
+import { Tag as TagIcon, Search, Key } from 'lucide-react';
 import InspectTag from './inspect-tag';
 import InspectSearch from './inspect-search';
 import InspectKeyword from './inspect-keyword';
 import { Suspense, useEffect } from 'react';
 import clsx from 'clsx';
 import { useToggleStore } from '../lib/use-enabled';
-
-const tags = [
-  {
-    value: 'code',
-    name: '코딩',
-  },
-  {
-    value: 'work',
-    name: '창작',
-  },
-  {
-    value: 'travel',
-    name: '방랑',
-  },
-  {
-    value: 'book',
-    name: '독서',
-  },
-  {
-    value: 'etc',
-    name: '미분류',
-  },
-]
+import { Tag } from '../lib/type';
 
 export function FilterComponents({
   icon,
@@ -54,7 +32,11 @@ export function FilterComponents({
   )
 }
 
-export default function NoteInspector() {
+export default function NoteInspector({
+  tags,
+}: {
+  tags: Tag[];
+}) {
   const initializeToggles = useToggleStore((s) => s.initializeToggles);
 
   useEffect(() => {
@@ -71,7 +53,7 @@ export default function NoteInspector() {
     )}>
       <Suspense>
         <FilterComponents
-          icon={<Tag className='w-3 h-3' />}
+          icon={<TagIcon className='w-3 h-3' />}
           cmp={{ value: 'tag', name: '태그' }}
         >
           <InspectTag tags={tags} />
