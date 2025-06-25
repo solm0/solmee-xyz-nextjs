@@ -36,7 +36,7 @@ export default function EnableButton({
     <button
       className={clsx(
         "w-auto h-8 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300",
-        isEnabled === true ? "bg-button-on" : "bg-button-100",
+        isEnabled === true ? "bg-green-100" : "bg-button-100",
       )}
       onClick={handleClick}
     >

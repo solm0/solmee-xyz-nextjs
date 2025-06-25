@@ -69,15 +69,15 @@ export default function RandList({
       {rootPath === note.id &&
         <ChevronRight className={clsx(
           "absolute left-0 text-text-900 border-r-0 w-4 h-4",
-          hovered && hovered !== note.id && "text-text-700",
+          hovered && hovered !== note.id && "text-text-600",
         )} />
       }
-      <p className="w-full text-text-700 truncate">
+      <p className="w-full text-text-600 truncate">
         <span className="text-text-900">{note.title}</span>
         <span className={clsx (
-          "ml-2 text-text-800 opacity-40",
+          "ml-2 text-text-800 opacity-40 transition-[colors, opacity] duration-300",
           hovered && hovered !== note.id && 'opacity-0!',
-          hovered && hovered === note.id && 'text-selected-500! opacity-100'
+          hovered && hovered === note.id && 'text-green-500! opacity-100'
         )}
         >
           {note.preview}

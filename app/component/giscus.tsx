@@ -1,8 +1,12 @@
 'use client'
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
+
 
 export default function Giscus() {
+  const { theme } = useTheme();
+  const giscusTheme = theme === 'light' ? 'catppuccin_latte' : 'dark_dimmed'
   const commentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,7 +21,7 @@ export default function Giscus() {
     script.setAttribute('data-reactions-enabled', '1');
     script.setAttribute('data-emit-metadata', '0');
     script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', 'catppuccin_latte');
+    script.setAttribute('data-theme', giscusTheme);
     script.setAttribute('data-lang', 'ko');
     script.setAttribute('data-loading', 'lazy');
     script.crossOrigin = 'anonymous';
@@ -27,7 +31,7 @@ export default function Giscus() {
       commentRef.current.innerHTML = '';
       commentRef.current.appendChild(script);
     }
-  }, []);
+  }, [giscusTheme]);
 
   return <div ref={commentRef} />;
 }

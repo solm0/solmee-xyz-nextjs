@@ -29,7 +29,7 @@ export default function NoteSection({
       id="note_section"
       className={clsx(
         `${maruburi.className}`,
-        "absolute right-8 w-[calc(100%-25rem)] border-t border-text-700 overflow-y-scroll pt-8 pl-8 bg-background transition-all duration-1000 ease-in-out",
+        "absolute right-8 w-[calc(100%-25rem)] border-t border-text-600 overflow-y-scroll pt-8 pl-8 bg-background transition-all duration-1000 ease-in-out",
         rootPath ? 'block' : 'hidden',
         isFullPage ? 'h-[calc(100%-8rem)] top-[8rem]' : 'h-1/2 top-1/2',
       )}
@@ -38,15 +38,15 @@ export default function NoteSection({
       {children}
       <button
         className={clsx(
-          "fixed right-16 w-10 h-10 flex items-center justify-center bg-background border-t border-l border-r border-text-700 rounded-t-sm transition-all duration-1000 ease-in-out",
+          "fixed right-16 w-10 h-10 flex items-center justify-center bg-background border-t border-l border-r border-text-600 rounded-t-sm transition-all duration-1000 ease-in-out",
           isFullPage ? 'top-[6rem]' : 'top-[calc(50vh-2rem)]'
         )}
         onClick={() => setIsFullPage(!isFullPage)}
       >
         {isFullPage ?
-          <ChevronDown  className="text-text-800 hover:text-text-700 w-5 h-5 transition-color duration-300" />
+          <ChevronDown  className="text-text-800 hover:text-text-600 w-5 h-5 transition-color duration-300" />
           :
-          <ChevronUp  className="text-text-800 hover:text-text-700 w-5 h-5 transition-color duration-300" />
+          <ChevronUp  className="text-text-800 hover:text-text-600 w-5 h-5 transition-color duration-300" />
         }
       </button>
     </section>

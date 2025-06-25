@@ -28,7 +28,6 @@ export default function Note({
             id={id}
             key={idx}
             className={clsx(
-              "text-[17px]",
               document.type === "heading" && document.level === 2 && `!text-xl mb-2 ${maruburi_bold.className}`,
               document.type === "paragraph" && 'pb-8'
             )}

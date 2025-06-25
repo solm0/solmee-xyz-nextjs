@@ -7,6 +7,7 @@ import ApolloWrapper from "./lib/ApolloWrapper";
 import { Suspense } from 'react';
 import { gql, GraphQLClient } from "graphql-request";
 import { Tag } from "./lib/type";
+import Providers from "./lib/theme-provider";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -37,19 +38,21 @@ export default async function RootLayout({
       <body
         className={`${pretendard.className} antialiased font-normal`}
       >
-        <div className="flex h-screen w-full p-8 gap-4">
-          <aside className="h-full w-80 shrink-0">
-            <Suspense>
-              <GlobalNav />
-            </Suspense>
-            <NoteInspector tags={tags} />
-          </aside>
-          <main className="h-full flex-1 flex flex-col items-center overflow-hidden">
-            <ApolloWrapper>
-              {children}
-            </ApolloWrapper>
-          </main>
-        </div>
+        <Providers>
+          <div className="flex h-screen w-full p-8 gap-4">
+            <aside className="h-full w-80 shrink-0">
+              <Suspense>
+                <GlobalNav />
+              </Suspense>
+              <NoteInspector tags={tags} />
+            </aside>
+            <main className="h-full flex-1 flex flex-col items-center overflow-hidden">
+              <ApolloWrapper>
+                {children}
+              </ApolloWrapper>
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

@@ -25,25 +25,25 @@ export default function HyperlinkMap({
       isEnabled ? 'translate-x-0' : 'translate-x-96',
       isFullPage ? 'top-[10rem]' : 'top-[calc(50vh+2rem)]',
     )}>
-      <div className="w-80 h-80 border text-text-800 border-text-700 flex items-center justify-center rounded-sm backdrop-blur-md">
+      <div className="w-80 h-80 border text-text-800 border-text-600 flex items-center justify-center rounded-sm backdrop-blur-md">
         아직 그래프가 없습니다ㅠ<br/>
         아래 버튼도 가짜예요ㅠ
       </div>
       <div className="flex w-full justify-between">
         <div className="flex gap-1 items-center">
-          <button className="bg-button-100 px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300">
+          <button className="px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm">
             <ChevronLeft className="w-4 h-4" />
           </button>
           <p className="px-2">2</p>
-          <button className="bg-button-100 px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300">
+          <button className="px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm">
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
         <div className="flex gap-1 items-center">
-          <button className="bg-button-100 px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300">
+          <button className="px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm">
             <Locate className="w-4 h-4"/>
           </button>
-          <button className="bg-button-100 px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300">
+          <button className="px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm">
             <Expand className="w-4 h-4"/>
           </button>
         </div>

@@ -1,43 +1,11 @@
 'use client'
 
-import { Settings } from 'lucide-react'
 import ExpandButton from "./expand-button";
 import ParamButton from './param-button';
-import SwitchField from "./switch-button";
 import EnableButton from "./enable-button";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from 'react';
-
-const settings = [
-  {
-    value: 'theme',
-    name: '테마',
-    options: [
-      {
-        value: "day",
-        name: '낮',
-      },
-      {
-        value: "night",
-        name: '밤',
-      }
-    ]
-  },
-  {
-    value: 'music',
-    name: '음악',
-    options: [
-      {
-        value: "on",
-        name: '켬',
-      },
-      {
-        value: "off",
-        name: '끔',
-      }
-    ]
-  },
-]
+import ThemeButton from "./theme-button";
 
 const components = [
   {
@@ -69,11 +37,7 @@ export default function GlobalNav() {
 
       <ParamButton param="meta" name="대해서" backbutton={true} />
 
-      <ExpandButton name={<Settings className="w-4 h-4" />}>
-        {settings.map((field, idx) => (
-          <SwitchField key={idx} value={field} />
-        ))}
-      </ExpandButton>
+      <ThemeButton />
 
       {components.map((cmp, idx) =>
         <EnableButton key={idx} value={cmp} />

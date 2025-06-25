@@ -105,7 +105,7 @@ export default function Toc({
             className={clsx(
               "leading-8 truncate bg-background rounded-sm px-2 transition-all duration-300",
               !isVisible ? 'opacity-0' : 
-              slug === hoverHeading ? 'opacity-100': 'text-neutral-400'
+              slug === hoverHeading ? 'opacity-100': 'text-text-700'
             )}
           >
             {text}
@@ -114,7 +114,7 @@ export default function Toc({
             <div
               className={clsx(
                 "rounded-full transition-all duration-300",
-                slug === hoverHeading ? 'bg-selected-500' : 'bg-button-200',
+                slug === hoverHeading ? 'bg-green-500' : 'bg-button-200',
                 slug === activeHeading ? 'w-[12px] h-[12px]': 'w-[5px] h-[5px]'
               )}
             ></div>

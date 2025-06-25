@@ -71,7 +71,7 @@ export default function ChronList({
       {rootPath === note.id &&
         <ChevronRight className={clsx(
           "absolute left-0 text-text-900 border-r-0 w-4 h-4",
-          hovered && hovered !== note.id && "text-text-700",
+          hovered && hovered !== note.id && "text-text-600",
         )} />
       }
       <div className="w-16 shrink-0 text-text-800">{note.chron.year && `${note.chron.year}년`}</div>

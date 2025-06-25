@@ -83,7 +83,7 @@ export default function InspectTag({
   return (
     <div
       id='tag-input'
-      className='h-auto w-auto px-1 py-1 border border-text-700 rounded-sm flex gap-1'
+      className='h-auto w-auto px-1 py-1 border border-text-600 rounded-sm flex gap-1'
       onMouseLeave={() => setHoveredTag(null, null, null)}
     >
       {tags.map((tag, idx) => (
@@ -105,7 +105,7 @@ export default function InspectTag({
       ))}
       <span
         className={clsx(
-          'absolute h-8 rounded-sm bg-selected-500 -z-10 pl-1 transition-all duration-300 ease-in-out',
+          'absolute h-8 rounded-sm bg-green-500 -z-10 pl-1 transition-all duration-300 ease-in-out',
           hoveredTag ? 'opacity-100' : 'opacity-0'
         )}
         style={{
