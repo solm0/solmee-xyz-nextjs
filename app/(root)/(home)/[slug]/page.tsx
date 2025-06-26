@@ -74,7 +74,7 @@ export default async function Page({
       <Metadata post={post} />
 
       <div className="flex flex-col">
-        <Note post={post} />
+        <Note post={post.content.document} />
       </div>
 
       <Toc post={post} />

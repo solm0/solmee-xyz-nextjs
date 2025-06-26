@@ -1,14 +1,14 @@
-import { UnorderedListNode } from "@/app/lib/type"
+import { OrderedListNode } from "@/app/lib/type"
 import Paragraph from "./paragraph";
 
-export default function Ul({
-  ul,
+export default function Ol({
+  ol,
 }: {
-  ul: UnorderedListNode
+  ol: OrderedListNode
 }) {
   return (
-    <ul className="list-disc pl-8">
-      {ul.children.map((child, idx) => (
+    <ol className="list-decimal pl-8">
+      {ol.children.map((child, idx) => (
         <li key={idx}>
           {child.children.map((ch, idx) => {
             if (ch.type === 'list-item-content') {
@@ -17,12 +17,12 @@ export default function Ul({
               );
             } else {
               return (
-                <Ul key={idx} ul={ch as UnorderedListNode} />
+                <Ol key={idx} ol={ch as OrderedListNode} />
               )
             }
           })}
         </li>
       ))}
-    </ul>
+    </ol>
   )
 }

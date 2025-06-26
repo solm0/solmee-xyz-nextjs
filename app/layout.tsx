@@ -7,7 +7,7 @@ import ApolloWrapper from "./lib/ApolloWrapper";
 import { Suspense } from 'react';
 import { gql, GraphQLClient } from "graphql-request";
 import { Tag, TagsResponse } from "./lib/type";
-import Providers from "./lib/theme-provider";
+import { ThemeProvider } from "next-themes";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -34,11 +34,11 @@ export default async function RootLayout({
   const tags: Tag[] = data.tags;
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${pretendard.className} antialiased font-normal`}
       >
-        <Providers>
+        <ThemeProvider disableTransitionOnChange>
           <div className="flex h-screen w-full p-8 gap-4">
             <aside className="h-full w-80 shrink-0">
               <Suspense>
@@ -52,7 +52,7 @@ export default async function RootLayout({
               </ApolloWrapper>
             </main>
           </div>
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

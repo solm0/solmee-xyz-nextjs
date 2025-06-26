@@ -50,7 +50,7 @@ export type HeadingNode = {
 };
 
 export type ParagraphNode = {
-  type: 'paragraph';
+  type: 'paragraph' | 'list-item-content' | "layout-area";
   children: TextNode[];
   textAlign?: 'start' | 'center' | 'end';
 };
@@ -68,16 +68,14 @@ export type BlockquoteNode = {
 export type CodeBlockNode = {
   type: 'code';
   children: FormattedText[];
+  caption?: string;
 };
 
-export type ListItemContentNode = {
-  type: 'list-item-content';
-  children: TextNode[];
-};
+export type ListItemChild = ParagraphNode | UnorderedListNode | OrderedListNode;
 
 export type ListItemNode = {
   type: 'list-item';
-  children: ListItemContentNode[];
+  children: ListItemChild[];
 };
 
 export type OrderedListNode = {
@@ -101,8 +99,7 @@ export type LayoutNode = {
   children: LayoutAreaNode[];
 };
 
-// Union of all possible block node types
-type RichTextNode =
+export type RichTextNode =
   | HeadingNode
   | ParagraphNode
   | DividerNode
@@ -112,7 +109,7 @@ type RichTextNode =
   | UnorderedListNode
   | LayoutNode;
 
-type PostContent = {
+export type PostContent = {
   document: RichTextNode[];
   relationships?: {
     tag?: Tag[];

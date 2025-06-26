@@ -1,17 +1,21 @@
-import { Post } from "../lib/type"
+import { RichTextNode } from "../lib/type"
 import Headings from "./document/heading";
 import Paragraph from "./document/paragraph";
 import Ul from "./document/ul";
+import Ol from "./document/ol";
+import Blockquote from "./document/blockquote";
+import LayoutBlock from "./document/layout-block";
+import CodeBlock from "./document/codeblock";
 
 export default function Note({
   post
 }: {
-  post: Post
+  post: RichTextNode[];
 }) {
   return (
     <>
       {
-        post.content?.document.map((document, idx) => {
+        post?.map((document, idx) => {
 
           switch (document.type) {
             case 'heading':
@@ -20,17 +24,34 @@ export default function Note({
               )
             case 'paragraph':
               return (
-                <Paragraph key={idx} p={document} />
+                <div key={idx} className="pb-8">
+                  <Paragraph p={document} />
+                </div>
               );
             case 'unordered-list':
               return (
                 <Ul key={idx} ul={document} />
               )
             case 'ordered-list':
+              return (
+                <Ol key={idx} ol={document} />
+              )
             case 'divider':
+              return (
+                <hr key={idx} className="border-t text-text-600" />
+              )
             case 'blockquote':
-            case 'code':
+              return (
+                <Blockquote key={idx} quote={document} />
+              )
             case 'layout':
+              return (
+                <LayoutBlock key={idx} layout={document} />
+              )
+            case 'code':
+              return (
+                <CodeBlock key={idx} codeblock={document} />
+              )
           }
         })
       }

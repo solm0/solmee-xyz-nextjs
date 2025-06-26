@@ -12,12 +12,12 @@ export default function InlineText ({
   if (text.italic) styles.push('italic');
   if (text.underline) styles.push('underline underline-offset-6 decoration-text-900 decoration-[1px]');
   if (text.strikethrough) styles.push('line-through decoration-text-900 decoration-[1px]');
-  if (text.code) styles.push('text-sm font-mono bg-button-100 rounded-sm px-2 py-1 border border-text-600');
+  if (text.code) styles.push('text-sm font-mono bg-button-100 rounded-sm px-[5px] py-[2px] border border-text-600 mx-1');
   if (text.keyboard) styles.push('text-sm font-mono px-2 py-1');
   if (text.subscript) styles.push('text-[0.7rem] align-0');
   if (text.superscript) styles.push('text-[0.7rem] align-[9px]');
   
-  const style = styles.join(' ')
+  const style = styles.join(' ');
 
   if (text.code) {
     return (
@@ -69,9 +69,9 @@ export default function InlineText ({
     )
   } else {
     return (
-      <div className={`inline ${style}`}>
+      <span className={`inline ${style}`}>
         {text.text}
-      </div>
+      </span>
     )
   }
 }

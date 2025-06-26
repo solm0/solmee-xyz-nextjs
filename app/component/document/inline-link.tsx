@@ -8,7 +8,7 @@ export default function InlineLink({
   link: LinkNode;
 }) {
   return (
-    <span className="inline">
+    <span>
       <Link
         href={link.href || ''}
         target="_blank" // 내부 외부 링크 차이
