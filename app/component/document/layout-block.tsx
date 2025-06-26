@@ -15,7 +15,10 @@ export default function LayoutBlock({
   return (
     <div className="flex gap-4">
       {layout.layout.map((num, idx) => (
-        <div key={idx} className={`basis-${num}/${den}`}>
+        <div
+          key={idx}
+          style={{ width: `${(num / den) * 100}%` }}
+        >
           <Note post={layout.children?.[idx].children} />
         </div>
       ))}
