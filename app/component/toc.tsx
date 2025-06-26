@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Post } from "../lib/type"
 import clsx from "clsx";
 import { pretendard } from "../lib/localfont";
+import { slugify } from "../lib/slugify";
 
 type Heading = {
   slug: string;
@@ -50,14 +51,6 @@ export default function Toc({
 }: {
   post: Post;
 }) {
-  function slugify(text: string): string {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-  }
-
   // heading 뽑아내서 매핑하기
   const headings: Heading[] | undefined = post.content?.document
   .filter(doc => doc.type === "heading")

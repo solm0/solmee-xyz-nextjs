@@ -72,7 +72,11 @@ export default async function Page({
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
       <h1 className={`text-3xl ${maruburi_bold.className}`}>{post?.title}</h1>
       <Metadata post={post} />
-      <Note post={post} />
+
+      <div className="flex flex-col">
+        <Note post={post} />
+      </div>
+
       <Toc post={post} />
       <Footer />
     </article>
