@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import { Post } from "../lib/type"
+import { Post, FormattedText } from "../lib/type"
 import clsx from "clsx";
 import { pretendard } from "../lib/localfont";
 import { slugify } from "../lib/slugify";
@@ -55,7 +55,7 @@ export default function Toc({
   const headings: Heading[] | undefined = post.content?.document
   .filter(doc => doc.type === "heading")
   .map(doc => {
-    const text = doc.children?.[0]?.text || 'undefined-heading';
+    const text = (doc.children?.[0] as FormattedText).text || 'undefined-heading';
     return {
       slug: slugify(text),
       text: text

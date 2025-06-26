@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 
 export default function Giscus() {
   const { theme } = useTheme();
-  const giscusTheme = theme === 'light' ? 'catppuccin_latte' : 'noborder_dark'
+  const giscusTheme = theme === 'light' ? 'noborder_light' : 'noborder_dark'
   const commentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

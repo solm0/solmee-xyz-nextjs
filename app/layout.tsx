@@ -6,7 +6,7 @@ import { pretendard } from "./lib/localfont";
 import ApolloWrapper from "./lib/ApolloWrapper";
 import { Suspense } from 'react';
 import { gql, GraphQLClient } from "graphql-request";
-import { Tag } from "./lib/type";
+import { Tag, TagsResponse } from "./lib/type";
 import Providers from "./lib/theme-provider";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
@@ -30,7 +30,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data: { tags: Tag[]; } = await client.request(GET_ALL_TAGS);
+  const data: TagsResponse = await client.request(GET_ALL_TAGS);
   const tags: Tag[] = data.tags;
 
   return (

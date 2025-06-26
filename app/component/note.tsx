@@ -1,34 +1,39 @@
 import { Post } from "../lib/type"
-import Heading from "./heading";
+import Headings from "./document/heading";
+import Paragraph from "./document/paragraph";
+import Ul from "./document/ul";
 
 export default function Note({
   post
 }: {
   post: Post
 }) {
-  post.content?.document.map((document, idx) => {
-    switch (document.type) {
-      case 'heading':
-        return (
-          <Heading key={idx} heading={document} />
-        )
-      case 'paragraph':
-        return (
-          <div
-            key={idx}
-            className='pb-8'
-          >
-            {document.children?.[0].text}
-          </div>
-        );
-      case 'unordered-list':
-        return (
-          <div></div>
-        )
-      case 'ordered-list':
-      case 'blockquote':
-      case 'code':
-      case 'layout':
-    }
-  })
+  return (
+    <>
+      {
+        post.content?.document.map((document, idx) => {
+
+          switch (document.type) {
+            case 'heading':
+              return (
+                <Headings key={idx} heading={document} />
+              )
+            case 'paragraph':
+              return (
+                <Paragraph key={idx} p={document} />
+              );
+            case 'unordered-list':
+              return (
+                <Ul key={idx} ul={document} />
+              )
+            case 'ordered-list':
+            case 'divider':
+            case 'blockquote':
+            case 'code':
+            case 'layout':
+          }
+        })
+      }
+    </>
+  )
 }

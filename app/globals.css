@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  ul, ol {
+    list-style: revert;
+  }
+}
+
 :root {
   --background: #F8F7FB;
   --foreground: #171717;
