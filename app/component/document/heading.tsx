@@ -13,8 +13,6 @@ export default function Headings({
     case 2: fontSize = '!text-xl'; break;
     case 3: fontSize = '!text-lg'; break;
     case 4: fontSize = '!text-base'; break;
-    case 5: fontSize = '!text-sm'; break;
-    case 6: fontSize = '!text-xs'; break;
   }
 
   return (

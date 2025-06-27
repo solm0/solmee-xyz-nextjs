@@ -16,7 +16,7 @@ const GET_ALL_POSTS = gql`
       publishedAt
       meta
       content {
-        document
+        document(hydrateRelationships: true)
       }
     }
   }
