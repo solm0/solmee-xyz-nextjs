@@ -11,7 +11,7 @@ export default function InlineLink({
     <span>
       <Link
         href={link.href || ''}
-        target="_blank" // 내부 외부 링크 차이
+        target="_blank"
         className="underline underline-offset-6 decoration-text-900 decoration-[1px] hover:text-text-700 hover:decoration-text-700 transition-colors duration-300"
       >
         {link.children?.map((child, idx) => 

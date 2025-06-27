@@ -1,16 +1,13 @@
-import { ParagraphNode, TextNode, LinkNode } from "@/app/lib/type";
+import { ParagraphNode, LinkNode, RelationshipNode, FormattedText } from "@/app/lib/type";
 import InlineLink from "./inline-link";
 import InlineText from "./inline-text";
+import InlineInternalLink from "./inline-internallink";
 
 export default function Paragraph({
   p,
 }: {
   p: ParagraphNode;
 }) {
-  function isLinkNode(node: TextNode): node is LinkNode {
-    return node.href !== undefined;
-  }
-  
   const styles: string[] = [];
 
   if (p.textAlign === 'start') styles.push('text-left');
@@ -22,13 +19,17 @@ export default function Paragraph({
   return (
     <p className={`${style}`}>
       {p.children.map((child, idx) => {
-        if (isLinkNode(child)) {
+        if (child.type === 'link') {
           return (
-            <InlineLink key={idx} link={child} />
+            <InlineLink key={idx} link={child as LinkNode} />
           )
-        } else {
+        } else if (child.type === 'relationship') {
           return (
-            <InlineText key={idx} text={child} />
+            <InlineInternalLink key={idx} internalLink={child as RelationshipNode} />
+          )
+        } else if (child.type === undefined) {
+          return (
+            <InlineText key={idx} text={child as FormattedText} />
           )
         }
       })}

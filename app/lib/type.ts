@@ -32,7 +32,7 @@ export type FormattedText = {
   keyboard?: boolean;
   subscript?: boolean;
   superscript?: boolean;
-  href?: string;
+  type?: string;
 };
 
 export type LinkNode = {
@@ -41,7 +41,7 @@ export type LinkNode = {
   children: FormattedText[];
 };
 
-export type TextNode = FormattedText | LinkNode;
+export type TextNode = FormattedText | LinkNode | RelationshipNode;
 
 export type HeadingNode = {
   type: 'heading';
@@ -125,4 +125,18 @@ export type Tag = {
 // Final root object
 export type TagsResponse = {
   tags: Tag[];
+};
+
+export type RelationshipNode = {
+  type: 'relationship';
+  relationship: 'post';
+  data: {
+    id: string;
+    label: string;
+    data: {
+      id: string;
+      title: string;
+    };
+  };
+  children: { text: string }[]; // usually an empty text node
 };
