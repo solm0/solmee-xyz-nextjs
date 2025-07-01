@@ -6,11 +6,7 @@ import { ChevronLeft, ChevronRight, Expand, Locate } from 'lucide-react';
 import { pretendard } from "../lib/localfont";
 import clsx from "clsx";
 
-export default function HyperlinkMap({
-  isFullPage,
-}: {
-  isFullPage: boolean;
-}) {
+export default function HyperlinkMap() {
   const initializeToggles = useToggleStore((s) => s.initializeToggles);
 
   useEffect(() => {
@@ -23,7 +19,6 @@ export default function HyperlinkMap({
     <nav className={clsx (
       `${pretendard.className} fixed top-8 right-8 flex flex-col gap-1 text-text-900 text-sm w-auto h-auto transition-all duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] z-80`,
       isEnabled ? 'translate-x-0' : 'translate-x-96',
-      isFullPage ? 'top-[10rem]' : 'top-[calc(50vh+2rem)]',
     )}>
       <div className="w-80 h-80 border text-text-800 border-text-600 flex items-center justify-center rounded-sm backdrop-blur-md">
         아직 그래프가 없습니다ㅠ<br/>

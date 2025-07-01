@@ -36,17 +36,17 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pretendard.className} antialiased font-normal`}
+        className={`${pretendard.className} antialiased font-normal overflow-hidden`}
       >
         <ThemeProvider disableTransitionOnChange>
           <div className="flex h-screen w-full p-8 gap-4">
-            <aside className="h-full w-80 shrink-0">
+            <aside className="fixed h-full w-80 shrink-0">
               <Suspense>
                 <GlobalNav />
               </Suspense>
               <NoteInspector tags={tags} />
             </aside>
-            <main className="h-full flex-1 flex flex-col items-center overflow-hidden">
+            <main className="absolute left-[21rem] flex flex-col h-full w-[calc(100vw-21rem)] flex-1 items-center overflow-hidden">
               <ApolloWrapper>
                 {children}
               </ApolloWrapper>

@@ -34,12 +34,12 @@ export default function RandSectionWrapper({
       <Suspense>
         {posts.map((note) => {
           if (menu === 'chron') return (
-              <ChronList
-                key={note.id}
-                note={note}
-                goUp={goUp} setGoUp={setGoUp}
-                hovered={hovered} setHovered={setHovered}
-              />
+            <ChronList
+              key={note.id}
+              note={note}
+              goUp={goUp} setGoUp={setGoUp}
+              hovered={hovered} setHovered={setHovered}
+            />
             )
           else return (
             <RandList

@@ -132,8 +132,8 @@ export type RelationshipNode = {
   relationship: 'post';
   data: {
     id: string;
-    label: string;
-    data: {
+    label?: string;
+    data?: {
       id: string;
       title: string;
     };

@@ -1,19 +1,18 @@
 'use client'
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { maruburi } from "@/app/lib/localfont";
 import HyperlinkMap from "./hyperlink-map";
-import { useEffect, useState } from "react";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function NoteSection({
   children,
 }: {
   children: React.ReactNode,
 }) {
+  const router = useRouter();
   const rootPath = usePathname().split('/').slice(1, 2).toString();
-  const [isFullPage, setIsFullPage] = useState(false);
 
   useEffect(() => {
     const page: HTMLElement | null = document.getElementById('note_section');
@@ -23,32 +22,77 @@ export default function NoteSection({
       top: 0,
     });
   }, [rootPath]);
+
+  // 현재 스크롤 위치가 끝임 && 아래쪽으로 사용자가 끌어내리려 함 -> router.push(뒤로)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isEnd, setIsEnd] = useState(false);
+  
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    const handleScroll = () => {
+      const validScroll = scrollEl.scrollHeight > scrollEl.clientHeight;
+      if (!validScroll) return;
+
+      const atBottom = scrollEl.scrollHeight - scrollEl.scrollTop <= scrollEl.clientHeight;
+      console.log(scrollEl.scrollHeight, scrollEl.scrollTop, scrollEl.clientHeight)
+
+      if (atBottom) {
+        console.log('setIsEnd to true')
+
+        setTimeout(() => {
+          setIsEnd(true);
+        }, 1000);
+      } else {
+        setIsEnd(false);
+      }
+    };
+
+    if (rootPath === '') {
+      console.log('rootPath no');
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      console.log('add event after wating')
+      scrollEl.addEventListener('scroll', handleScroll);
+      handleScroll();
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+      scrollEl.removeEventListener('scroll', handleScroll);
+    };
+  }, [rootPath]);
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    console.log(isEnd);
+    if (e.deltaY > 0 && isEnd) {
+      const newParams = new URLSearchParams(window.location.search);
+      router.push(`/?${newParams.toString()}`);
+      setIsEnd(false)
+    }
+  }
   
   return (
-    <section
-      id="note_section"
-      className={clsx(
-        `${maruburi.className}`,
-        "absolute right-8 w-[calc(100%-25rem)] border-t border-text-600 overflow-y-scroll pt-8 pl-8 bg-background transition-all duration-1000 ease-in-out",
-        rootPath ? 'block' : 'hidden',
-        isFullPage ? 'h-[calc(100%-8rem)] top-[8rem]' : 'h-1/2 top-1/2',
-      )}
+    <div
+      ref={scrollRef}
+      onWheel={(e) => handleWheel(e)}
+      className="absolute f top-0 w-full h-screen overflow-y-scroll pointer-events-none"
     >
-      <HyperlinkMap isFullPage={isFullPage} />
-      {children}
-      <button
+      <section
+        id="note_section"
         className={clsx(
-          "fixed right-16 w-10 h-10 flex items-center justify-center bg-background border-t border-l border-r border-text-600 rounded-t-sm transition-all duration-1000 ease-in-out",
-          isFullPage ? 'top-[6rem]' : 'top-[calc(50vh-2rem)]'
+          `${maruburi.className}`,
+          "absolute left-0 right-8 w-full mt-[50vh] border-b border-t border-text-600 pt-8 pl-8 pr-8 bg-background transition-all duration-1000 ease-in-out pointer-events-auto",
+          rootPath ? 'block' : 'hidden',
         )}
-        onClick={() => setIsFullPage(!isFullPage)}
       >
-        {isFullPage ?
-          <ChevronDown  className="text-text-800 hover:text-text-600 w-5 h-5 transition-color duration-300" />
-          :
-          <ChevronUp  className="text-text-800 hover:text-text-600 w-5 h-5 transition-color duration-300" />
-        }
-      </button>
-    </section>
+        <HyperlinkMap/>
+        {children}
+        <div className="relative w-full h-[50vh]"></div>
+      </section>
+    </div>
   )
 }
