@@ -1,5 +1,5 @@
 import { LayoutNode } from "@/app/lib/type";
-import Note from "../note";
+import Content from "../content";
 
 export default function LayoutBlock({
   layout,
@@ -19,7 +19,7 @@ export default function LayoutBlock({
           key={idx}
           style={{ width: `${(num / den) * 100}%` }}
         >
-          <Note post={layout.children?.[idx].children} />
+          <Content post={layout.children?.[idx].children} />
         </div>
       ))}
     </div>

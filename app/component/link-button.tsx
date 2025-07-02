@@ -17,7 +17,6 @@ export default function LinkButton({
 
   const router = useRouter();
   let rootPath = pathname.split('/').slice(1, 2).toString();
-  console.log(rootPath)
 
   const handleClick = (href: string) => {
     if (href === rootPath) {

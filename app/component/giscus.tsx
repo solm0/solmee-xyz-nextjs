@@ -33,5 +33,5 @@ export default function Giscus() {
     }
   }, [giscusTheme]);
 
-  return <div ref={commentRef} />;
+  return <div className='min-h-96' ref={commentRef} />;
 }

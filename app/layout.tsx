@@ -46,7 +46,7 @@ export default async function RootLayout({
               </Suspense>
               <NoteInspector tags={tags} />
             </aside>
-            <main className="absolute left-[21rem] flex flex-col h-full w-[calc(100vw-21rem)] flex-1 items-center overflow-hidden">
+            <main className="absolute left-[22rem] flex flex-col h-full w-[calc(100vw-22rem)] top-0 flex-1 items-center overflow-hidden">
               <ApolloWrapper>
                 {children}
               </ApolloWrapper>

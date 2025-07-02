@@ -36,10 +36,10 @@ export default function NoteSection({
       if (!validScroll) return;
 
       const atBottom = scrollEl.scrollHeight - scrollEl.scrollTop <= scrollEl.clientHeight;
-      console.log(scrollEl.scrollHeight, scrollEl.scrollTop, scrollEl.clientHeight)
+      // console.log(scrollEl.scrollHeight, scrollEl.scrollTop, scrollEl.clientHeight)
 
       if (atBottom) {
-        console.log('setIsEnd to true')
+        // console.log('setIsEnd to true')
 
         setTimeout(() => {
           setIsEnd(true);
@@ -50,12 +50,12 @@ export default function NoteSection({
     };
 
     if (rootPath === '') {
-      console.log('rootPath no');
+      // console.log('rootPath no');
       return;
     }
 
     const timeout = setTimeout(() => {
-      console.log('add event after wating')
+      // console.log('add event after wating')
       scrollEl.addEventListener('scroll', handleScroll);
       handleScroll();
     }, 3000);
@@ -67,7 +67,7 @@ export default function NoteSection({
   }, [rootPath]);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    console.log(isEnd);
+    // console.log(isEnd);
     if (e.deltaY > 0 && isEnd) {
       const newParams = new URLSearchParams(window.location.search);
       router.push(`/?${newParams.toString()}`);
@@ -77,9 +77,10 @@ export default function NoteSection({
   
   return (
     <div
+      id="note_wrapper"
       ref={scrollRef}
       onWheel={(e) => handleWheel(e)}
-      className="absolute f top-0 w-full h-screen overflow-y-scroll pointer-events-none"
+      className="absolute top-0 w-full h-screen overflow-y-scroll pointer-events-none"
     >
       <section
         id="note_section"
@@ -91,7 +92,6 @@ export default function NoteSection({
       >
         <HyperlinkMap/>
         {children}
-        <div className="relative w-full h-[50vh]"></div>
       </section>
     </div>
   )

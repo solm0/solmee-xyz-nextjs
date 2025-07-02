@@ -88,10 +88,20 @@ export default function Toc({
           onMouseLeave={() => setHoverHeading(null)}
           onClick={(e) => {
             e.preventDefault();
-            console.log('click')
-            document.getElementById(slug)?.scrollIntoView({
-              behavior: 'smooth'
-            });
+            const el = document.getElementById(slug);
+            const page = document.getElementById('note_wrapper');
+
+            if (el && page) {
+              const containerTop = page.getBoundingClientRect().top;
+              const elementTop = el.getBoundingClientRect().top;
+
+              const offset = elementTop - containerTop + page.scrollTop - 80;
+
+              page.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+              });
+            }
           }}
         >
           <p

@@ -3,10 +3,6 @@
 
 import { gql, GraphQLClient } from 'graphql-request';
 import Note from '@/app/component/note';
-import Footer from '@/app/component/footer';
-import Toc from '@/app/component/toc';
-import Metadata from '@/app/component/metadata';
-import { maruburi_bold } from '@/app/lib/localfont';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -70,15 +66,7 @@ export default async function Page({
 
   return (
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
-      <h1 className={`text-3xl ${maruburi_bold.className}`}>{post?.title}</h1>
-      <Metadata post={post} />
-
-      <div className="flex flex-col">
-        <Note post={post.content.document} />
-      </div>
-
-      <Toc post={post} />
-      <Footer />
+      <Note post={post} />
     </article>
   )
 }
