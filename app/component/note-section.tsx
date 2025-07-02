@@ -16,11 +16,15 @@ export default function NoteSection({
 
   useEffect(() => {
     const page: HTMLElement | null = document.getElementById('note_section');
+    const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
     if (!page) return;
-
+    
     page.scrollTo({
       top: 0,
     });
+    wrapper?.scrollTo({
+      top: 0,
+    })
   }, [rootPath]);
 
   // 현재 스크롤 위치가 끝임 && 아래쪽으로 사용자가 끌어내리려 함 -> router.push(뒤로)

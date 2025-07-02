@@ -21,7 +21,7 @@ export default function InlineInternalLink({
         href={`${internalLink.data.id}/?${newParams}`}
         target="_self"
         className="underline underline-offset-6 decoration-text-900 decoration-[1px] hover:text-text-700 hover:decoration-text-700 hover:cursor-ne-resize transition-colors duration-300"
-        onMouseEnter={() => setHoveredId(internalLink.data.data?.title || null, internalLink.data.data?.id || null)}
+        onMouseEnter={() => setHoveredId(internalLink.data.data?.title || null, internalLink.data.data?.id || null, true)}
         onMouseLeave={() => setHoveredId(null, null)}
         onClick={() => setHoveredId(null, null)}
       >

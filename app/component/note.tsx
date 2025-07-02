@@ -8,6 +8,8 @@ import Metadata from '@/app/component/metadata';
 import { maruburi_bold } from '@/app/lib/localfont';
 import { useEffect, useRef, useState } from "react";
 import Header from "./header";
+import RingLinks from "./ring-links";
+import SequenceNav from "./sequence-nav";
 
 export default function Note({
   post,
@@ -16,7 +18,7 @@ export default function Note({
 }) {
   const headRef = useRef<HTMLDivElement>(null);
 
-  const [isHeadingVisible, setIsHeadingVisible] = useState(false);
+  const [isHeadingVisible, setIsHeadingVisible] = useState(true);
 
   useEffect(() => {
     const heading = headRef.current;
@@ -38,6 +40,41 @@ export default function Note({
         observer.disconnect();
       };
   }, []);
+
+  const RingLink = () => {
+    if (post.links && post.links?.length > 0) {   // 부모노트일 경우
+      return (<RingLinks id={post.id} links={post.links} backlink={post} />);
+    } else if (post.backlinks?.[0]) {             // 자식노트일 경우
+      return (<RingLinks id={post.id} links={post.backlinks?.[0].links ?? null} backlink={post.backlinks?.[0]} />)
+    } else return;
+  }
+
+  const generateSequence = () => {
+    let prev = null;
+    let next = null;
+    let isFirstChild = false;
+
+    if (post.links && post.links?.length > 0) {
+      const sorted = [...post.links].sort(
+        (a, b) => (a.order ?? 0) - (b.order ?? 0)
+      );
+      next = sorted[0];
+    } else if (post.backlinks?.[0]) {
+      const currentOrder = post.order ?? 0;
+      const links = post.backlinks[0].links ?? [];
+
+      prev = links.find(link => link.order === currentOrder - 1) ?? null;
+      next = links.find(link => link.order === currentOrder + 1) ?? null;
+
+      if (prev === null) {
+        prev = post.backlinks?.[0];
+        isFirstChild = true;
+      }
+    }
+    return { prev, next, isFirstChild };
+  };
+
+  const { prev, next, isFirstChild } = generateSequence();
   
   return (
     <>
@@ -47,15 +84,20 @@ export default function Note({
       >
         {post?.title}
       </h1>
+      <RingLink />
       <Metadata post={post} />
-
+      
       <div className="flex flex-col">
         {post.content && <Content post={post.content.document} />}
       </div>
 
-      <Toc post={post} />
+      {(post.backlinks?.length || (post.links?.length ?? 0) > 0) &&
+        <SequenceNav isFirstChild={isFirstChild} prev={prev} next={next} />
+      }
+
       <Footer />
 
+      <Toc post={post} />
       <Header title={post.title} isHeadingVisible={isHeadingVisible} />
     </>
   )

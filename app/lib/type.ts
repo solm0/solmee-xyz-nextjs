@@ -13,6 +13,9 @@ export type Post = {
     month?: string;
     day?: string;
   }
+  order?: number;
+  links?: Post[];
+  backlinks?: Post[];
 };
 
 export type User = {

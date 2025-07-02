@@ -6,9 +6,10 @@ import { useHoveredLink } from "@/app/lib/use-hovered-link";
 export default function InternalLinkTooltip() {
   const mousePosition = useMousePosition();
 
-  const hoveredId = useHoveredLink((state) => state.title);
+  const hoveredTitle = useHoveredLink((state) => state.title);
+  const tooltip = useHoveredLink((state) => state.tooltip);
 
-  if (hoveredId) {
+  if (hoveredTitle && tooltip) {
     return (
       <span
         className="text-sm bg-button-100 rounded-sm flex items-center h-auto w-72 -translate-x-36 break-words px-3 py-2 absolute leading-6"
@@ -17,7 +18,7 @@ export default function InternalLinkTooltip() {
           left: mousePosition.x! || 0,
         }}
       >
-        {hoveredId}
+        {hoveredTitle}
       </span>
     )
   }
