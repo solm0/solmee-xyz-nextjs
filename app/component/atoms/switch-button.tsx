@@ -2,8 +2,8 @@
 
 import clsx from 'clsx';
 import { useState, useEffect } from "react";
-import usePersistentState from '../lib/use-persistent-state';
-import { useIsSettingOpen } from '../lib/use-is-setting-open';
+import usePersistentState from '@/app/lib/use-persistent-state';
+import { useIsSettingOpen } from '@/app/lib/use-is-setting-open';
 
 type HoverState = {
   offsetX: number | null;

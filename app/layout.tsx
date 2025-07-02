@@ -8,6 +8,7 @@ import { Suspense } from 'react';
 import { gql, GraphQLClient } from "graphql-request";
 import { Tag, TagsResponse } from "./lib/type";
 import { ThemeProvider } from "next-themes";
+import InternalLinkTooltip from "./component/internallink-tooltip";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -52,6 +53,8 @@ export default async function RootLayout({
               </ApolloWrapper>
             </main>
           </div>
+
+          <InternalLinkTooltip />
         </ThemeProvider>
       </body>
     </html>

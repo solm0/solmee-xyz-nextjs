@@ -1,7 +1,7 @@
 'use client'
 
-import SwitchField from "./switch-button";
-import ParamKwButton from "./param-kw-button";
+import SwitchField from "./atoms/switch-button";
+import ParamKwButton from "./atoms/param-kw-button";
 
 const keywords = ['Next.js', 'Astro', '에러', 'Rich Text', '독일',
   '교환학생', 'HeadlessCMS', 'chatGPT', '웹', 'VPS', '타이포그래피'

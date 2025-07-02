@@ -17,6 +17,7 @@ export default function InlineLink({
         {link.children?.map((child, idx) => 
           <InlineText key={idx} text={child} />
         )}
+        <span> ↗</span>
       </Link>
     </span>
   )

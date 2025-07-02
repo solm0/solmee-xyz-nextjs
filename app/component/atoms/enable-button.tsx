@@ -4,7 +4,7 @@
 'use client'
 
 import clsx from 'clsx';
-import { useToggleStore } from '../lib/use-enabled';
+import { useToggleStore } from '@/app/lib/use-enabled';
 import { useEffect } from 'react';
 
 export default function EnableButton({

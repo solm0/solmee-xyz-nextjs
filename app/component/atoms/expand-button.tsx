@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import clsx from 'clsx';
-import { useIsSettingOpen } from "../lib/use-is-setting-open";
+import { useIsSettingOpen } from "@/app/lib/use-is-setting-open";
 import { useEffect } from "react";
 
 export default function ExpandButton({

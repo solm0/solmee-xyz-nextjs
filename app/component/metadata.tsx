@@ -4,7 +4,7 @@ import { Post } from "../lib/type";
 import { pretendard } from '@/app/lib/localfont';
 import { Calendar, Tag, Key } from 'lucide-react';
 import clsx from "clsx";
-import ParamKwButton from "./param-kw-button";
+import ParamKwButton from "./atoms/param-kw-button";
 
 const tempKeywords = ['임시', '키워드', '입니다', 'this', 'is', 'temp', 'keywords', 'Next.js']
 

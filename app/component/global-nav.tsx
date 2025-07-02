@@ -1,11 +1,11 @@
 'use client'
 
-import ExpandButton from "./expand-button";
-import ParamButton from './param-button';
-import EnableButton from "./enable-button";
+import ExpandButton from './atoms/expand-button';
+import ParamButton from './atoms/param-button';
+import EnableButton from './atoms/enable-button';
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from 'react';
-import ThemeButton from "./theme-button";
+import ThemeButton from "./atoms/theme-button";
 
 const components = [
   {
