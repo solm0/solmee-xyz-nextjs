@@ -136,10 +136,23 @@ export type RelationshipNode = {
   data: {
     id: string;
     label?: string;
-    data?: {
-      id: string;
-      title: string;
-    };
+    data?: Post;
   };
   children: { text: string }[]; // usually an empty text node
 };
+
+export type Node = {
+  id: string;
+  title: string;
+  tag: string;
+}
+
+export type Link = {
+  source: string;
+  target: string;
+}
+
+export type Graph = {
+  nodes: Node[],
+  links: Link[]
+}

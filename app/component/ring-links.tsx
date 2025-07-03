@@ -71,7 +71,7 @@ export default function RingLinks({
                 onMouseLeave={() => setHoveredId(null, null)}
                 onClick={() => setHoveredId(null, null)}
                 className={clsx(
-                  'h-8 flex items-center',
+                  'leading-7 flex items-center',
                   link.id === id ? `${maruburi_bold.className} pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
                 )}
               >

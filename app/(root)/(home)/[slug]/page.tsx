@@ -3,6 +3,8 @@
 
 import { gql, GraphQLClient } from 'graphql-request';
 import Note from '@/app/component/note';
+import HyperlinkMap from '@/app/component/hyperlink-map';
+import GraphController from '@/app/component/graph-controller';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -25,6 +27,10 @@ const GET_POST_BY_ID = gql`
         id
         title
         order
+        tags {
+          id
+          name
+        }
       }
       backlinks {
         id
@@ -33,6 +39,10 @@ const GET_POST_BY_ID = gql`
           id
           title
           order
+          tags {
+            id
+            name
+          }
         }
       }
     }
@@ -82,6 +92,9 @@ export default async function Page({
   return (
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
       <Note post={post} />
+      <HyperlinkMap>
+        <GraphController post={post} />
+      </HyperlinkMap>
     </article>
   )
 }

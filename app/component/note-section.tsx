@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { maruburi } from "@/app/lib/localfont";
-import HyperlinkMap from "./hyperlink-map";
 import { useEffect, useRef, useState } from "react";
 
 export default function NoteSection({
@@ -94,7 +93,6 @@ export default function NoteSection({
           rootPath ? 'block' : 'hidden',
         )}
       >
-        <HyperlinkMap/>
         {children}
       </section>
     </div>
