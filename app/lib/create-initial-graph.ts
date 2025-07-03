@@ -32,7 +32,7 @@ export function inlineOut(post: Post, graph: Graph): void {
     const tag = r.data.data?.tags?.id || '';
 
     if (!id || !title) return;
-    const node = { id: id, title: title, tag: tag };
+    const node = { id: id, title: title, tag: tag, depth: 1 };
 
     // link
     const source = post.id;
@@ -60,7 +60,7 @@ export function childLink(post: Post, graph: Graph) {
     const tag = r.tags?.id;
 
     if (!id || !title) return;
-    const node = { id: id, title: title, tag: tag };
+    const node = { id: id, title: title, tag: tag, depth: 1 };
 
     // link
     const source = post.id;
@@ -82,7 +82,7 @@ export function parentLink(post: Post, graph: Graph) {
   const tag = post.backlinks?.[0]?.tags?.id || '';
 
   if (!id || !title) return;
-  const node = { id: id, title: title, tag: tag };
+  const node = { id: id, title: title, tag: tag, depth: 1 };
 
   // link
   const source = id;
