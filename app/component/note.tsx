@@ -84,8 +84,11 @@ export default function Note({
       >
         {post?.title}
       </h1>
-      <RingLink />
-      <Metadata post={post} />
+
+      <div className="flex flex-col gap-2">
+        <RingLink />
+        <Metadata post={post} />
+      </div>
       
       <div className="flex flex-col">
         {post.content && <Content post={post.content.document} />}

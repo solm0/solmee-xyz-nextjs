@@ -19,7 +19,7 @@ export default function Metadata({
 
   return (
     <section className={clsx (
-      `relative ${pretendard.className} flex flex-col gap-1 w-full h-auto items-start text-text-900 text-sm bg-button-50 px-4 py-3 rounded-sm border border-text-600 -left-4`,
+      `relative ${pretendard.className} flex flex-col w-full h-auto items-start text-text-900 text-sm px-4 py-3 rounded-sm -left-4`,
       post.meta === true ? 'hidden' : 'block',
     )}>
       <div className="flex gap-3 h-8 items-center">
@@ -32,9 +32,7 @@ export default function Metadata({
       </div>
       <div className="flex gap-3 h-8 items-center">
         <Tag className='w-3 h-3' />
-        <div key={post.tags.id} className="w-auto h-full bg-button-100 px-3 flex items-center gap-1 rounded-sm">
-          {post.tags.name}
-        </div>
+        {post.tags.name}
       </div>
       <div className="flex gap-3 items-start">
         <Key className='w-3 h-8 shrink-0' />
