@@ -25,7 +25,7 @@ export default function Headings({
           <div
             key={id}
             id={id}
-            className={`mb-2 ${maruburi_bold.className} ${fontSize}`}
+            className={`mb-2 text-text-950 ${maruburi_bold.className} ${fontSize}`}
           >
             {text}
           </div>

@@ -15,7 +15,8 @@
   --green-100: #B8FFCA;
   --green-500: #00EB95;
   --green-900: #009B71;
-  --text-900: #3D4F58;
+  --text-950: #394A54;
+  --text-900: #52636E;
   --text-800: #646464;
   --text-700: #B5B5B5;
   --text-600: #DADADA;
@@ -30,6 +31,7 @@
   --green-100: #004636;
   --green-500: #006B48;
   --green-900: #00B371;
+  --text-950: #C6CFDE;
   --text-900: #A6ACB6;
   --text-800: #828B9A;
   --text-700: #5A626F;
@@ -45,6 +47,7 @@
   --color-green-100: var(--green-100);
   --color-green-500: var(--green-500);
   --color-green-900: var(--green-900);
+  --color-text-950: var(--text-950);
   --color-text-900: var(--text-900);
   --color-text-800: var(--text-800);
   --color-text-700: var(--text-700);

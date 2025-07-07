@@ -1,6 +1,6 @@
 import { Graph, ParagraphNode, Post, RelationshipNode } from "./type";
 
-export function addNodeIfNotExists(graph: Graph, node: { id: string; title: string; tag: string }) {
+export function addNodeIfNotExists(graph: Graph, node: { id: string; title: string; depth: number; }) {
   if (!graph.nodes.find((n) => n.id === node.id)) {
     graph.nodes.push(node);
   }
@@ -29,10 +29,9 @@ export function inlineOut(post: Post, graph: Graph): void {
     // node
     const id = r.data.id;
     const title = r.data.data?.title;
-    const tag = r.data.data?.tags?.id || '';
 
     if (!id || !title) return;
-    const node = { id: id, title: title, tag: tag, depth: 1 };
+    const node = { id: id, title: title, depth: 1 };
 
     // link
     const source = post.id;
@@ -57,10 +56,9 @@ export function childLink(post: Post, graph: Graph) {
     // node
     const id = r.id;
     const title = r.title;
-    const tag = r.tags?.id;
 
     if (!id || !title) return;
-    const node = { id: id, title: title, tag: tag, depth: 1 };
+    const node = { id: id, title: title, depth: 1 };
 
     // link
     const source = post.id;
@@ -79,10 +77,9 @@ export function parentLink(post: Post, graph: Graph) {
   // node
   const id = post.backlinks?.[0]?.id;
   const title = post.backlinks?.[0]?.title;
-  const tag = post.backlinks?.[0]?.tags?.id || '';
 
   if (!id || !title) return;
-  const node = { id: id, title: title, tag: tag, depth: 1 };
+  const node = { id: id, title: title, depth: 1 };
 
   // link
   const source = id;
@@ -103,7 +100,7 @@ export default function CreateInitialGraph(post: Post): Graph | undefined {
     links: [],
   };
 
-  const centralNode = { id: post.id, title: post.title, tag: post.tags.id }
+  const centralNode = { id: post.id, title: post.title, depth: 0 }
   initialGraph.nodes.push(centralNode);
 
   inlineOut(post, initialGraph);

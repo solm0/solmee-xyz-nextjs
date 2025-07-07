@@ -27,6 +27,23 @@ const GET_POST_BY_ID = gql`
         id
         title
         order
+        content {
+          document(hydrateRelationships: true)
+        }
+        links {
+          id
+          title
+          content {
+            document(hydrateRelationships: true)
+          }
+        }
+        backlinks {
+          id
+          title
+          content {
+            document(hydrateRelationships: true)
+          }
+        }
         tags {
           id
           name
@@ -35,6 +52,9 @@ const GET_POST_BY_ID = gql`
       backlinks {
         id
         title
+        content {
+          document(hydrateRelationships: true)
+        }
         links {
           id
           title
@@ -43,6 +63,20 @@ const GET_POST_BY_ID = gql`
             id
             name
           }
+          content {
+            document(hydrateRelationships: true)
+          }
+        }
+        backlinks {
+          id
+          title
+          content {
+            document(hydrateRelationships: true)
+          }
+        }
+        tags {
+          id
+          name
         }
       }
     }

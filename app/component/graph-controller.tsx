@@ -2,10 +2,10 @@
 
 import { ChevronLeft, Expand } from 'lucide-react';
 import { Post, Graph } from '../lib/type';
-import CreateInitialGraph from '../lib/create-initial-graph';
 import { useState, useEffect } from 'react';
 import GraphRenderer from './graph-renderer';
 import clsx from 'clsx';
+import expandGraphToDepth from '../lib/expand-graph-to-depth';
 
 export function ControllerButton({
   role,
@@ -36,40 +36,27 @@ export function ControllerButton({
   )
 }
 
-const initGraph: Graph = {
-  nodes: [],
-  links: [],
-};
-
 export default function GraphController({
   post,
 }: {
   post: Post;
 }) {
-  // depth state
   const [depth, setDepth] = useState(1);
+  const [graph, setGraph] = useState<Graph>({ nodes: [], links: [] });
 
-  const increaseDepth = () => {
-    if (depth < 3) {
-      setDepth(depth+1);
-    } else return;
-  }
-
-  const decreaseDepth = () => {
-    if (depth > 1) {
-      setDepth(depth-1);
-    } else return;
-  }
-
-  // initialize graph data
-  const [graph, setGraph] = useState<Graph | undefined>(initGraph);
+  const handleDepthChange = async (newDepth: number) => {
+    if (!post) return;
+    const newGraph: Graph = { nodes: [], links: [] };
+    await expandGraphToDepth(post, newDepth, newGraph);
+    setGraph(newGraph);
+    setDepth(newDepth);
+  };
 
   useEffect(() => {
-    const initialGraph = CreateInitialGraph(post);
-    setGraph(initialGraph);
+    if (post) {
+      handleDepthChange(depth);
+    }
   }, [post]);
-
-  // depth update graph data - depth를 함수에 파라미터로 넣기
 
   // filter update graph data
 
@@ -84,14 +71,14 @@ export default function GraphController({
           <ControllerButton
             role='dec'
             icon={<ChevronLeft className="w-4 h-4" />}
-            onClick={decreaseDepth}
+            onClick={() => handleDepthChange(depth - 1)}
             depth={depth}
           />
           <p className="px-2">{depth}</p>
           <ControllerButton
             role='inc'
             icon={<ChevronLeft className="w-4 h-4 -scale-x-100" />}
-            onClick={increaseDepth}
+            onClick={() => handleDepthChange(depth + 1)}
             depth={depth}
           />
         </div>
