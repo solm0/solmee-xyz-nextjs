@@ -20,8 +20,8 @@ export default function MainLayout({
   
   switch(menu) {
 
-    case 'rand': 
-    case 'chron':
+    case '무작위': 
+    case '최신순':
       return (
         <>
           <RandSectionWrapper posts={posts} menu={menu} />
@@ -32,7 +32,7 @@ export default function MainLayout({
       );
       break;
       
-    case 'graphic':
+    case '그래픽':
       return (
         <div>
           {children}
@@ -40,7 +40,7 @@ export default function MainLayout({
       );
       break;
 
-    case 'meta':
+    case '대해서':
       return (
         <>
           <RandSectionWrapper posts={metaPosts} />

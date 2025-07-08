@@ -7,13 +7,11 @@ export default function GraphRenderer({
   data: Graph | undefined;
 }) {
   if (data === undefined) return (<div>no graph</div>);
-  const DynamicLocalGraph = dynamic(() => import('./graph'), {ssr: false});
+  const DynamicLocalGraph = dynamic(() => import('./graph-local'), {ssr: false});
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex justify-center items-center">
       <DynamicLocalGraph graphData={data} />
-      {/* <div>{data.nodes.map((node) => <p key={node.id}>{node.id}</p>)}</div>
-      <div className="text-green-900">{data.links.map((link) => <p key={`${link.source}<->${link.target}`}>{`${link.source}<->${link.target}`}</p>)}</div> */}
     </div>
   )
 }

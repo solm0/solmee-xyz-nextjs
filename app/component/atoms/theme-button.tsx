@@ -27,7 +27,7 @@ export default function ThemeButton() {
   return (
     <button
       onClick={handleTheme}
-      className='h-8 w-8 text-text-900 bg-button-100 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300'
+      className='h-8 w-8 text-text-900 bg-button-100 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300  pointer-events-auto'
     >
       {theme === 'light' ?
         <Moon className='h-3 w-3' /> : <SunMedium className='h-4 w-4' />

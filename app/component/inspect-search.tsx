@@ -36,7 +36,7 @@ export default function InspectSearch() {
   return (
     <div
       id="search-input"
-      className="h-auto w-full flex flex-col gap-1"
+      className="h-auto w-full flex flex-col gap-1 pointer-events-auto"
     >
       <input
         type="text"

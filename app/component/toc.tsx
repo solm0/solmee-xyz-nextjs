@@ -5,6 +5,7 @@ import { Post, FormattedText } from "../lib/type"
 import clsx from "clsx";
 import { pretendard } from "../lib/localfont";
 import { slugify } from "../lib/slugify";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 type Heading = {
   slug: string;
@@ -51,6 +52,10 @@ export default function Toc({
 }: {
   post: Post;
 }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   // heading 뽑아내서 매핑하기
   const headings: Heading[] | undefined = post.content?.document
   .filter(doc => doc.type === "heading")
@@ -101,6 +106,8 @@ export default function Toc({
                 top: offset,
                 behavior: 'smooth',
               });
+
+              router.replace(`${pathname}?${searchParams}#${text.replace(/ /g, "-")}`, { scroll: false });
             }
           }}
         >

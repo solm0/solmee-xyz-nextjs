@@ -144,7 +144,8 @@ export type RelationshipNode = {
 export type Node = {
   id: string;
   title: string;
-  depth: number;
+  depth?: number;
+  val?: number;
 }
 
 export type Link = {

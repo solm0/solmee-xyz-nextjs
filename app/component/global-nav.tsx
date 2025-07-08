@@ -23,19 +23,19 @@ export default function GlobalNav() {
   const pathname = usePathname();
 
   useEffect(() => {
-    newParams.set("menu", 'rand');
+    newParams.set("menu", '무작위');
     router.push(`${pathname}?${newParams.toString()}`);
   }, [])
 
   return (
     <nav className="h-auto w-full flex flex-col gap-1 items-start text-sm">
-      <ExpandButton name="solmee.xyz">
-        <ParamButton param="rand" name="무작위" />
-        <ParamButton param="chron" name="작성일 순서" />
-        <ParamButton param="graphic" name="그래픽" />
+      <ExpandButton name="solmee.xyz" >
+        <ParamButton name="무작위" />
+        <ParamButton name="최신순" />
+        <ParamButton name="그래픽" />
       </ExpandButton>
 
-      <ParamButton param="meta" name="대해서" backbutton={true} />
+      <ParamButton name="대해서" backbutton={true} />
 
       <ThemeButton />
 

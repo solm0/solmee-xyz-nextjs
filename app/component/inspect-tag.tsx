@@ -83,7 +83,7 @@ export default function InspectTag({
   return (
     <div
       id='tag-input'
-      className='h-auto w-auto px-1 py-1 border border-text-600 rounded-sm flex gap-1'
+      className='h-auto w-auto px-1 py-1 border border-text-600 rounded-sm flex gap-1 backdrop-blur-md pointer-events-auto'
       onMouseLeave={() => setHoveredTag(null, null, null)}
     >
       {tags.map((tag, idx) => (

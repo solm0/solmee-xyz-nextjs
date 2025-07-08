@@ -4,11 +4,9 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import clsx from 'clsx';
 
 export default function ParamButton({
-  param,
   name,
   backbutton = false,
 }: {
-  param: string;
   name: string;
   backbutton?: boolean;
 }) {
@@ -20,15 +18,15 @@ export default function ParamButton({
 
   let path: string;
 
-  const handleClick = (param: string) => {
-    if (menu === param) {
+  const handleClick = (name: string) => {
+    if (menu === name) {
       if (backbutton) {
-        newParams.set("menu", 'rand');
+        newParams.set("menu", '무작위');
       } else {
-        newParams.set("menu", param);
+        newParams.set("menu", name);
       }
     } else {
-      newParams.set("menu", param);
+      newParams.set("menu", name);
     }
 
     if (pathname) {
@@ -42,10 +40,10 @@ export default function ParamButton({
 
   return (
     <button
-      onClick={() => handleClick(param)}
+      onClick={() => handleClick(name)}
       className={clsx(
-        "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300",
-        menu === param ? "bg-button-200 font-semibold" : "bg-button-100",
+        "w-auto h-8 text-text-900 flex items-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300  pointer-events-auto",
+        menu === name ? "bg-button-200 font-semibold" : "bg-button-100",
       )}
     >
       {name}

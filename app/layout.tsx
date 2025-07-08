@@ -41,7 +41,7 @@ export default async function RootLayout({
       >
         <ThemeProvider disableTransitionOnChange>
           <div className="flex h-screen w-full p-8 gap-4">
-            <aside className="fixed h-full w-80 shrink-0">
+            <aside className="fixed h-full w-80 shrink-0 z-10 pointer-events-none">
               <Suspense>
                 <GlobalNav />
               </Suspense>

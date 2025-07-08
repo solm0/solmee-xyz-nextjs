@@ -33,7 +33,7 @@ export default function RandSectionWrapper({
     <RandSection goUp={goUp}>
       <Suspense>
         {posts.map((note) => {
-          if (menu === 'chron') return (
+          if (menu === '최신순') return (
             <ChronList
               key={note.id}
               note={note}
