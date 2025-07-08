@@ -76,7 +76,7 @@ export default async function expandGraphToDepth(
       .map(r => r.data?.data)
       .filter((p): p is Post => !!p && !!p.id && !!p.title);
 
-    console.log(currentPost, relationshipPosts, currentPost.links, currentPost.backlinks)
+    // console.log(currentPost, relationshipPosts, currentPost.links, currentPost.backlinks)
     const nextPosts: Post[] = [
       ...(currentPost.links || []),
       ...(currentPost.backlinks || []),

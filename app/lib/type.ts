@@ -148,8 +148,8 @@ export type Node = {
 }
 
 export type Link = {
-  source: string;
-  target: string;
+  source: string | {id: string};
+  target: string | {id: string};
 }
 
 export type Graph = {
