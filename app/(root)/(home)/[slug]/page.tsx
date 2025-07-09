@@ -23,60 +23,150 @@ const GET_POST_BY_ID = gql`
         id
         name
       }
-      links {
+      internalLinks {
         id
         title
         order
-        content {
-          document(hydrateRelationships: true)
+        internalLinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        internalBacklinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
         links {
           id
           title
-          content {
-            document(hydrateRelationships: true)
-          }
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
         backlinks {
           id
           title
-          content {
-            document(hydrateRelationships: true)
-          }
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
-        tags {
+      }
+      internalBacklinks {
+        id
+        title
+        internalLinks {
           id
-          name
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        internalBacklinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        links {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        backlinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+      }
+      links {
+        id
+        title
+        order
+        internalLinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        internalBacklinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        links {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        backlinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
       }
       backlinks {
         id
         title
-        content {
-          document(hydrateRelationships: true)
+        internalLinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
+        }
+        internalBacklinks {
+          id
+          title
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
         links {
           id
           title
-          order
-          tags {
-            id
-            name
-          }
-          content {
-            document(hydrateRelationships: true)
-          }
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
         backlinks {
           id
           title
-          content {
-            document(hydrateRelationships: true)
-          }
-        }
-        tags {
-          id
-          name
+          links { id title }
+          backlinks { id title }
+          internalLinks { id title }
+          internalBacklinks { id title }
         }
       }
     }

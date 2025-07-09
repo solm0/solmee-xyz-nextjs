@@ -16,6 +16,8 @@ export type Post = {
   order?: number;
   links?: Post[];
   backlinks?: Post[];
+  internalLinks?: Post[];
+  internalBacklinks?: Post[];
 };
 
 export type User = {

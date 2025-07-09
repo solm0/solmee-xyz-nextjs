@@ -20,8 +20,9 @@ const GET_ALL_POSTS_GRAPH = gql`
         id
         title
       }
-      content {
-        document(hydrateRelationships: true)
+      internalLinks {
+        id
+        title
       }
     }
   }

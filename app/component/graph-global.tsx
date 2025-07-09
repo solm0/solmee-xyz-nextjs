@@ -107,7 +107,8 @@ export default function GlobalGraph({
       enablePanInteraction={true}
 
       nodeCanvasObject={(node, ctx, globalScale) => {
-        
+        const size = Math.sqrt(node.val ?? 1) * 2;
+
         if (filteredNodes.has(node.id)) {
           if (hoveredId) {
             if (node.id === hoveredId) {
@@ -125,7 +126,7 @@ export default function GlobalGraph({
         }
         
         ctx.beginPath();
-        ctx.arc(node.x!, node.y!, 2, 0, 2 * Math.PI, false);
+        ctx.arc(node.x!, node.y!, size, 0, 2 * Math.PI, false);
         ctx.fill();
 
         function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
@@ -169,7 +170,7 @@ export default function GlobalGraph({
         ctx.font = `${fontSize}px Pretendard, sans-serif`
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        wrapText(ctx, node.title.slice(0, 50)+'…', node.x!, node.y!+8, 50, 17 / globalScale);
+        wrapText(ctx, node.val + node.title.slice(0, 50)+'…', node.x!, node.y!+8, 50, 17 / globalScale);
       }}
       
       linkCanvasObject={(link, ctx, globalScale) => {
