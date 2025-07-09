@@ -19,20 +19,19 @@ export default function GlobalGraphRenderer({
     setGraph(graph);
   }, [])
 
-  if (posts === undefined) return (<div>no posts</div>);
-  const DynamicGlobalGraph = dynamic(() => import('./graph-global'), {ssr: false});
+  // filter
+  const searchParams = useSearchParams();
+  const newParams = new URLSearchParams(searchParams.toString());
+  const tag = newParams.get("tag");
+  const search = newParams.get("search");
 
-    // filter
-    const searchParams = useSearchParams();
-    const newParams = new URLSearchParams(searchParams.toString());
-    const tag = newParams.get("tag");
-    const search = newParams.get("search");
-  
-    const filteredPosts = filterPosts({
-      posts: posts,
-      tag: tag,
-      search: search,
-    })
+  const filteredPosts = filterPosts({
+    posts: posts,
+    tag: tag,
+    search: search,
+  })
+
+  const DynamicGlobalGraph = dynamic(() => import('./graph-global'), {ssr: false});
 
   return (
       <DynamicGlobalGraph graphData={graph} filteredData={filteredPosts} />
