@@ -4,6 +4,7 @@
 import type { Metadata } from "next";
 import GlobalGraphRenderer from "../component/graph-global-renderer";
 import { gql, GraphQLClient } from "graphql-request";
+import { Suspense } from "react";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -12,6 +13,9 @@ const GET_ALL_POSTS_GRAPH = gql`
     posts {
       id
       title
+      tags {
+        name
+      }
       links {
         id
         title
@@ -32,11 +36,11 @@ export default async function GraphPage() {
   const data = await client.request(GET_ALL_POSTS_GRAPH);
   const posts = data.posts;
 
-  // 필터링
-
   return (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-      <GlobalGraphRenderer posts={posts} />
+      <Suspense>
+        <GlobalGraphRenderer posts={posts} />
+      </Suspense>
     </div>
   )
 }

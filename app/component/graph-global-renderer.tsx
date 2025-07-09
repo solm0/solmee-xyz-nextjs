@@ -4,12 +4,15 @@ import dynamic from "next/dynamic";
 import { Graph, Post } from "../lib/type";
 import { useEffect, useState } from "react";
 import generateGlobalGraph from "../lib/generate-global-graph";
+import { useSearchParams } from "next/navigation";
+import filterPosts from "../lib/filter-posts";
 
 export default function GlobalGraphRenderer({
   posts,
 }: {
   posts: Post[];
 }) {
+  // set graph
   const [graph, setGraph] = useState<Graph>({ nodes: [], links: [] });
   useEffect(() => {
     generateGlobalGraph(posts, graph);
@@ -19,10 +22,19 @@ export default function GlobalGraphRenderer({
   if (posts === undefined) return (<div>no posts</div>);
   const DynamicGlobalGraph = dynamic(() => import('./graph-global'), {ssr: false});
 
-  return (
-    <div className="h-auto w-auto border">
+    // filter
+    const searchParams = useSearchParams();
+    const newParams = new URLSearchParams(searchParams.toString());
+    const tag = newParams.get("tag");
+    const search = newParams.get("search");
+  
+    const filteredPosts = filterPosts({
+      posts: posts,
+      tag: tag,
+      search: search,
+    })
 
-      <DynamicGlobalGraph graphData={graph} />
-    </div>
+  return (
+      <DynamicGlobalGraph graphData={graph} filteredData={filteredPosts} />
   )
 }

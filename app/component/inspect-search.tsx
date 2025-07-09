@@ -14,7 +14,7 @@ export default function InspectSearch() {
 
   useEffect(() => {
     setValue(searchParams.get("search")?.toString() || "");
-  }, [searchParams]);
+  }, []);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -26,7 +26,7 @@ export default function InspectSearch() {
     }
 
     replace(`${pathname}?${params.toString()}`);
-  }, 500);
+  }, 100);
 
   const handleClear = () => {
     setValue("");

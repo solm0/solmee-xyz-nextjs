@@ -3,7 +3,6 @@ import "./globals.css";
 import GlobalNav from "./component/global-nav";
 import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
-import ApolloWrapper from "./lib/ApolloWrapper";
 import { Suspense } from 'react';
 import { gql, GraphQLClient } from "graphql-request";
 import { Tag, TagsResponse } from "./lib/type";
@@ -48,9 +47,7 @@ export default async function RootLayout({
               <NoteInspector tags={tags} />
             </aside>
             <main className="absolute left-[22rem] flex flex-col h-full w-[calc(100vw-22rem)] top-0 flex-1 items-center overflow-hidden">
-              <ApolloWrapper>
-                {children}
-              </ApolloWrapper>
+              {children}
             </main>
           </div>
 

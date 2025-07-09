@@ -2,15 +2,17 @@
 
 import ForceGraph2D from 'react-force-graph-2d';
 import { NodeObject, LinkObject, GraphData } from 'react-force-graph-2d';
-import { Graph, Node } from '../lib/type';
+import { Graph, Node, Post } from '../lib/type';
 import { useHoveredLink } from '../lib/use-hovered-link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function GlobalGraph({
   graphData,
+  filteredData,
 }: {
   graphData: Graph;
+  filteredData: Post[];
 }) {
   const [colors, setColors] = useState<{green500: string, text800: string, text700: string, text600: string, bg: string}>({
     green500: '#FFFFFF',
@@ -78,6 +80,9 @@ export default function GlobalGraph({
       router.push(`/${node.id}?${newParams.toString()}`);
     }
   }
+
+  const filteredNodes = new Set(filteredData?.map(post => post.id));
+
   return (
     <ForceGraph2D
       graphData={graphData as GraphData<NodeObject<Node>, LinkObject<Node>>}
@@ -102,40 +107,23 @@ export default function GlobalGraph({
       enablePanInteraction={true}
 
       nodeCanvasObject={(node, ctx, globalScale) => {
-        if (node.depth === 0) {
-          ctx.fillStyle = colors.bg;
-          ctx.beginPath();
-          ctx.arc(node.x!, node.y!, 3, 0, 2 * Math.PI, false)
-          ctx.fill();
+        
+        if (filteredNodes.has(node.id)) {
           if (hoveredId) {
             if (node.id === hoveredId) {
-              ctx.strokeStyle = colors.green500;
+              ctx.fillStyle = colors.green500;
             } else if (depth1Nodes.has(node.id)) {
-              ctx.strokeStyle = colors.text800;
+              ctx.fillStyle = colors.text800;
             } else {
-              ctx.strokeStyle = colors.text600;
+              ctx.fillStyle = colors.text600;
             }
           } else {
-            ctx.strokeStyle = colors.green500;
-          }
-          ctx.lineWidth = 1.3 / globalScale;
-          ctx.beginPath();
-          ctx.arc(node.x!, node.y!, 3, 0, 2 * Math.PI, false)
-          ctx.stroke();
-        }
-
-        if (hoveredId) {
-          if (node.id === hoveredId) {
             ctx.fillStyle = colors.green500;
-          } else if (depth1Nodes.has(node.id)) {
-            ctx.fillStyle = colors.text800;
-          } else {
-            ctx.fillStyle = colors.text600;
           }
         } else {
-          ctx.fillStyle = colors.green500;
+          ctx.fillStyle = colors.text600;
         }
-
+        
         ctx.beginPath();
         ctx.arc(node.x!, node.y!, 2, 0, 2 * Math.PI, false);
         ctx.fill();
@@ -163,9 +151,13 @@ export default function GlobalGraph({
           });
         }
 
-        if (hoveredId) {
-          if (node.id === hoveredId || depth1Nodes.has(node.id)) {
-            ctx.fillStyle = colors.text800;
+        if (filteredNodes.has(node.id)) {
+          if (hoveredId) {
+            if (node.id === hoveredId || depth1Nodes.has(node.id)) {
+              ctx.fillStyle = colors.text800;
+            } else {
+              ctx.fillStyle = colors.text600;
+            }
           } else {
             ctx.fillStyle = colors.text600;
           }
@@ -177,22 +169,29 @@ export default function GlobalGraph({
         ctx.font = `${fontSize}px Pretendard, sans-serif`
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        wrapText(ctx, node.title.slice(0, 50)+'…', node.x!, node.y!+10, 50, 17 / globalScale);
+        wrapText(ctx, node.title.slice(0, 50)+'…', node.x!, node.y!+8, 50, 17 / globalScale);
       }}
       
       linkCanvasObject={(link, ctx, globalScale) => {
         ctx.lineWidth = 0.8 / globalScale;
 
-        if (hoveredId) {
-          const isDirectlyConnected = (typeof link.source === 'object' && link.source.id === hoveredId || typeof link.target === 'object' && link.target.id === hoveredId);
+        const sourceId = typeof link.source === 'object' ? link.source.id : '';
+        const targetId = typeof link.target === 'object' ? link.target.id : '';
 
-          if (isDirectlyConnected) {
-            ctx.strokeStyle = colors.text800;
+        if (filteredNodes.has(sourceId) && filteredNodes.has(targetId)) {
+          if (hoveredId) {
+            const isDirectlyConnected = (sourceId || targetId === hoveredId);
+  
+            if (isDirectlyConnected) {
+              ctx.strokeStyle = colors.text800;
+            } else {
+              ctx.strokeStyle = colors.text600;
+            }
           } else {
-            ctx.strokeStyle = colors.text600;
+            ctx.strokeStyle = colors.text800;
           }
         } else {
-          ctx.strokeStyle = colors.text800;
+          ctx.strokeStyle = colors.text600;
         }
 
         ctx.beginPath();
@@ -205,8 +204,8 @@ export default function GlobalGraph({
         ctx.lineTo(targetX!, targetY!);
         ctx.stroke();
 
-        const arrowLength = 3;
-        const arrowRelPos = 0.92;
+        const arrowLength = 10 / globalScale;
+        const arrowRelPos = 0.94;
         const dx = targetX! - sourceX!;
         const dy = targetY! - sourceY!;
         const angle = Math.atan2(dy, dx);
