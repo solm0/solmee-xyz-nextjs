@@ -14,16 +14,20 @@ export default function GlobalGraph({
   graphData: Graph;
   filteredData: Post[];
 }) {
-  const [colors, setColors] = useState<{green500: string, text800: string, text700: string, text600: string, bg: string}>({
-    green500: '#FFFFFF',
+  const [colors, setColors] = useState<{nodeGreen: string, text950: string, text800: string, text700: string, text600: string, bg: string}>({
+    nodeGreen: '#FFFFFF',
+    text950: '#000000',
     text800: '#000000',
     text700: '#000000',
     text600: '#000000',
     bg: '#000000'
   })
   useEffect(() => {
-    const green500 = getComputedStyle(document.documentElement)
-      .getPropertyValue('--green-500')
+    const nodeGreen = getComputedStyle(document.documentElement)
+      .getPropertyValue('--node')
+      .trim();
+    const text950 = getComputedStyle(document.documentElement)
+      .getPropertyValue('--text-950')
       .trim();
     const text800 = getComputedStyle(document.documentElement)
       .getPropertyValue('--text-800')
@@ -37,7 +41,7 @@ export default function GlobalGraph({
     const bg = getComputedStyle(document.documentElement)
       .getPropertyValue('--background')
       .trim();
-    if (green500 && text800 && text700) setColors({green500: green500, text800: text800, text700: text700, text600: text600, bg: bg});
+    if (nodeGreen && text800 && text700) setColors({nodeGreen: nodeGreen, text950: text950, text800: text800, text700: text700, text600: text600, bg: bg});
   }, []);
 
   const router = useRouter();
@@ -94,7 +98,7 @@ export default function GlobalGraph({
       maxZoom={6}
       nodeRelSize={4}
       // nodeVal={(node) => node.depth === 0 ? 3 : 1}
-      // nodeColor={() => colors.green500}
+      // nodeColor={() => colors.nodeGreen}
       // linkWidth={1}
       // linkDirectionalArrowLength={5}
       // linkDirectionalArrowRelPos={1}
@@ -105,6 +109,10 @@ export default function GlobalGraph({
       d3VelocityDecay={0.2} // 0.4
       enableZoomInteraction={true}
       enablePanInteraction={true}
+      linkDirectionalParticles={1}
+      linkDirectionalParticleColor={() => colors.text800}
+      linkDirectionalParticleWidth={3}
+      linkDirectionalParticleSpeed={0.005}
 
       nodeCanvasObject={(node, ctx, globalScale) => {
         const size = Math.sqrt(node.val ?? 1) * 2;
@@ -112,14 +120,14 @@ export default function GlobalGraph({
         if (filteredNodes.has(node.id)) {
           if (hoveredId) {
             if (node.id === hoveredId) {
-              ctx.fillStyle = colors.green500;
+              ctx.fillStyle = colors.nodeGreen;
             } else if (depth1Nodes.has(node.id)) {
               ctx.fillStyle = colors.text800;
             } else {
               ctx.fillStyle = colors.text600;
             }
           } else {
-            ctx.fillStyle = colors.green500;
+            ctx.fillStyle = colors.nodeGreen;
           }
         } else {
           ctx.fillStyle = colors.text600;
@@ -155,7 +163,7 @@ export default function GlobalGraph({
         if (filteredNodes.has(node.id)) {
           if (hoveredId) {
             if (node.id === hoveredId || depth1Nodes.has(node.id)) {
-              ctx.fillStyle = colors.text800;
+              ctx.fillStyle = colors.text950;
             } else {
               ctx.fillStyle = colors.text600;
             }
@@ -181,7 +189,7 @@ export default function GlobalGraph({
 
         if (filteredNodes.has(sourceId) && filteredNodes.has(targetId)) {
           if (hoveredId) {
-            const isDirectlyConnected = (sourceId || targetId === hoveredId);
+            const isDirectlyConnected = sourceId === hoveredId || targetId === hoveredId;
   
             if (isDirectlyConnected) {
               ctx.strokeStyle = colors.text800;
@@ -204,27 +212,6 @@ export default function GlobalGraph({
         ctx.moveTo(sourceX!, sourceY!);
         ctx.lineTo(targetX!, targetY!);
         ctx.stroke();
-
-        const arrowLength = 10 / globalScale;
-        const arrowRelPos = 0.94;
-        const dx = targetX! - sourceX!;
-        const dy = targetY! - sourceY!;
-        const angle = Math.atan2(dy, dx);
-        const offsetX = sourceX! + dx * arrowRelPos;
-        const offsetY = sourceY! + dy * arrowRelPos;
-
-        ctx.beginPath();
-        ctx.moveTo(
-          offsetX - arrowLength * Math.cos(angle - Math.PI / 6),
-          offsetY - arrowLength * Math.sin(angle - Math.PI / 6)
-        );
-        ctx.lineTo(offsetX, offsetY);
-        ctx.lineTo(
-          offsetX - arrowLength * Math.cos(angle + Math.PI / 6),
-          offsetY - arrowLength * Math.sin(angle + Math.PI / 6)
-        );
-        ctx.fillStyle = ctx.strokeStyle; // Match arrow color to link color
-        ctx.fill();
       }}
     />
   )

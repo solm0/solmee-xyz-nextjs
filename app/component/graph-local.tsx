@@ -12,16 +12,16 @@ export default function LocalGraph({
 }: {
   graphData: Graph;
 }) {
-  const [colors, setColors] = useState<{green500: string, text800: string, text700: string, text600: string, bg: string}>({
-    green500: '#FFFFFF',
+  const [colors, setColors] = useState<{nodeGreen: string, text800: string, text700: string, text600: string, bg: string}>({
+    nodeGreen: '#FFFFFF',
     text800: '#000000',
     text700: '#000000',
     text600: '#000000',
     bg: '#000000'
   })
   useEffect(() => {
-    const green500 = getComputedStyle(document.documentElement)
-      .getPropertyValue('--green-500')
+    const nodeGreen = getComputedStyle(document.documentElement)
+      .getPropertyValue('--node')
       .trim();
     const text800 = getComputedStyle(document.documentElement)
       .getPropertyValue('--text-800')
@@ -35,7 +35,7 @@ export default function LocalGraph({
     const bg = getComputedStyle(document.documentElement)
       .getPropertyValue('--background')
       .trim();
-    if (green500 && text800 && text700) setColors({green500: green500, text800: text800, text700: text700, text600: text600, bg: bg});
+    if (nodeGreen && text800 && text700) setColors({nodeGreen: nodeGreen, text800: text800, text700: text700, text600: text600, bg: bg});
   }, []);
 
   const router = useRouter();
@@ -89,7 +89,7 @@ export default function LocalGraph({
       maxZoom={3}
       nodeRelSize={3}
       // nodeVal={(node) => node.depth === 0 ? 3 : 1}
-      // nodeColor={() => colors.green500}
+      // nodeColor={() => colors.nodeGreen}
       // linkWidth={1}
       // linkDirectionalArrowLength={5}
       // linkDirectionalArrowRelPos={1}
@@ -109,14 +109,14 @@ export default function LocalGraph({
           ctx.fill();
           if (hoveredId) {
             if (node.id === hoveredId) {
-              ctx.strokeStyle = colors.green500;
+              ctx.strokeStyle = colors.nodeGreen;
             } else if (depth1Nodes.has(node.id)) {
               ctx.strokeStyle = colors.text800;
             } else {
               ctx.strokeStyle = colors.text600;
             }
           } else {
-            ctx.strokeStyle = colors.green500;
+            ctx.strokeStyle = colors.nodeGreen;
           }
           ctx.lineWidth = 1.3 / globalScale;
           ctx.beginPath();
@@ -126,14 +126,14 @@ export default function LocalGraph({
 
         if (hoveredId) {
           if (node.id === hoveredId) {
-            ctx.fillStyle = colors.green500;
+            ctx.fillStyle = colors.nodeGreen;
           } else if (depth1Nodes.has(node.id)) {
             ctx.fillStyle = colors.text800;
           } else {
             ctx.fillStyle = colors.text600;
           }
         } else {
-          ctx.fillStyle = colors.green500;
+          ctx.fillStyle = colors.nodeGreen;
         }
 
         ctx.beginPath();
