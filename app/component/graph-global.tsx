@@ -170,7 +170,7 @@ export default function GlobalGraph({
         ctx.font = `${fontSize}px Pretendard, sans-serif`
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        wrapText(ctx, node.val + node.title.slice(0, 50)+'…', node.x!, node.y!+8, 50, 17 / globalScale);
+        wrapText(ctx, node.title.slice(0, 50)+'…', node.x!, node.y!+8, 50, 17 / globalScale);
       }}
       
       linkCanvasObject={(link, ctx, globalScale) => {
