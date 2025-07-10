@@ -2,8 +2,8 @@
 
 import ParamKwButton from "./atoms/param-kw-button";
 
-const keywords = ['Next.js', 'Astro', '에러', 'Rich Text', '독일',
-  '교환학생', 'HeadlessCMS', 'chatGPT', '웹', 'VPS', '타이포그래피'
+const keywords = ['nextjs', 'astro', '에러', 'rich text', '독일',
+  '교환학생', 'headlesscms', 'chatgpt', '웹', 'vps', '타이포그래피', '여행',
 ]
 
 export default function InspectKeyword() {

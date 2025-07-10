@@ -6,6 +6,7 @@ export type Post = {
   content?: PostContent | null;
   author?: User | null;
   tags: Tag;
+  keywords: Keyword[];
   meta: boolean;
   status: 'published' | 'draft';
   chron: {
@@ -122,6 +123,12 @@ export type PostContent = {
 };
 
 export type Tag = {
+  id: string;
+  name: string;
+  posts: Post[];
+};
+
+export type Keyword = {
   id: string;
   name: string;
   posts: Post[];

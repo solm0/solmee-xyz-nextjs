@@ -23,6 +23,10 @@ const GET_POST_BY_ID = gql`
         id
         name
       }
+      keywords {
+        id
+        name
+      }
       internalLinks {
         id
         title

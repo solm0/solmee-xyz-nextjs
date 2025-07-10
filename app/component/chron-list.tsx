@@ -60,7 +60,7 @@ export default function ChronList({
     <div
       key={note.id}
       className={clsx (
-        "text-nowrap h-12 w-full transition-[opacity] duration-300 hover:cursor-pointer flex items-center",
+        "text-nowrap h-12 w-full transition-[opacity] duration-300 hover:cursor-pointer flex items-center font-normal",
         hovered && hovered !== note.id && "opacity-40!",
         "flex gap-4"
       )}

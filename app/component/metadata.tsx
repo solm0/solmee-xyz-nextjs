@@ -4,9 +4,7 @@ import { Post } from "../lib/type";
 import { pretendard } from '@/app/lib/localfont';
 import { Calendar, Tag, Key } from 'lucide-react';
 import clsx from "clsx";
-import ParamKwButton from "./atoms/param-kw-button";
-
-const tempKeywords = ['임시', '키워드', '입니다', 'this', 'is', 'temp', 'keywords', 'Next.js']
+import ParamKwMetadata from "./atoms/param-kw-metadata";
 
 export default function Metadata({
   post
@@ -34,12 +32,14 @@ export default function Metadata({
         <Tag className='w-3 h-3' />
         {post.tags.name}
       </div>
-      <div className="flex gap-3 items-start">
-        <Key className='w-3 h-8 shrink-0' />
-        <div className="flex gap-1 flex-wrap h-auto">
-          <ParamKwButton keywords={tempKeywords} />
+      {post.keywords?.length > 1 &&
+        <div className="flex gap-3 items-start">
+          <Key className='w-3 h-8 shrink-0' />
+          <div className="flex gap-1 flex-wrap h-auto">
+            <ParamKwMetadata keywords={post.keywords} />
+          </div>
         </div>
-      </div>
+      }
     </section>
   )
 }

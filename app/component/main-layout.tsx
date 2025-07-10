@@ -18,6 +18,7 @@ export default function MainLayout({
   const menu = newParams.get("menu");
   const tag = newParams.get("tag");
   const search = newParams.get("search");
+  const keywords = newParams.getAll("keyword");
 
   // insert preview
   posts.map(post => {
@@ -38,6 +39,7 @@ export default function MainLayout({
     posts: chronPosts,
     tag: tag,
     search: search,
+    keywords: keywords,
   })
   
   switch(menu) {

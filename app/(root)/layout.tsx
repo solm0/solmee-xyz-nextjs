@@ -17,6 +17,9 @@ const GET_ALL_POSTS = gql`
       tags {
         name
       }
+      keywords {
+        name
+      }
       content {
         document(hydrateRelationships: true)
       }

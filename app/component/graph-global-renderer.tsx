@@ -24,11 +24,13 @@ export default function GlobalGraphRenderer({
   const newParams = new URLSearchParams(searchParams.toString());
   const tag = newParams.get("tag");
   const search = newParams.get("search");
+  const keywords = newParams.getAll("keyword");
 
   const filteredPosts = filterPosts({
     posts: posts,
     tag: tag,
     search: search,
+    keywords: keywords,
   })
 
   const DynamicGlobalGraph = dynamic(() => import('./graph-global'), {ssr: false});
