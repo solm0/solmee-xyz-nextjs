@@ -3,6 +3,7 @@
 import ParamKwButton from "./atoms/param-kw-button";
 import { useSearchParams } from "next/navigation";
 import { KeywordsByTag } from "../lib/type";
+import { useState } from "react";
 
 export default function InspectKeyword({
   kwByTag
@@ -14,10 +15,16 @@ export default function InspectKeyword({
   const tag = newParams.get("tag");
   const urlKeywords = newParams.getAll("keyword");
 
-  const keywords = tag ? kwByTag[tag] : kwByTag['전체'];
+  const tagKeywords = tag ? kwByTag[tag] : kwByTag['전체'];
+  const [keywords, setKeywords] = useState(tagKeywords);
 
   const noteKeywords = urlKeywords.filter(kw => !keywords.includes(kw));
-  noteKeywords.map(kw => keywords.push(kw))
+  noteKeywords.map(kw => {
+    setKeywords(
+      [ ...keywords, kw]
+    );
+  })
+
 
   return (
     <>
