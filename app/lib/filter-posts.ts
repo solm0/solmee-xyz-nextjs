@@ -53,16 +53,11 @@ export default function filterPosts({
 
   // keyword
   if (keywords && keywords.length > 0) {
-    console.log('keywords exist', keywords)
-
     filtered = filtered.filter(post => {
       const postKeywords = post.keywords ? post.keywords?.map(pk => pk.name) : [];
-      console.log('postKeywords', post.title, postKeywords, keywords, keywords.every(kw => postKeywords.includes(kw)))
       return keywords.every(kw => postKeywords.includes(kw));
     });
   }
-
-  console.log(filtered)
 
   return filtered;
 

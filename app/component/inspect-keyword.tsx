@@ -12,11 +12,12 @@ export default function InspectKeyword({
   const searchParams = useSearchParams();
   const newParams = new URLSearchParams(searchParams.toString());
   const tag = newParams.get("tag");
+  const urlKeywords = newParams.getAll("keyword");
 
-  console.log(kwByTag)
-
-  if (tag)console.log(tag, kwByTag[tag])
   const keywords = tag ? kwByTag[tag] : kwByTag['전체'];
+
+  const noteKeywords = urlKeywords.filter(kw => !keywords.includes(kw));
+  noteKeywords.map(kw => keywords.push(kw))
 
   return (
     <>

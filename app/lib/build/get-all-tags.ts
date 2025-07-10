@@ -56,9 +56,7 @@ export function getKeywordsTag(tag: Tag) {
 
   for (const post of tag.posts) {
     for (const kw of post.keywords) {
-      // Per-tag count
       tagKeywordMap[tag.name][kw.name] = (tagKeywordMap[tag.name][kw.name] || 0) + 1;
-      // Global count
       globalKeywordCount[kw.name] = (globalKeywordCount[kw.name] || 0) + 1;
     }
   }
@@ -70,21 +68,17 @@ export function writeKeywordFiles() {
   for (const [tag, keywords] of Object.entries(tagKeywordMap)) {
     const sorted = Object.entries(keywords)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 7)
+      .slice(0, 10)
       .map(([kw]) => kw);
-
     keywordsByTag[tag] = sorted;
   }
 
-  // ✨ Add global ranking
   const globalRank = Object.entries(globalKeywordCount)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 7)
+    .slice(0, 10)
     .map(([kw]) => kw);
-
   keywordsByTag["전체"] = globalRank;
 
-  // Save to file
   fs.writeFileSync(
     path.join(dirPath, 'top-keywords-tag.json'),
     JSON.stringify(keywordsByTag, null, 2)

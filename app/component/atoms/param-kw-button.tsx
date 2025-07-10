@@ -8,7 +8,6 @@ export default function ParamKwButton({
 }: {
   keywords: string[];
 }) {
-  console.log(keywords)
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();

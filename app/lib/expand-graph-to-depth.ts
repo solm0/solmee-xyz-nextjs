@@ -28,7 +28,7 @@ export function processLinks(
 
     let link;
     if (field === 'internalLinks' || field === 'links') {
-      console.log(`source: ${post.title}, target: ${l.title}`)
+      // console.log(`source: ${post.title}, target: ${l.title}`)
       link = { source: post.id, target: l.id };
     } else {
       link = { source: l.id, target: post.id };
@@ -47,7 +47,7 @@ export default async function expandGraphToDepth(
   const visited = new Set<string>();
 
   async function recurse(currentPost: Post, currentDepth: number) {
-    console.log('recurse', currentDepth, depth)
+    // console.log('recurse', currentDepth, depth)
     if (currentDepth > depth) return;
     if (visited.has(currentPost.id)) return;
     visited.add(currentPost.id);
