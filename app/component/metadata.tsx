@@ -4,7 +4,7 @@ import { Post } from "../lib/type";
 import { pretendard } from '@/app/lib/localfont';
 import { Calendar, Tag, Key } from 'lucide-react';
 import clsx from "clsx";
-import ParamKwMetadata from "./atoms/param-kw-metadata";
+import ParamKwButton from "./atoms/param-kw-button";
 
 export default function Metadata({
   post
@@ -14,6 +14,8 @@ export default function Metadata({
   const year = post.publishedAt.toString().slice(0,4);
   const month = post.publishedAt.toString().slice(5,7);
   const day = post.publishedAt.toString().slice(8, 10);
+
+  const keywords = post.keywords.map(kw => kw.name);
 
   return (
     <section className={clsx (
@@ -36,7 +38,7 @@ export default function Metadata({
         <div className="flex gap-3 items-start">
           <Key className='w-3 h-8 shrink-0' />
           <div className="flex gap-1 flex-wrap h-auto">
-            <ParamKwMetadata keywords={post.keywords} />
+            <ParamKwButton keywords={keywords} />
           </div>
         </div>
       }

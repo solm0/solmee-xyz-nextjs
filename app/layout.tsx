@@ -4,21 +4,10 @@ import GlobalNav from "./component/global-nav";
 import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
 import { Suspense } from 'react';
-import { gql, GraphQLClient } from "graphql-request";
-import { Tag, TagsResponse } from "./lib/type";
 import { ThemeProvider } from "next-themes";
 import InternalLinkTooltip from "./component/internallink-tooltip";
-
-const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
-
-const GET_ALL_TAGS = gql`
-  query {
-    tags {
-      id
-      name
-    }
-  }
-`;
+import fs from 'fs';
+import path from 'path';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,8 +19,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data: TagsResponse = await client.request(GET_ALL_TAGS);
-  const tags: Tag[] = data.tags;
+  const tags = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public/all-tags.json'), 'utf8'));
+  const keywordsTag = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public/top-keywords-tag.json'), 'utf8'));
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -44,7 +33,7 @@ export default async function RootLayout({
               <Suspense>
                 <GlobalNav />
               </Suspense>
-              <NoteInspector tags={tags} />
+              <NoteInspector tags={tags} kwByTag={keywordsTag} />
             </aside>
             <main className="absolute left-[22rem] flex flex-col h-full w-[calc(100vw-22rem)] top-0 flex-1 items-center overflow-hidden">
               {children}

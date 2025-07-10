@@ -1,12 +1,23 @@
 'use client'
 
 import ParamKwButton from "./atoms/param-kw-button";
+import { useSearchParams } from "next/navigation";
+import { KeywordsByTag } from "../lib/type";
 
-const keywords = ['nextjs', 'astro', '에러', 'rich text', '독일',
-  '교환학생', 'headlesscms', 'chatgpt', '웹', 'vps', '타이포그래피', '여행',
-]
+export default function InspectKeyword({
+  kwByTag
+}: {
+  kwByTag: KeywordsByTag;
+}) {
+  const searchParams = useSearchParams();
+  const newParams = new URLSearchParams(searchParams.toString());
+  const tag = newParams.get("tag");
 
-export default function InspectKeyword() {
+  console.log(kwByTag)
+
+  if (tag)console.log(tag, kwByTag[tag])
+  const keywords = tag ? kwByTag[tag] : kwByTag['전체'];
+
   return (
     <>
       <div className="w-72 flex gap-1 flex-wrap py-1 pointer-events-auto">

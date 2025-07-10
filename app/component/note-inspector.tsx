@@ -7,7 +7,7 @@ import InspectKeyword from './inspect-keyword';
 import { Suspense, useEffect } from 'react';
 import clsx from 'clsx';
 import { useToggleStore } from '../lib/use-enabled';
-import { Tag } from '../lib/type';
+import { Tag, KeywordsByTag } from '../lib/type';
 
 export function FilterComponents({
   icon,
@@ -34,8 +34,10 @@ export function FilterComponents({
 
 export default function NoteInspector({
   tags,
+  kwByTag
 }: {
   tags: Tag[];
+  kwByTag: KeywordsByTag;
 }) {
   const initializeToggles = useToggleStore((s) => s.initializeToggles);
 
@@ -70,7 +72,7 @@ export default function NoteInspector({
           icon={<Key className='w-3 h-3' />}
           cmp={{ value: 'keyword', name: '키워드' }}
         >
-          <InspectKeyword />
+          <InspectKeyword kwByTag={kwByTag} />
         </FilterComponents>
 
       </Suspense>

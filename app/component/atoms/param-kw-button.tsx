@@ -8,6 +8,7 @@ export default function ParamKwButton({
 }: {
   keywords: string[];
 }) {
+  console.log(keywords)
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function ParamKwButton({
   }
 
   return (
-    keywords.map((kw, idx) => (
+    keywords && keywords.map((kw, idx) => (
       <button
       key={idx}
       className={clsx(

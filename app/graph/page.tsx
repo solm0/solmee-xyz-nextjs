@@ -16,6 +16,9 @@ const GET_ALL_POSTS_GRAPH = gql`
       tags {
         name
       }
+      keywords {
+        name
+      }
       links {
         id
         title

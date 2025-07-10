@@ -166,3 +166,7 @@ export type Graph = {
   nodes: Node[],
   links: Link[]
 }
+
+export type KeywordsByTag = {
+  [tag: string]: string[];
+};
