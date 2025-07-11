@@ -6,6 +6,8 @@ import Ol from "./document/ol";
 import Blockquote from "./document/blockquote";
 import LayoutBlock from "./document/layout-block";
 import CodeBlock from "./document/codeblock";
+import Notice from "./document/notice";
+import Quote from "./document/quote";
 
 export default function Content({
   post
@@ -16,7 +18,6 @@ export default function Content({
     <>
       {
         post?.map((document, idx) => {
-
           switch (document.type) {
             case 'heading':
               return (
@@ -48,10 +49,21 @@ export default function Content({
               return (
                 <LayoutBlock key={idx} layout={document} />
               )
-            case 'code':
-              return (
-                <CodeBlock key={idx} codeblock={document} />
-              )
+            case 'component-block':
+              switch (document.component) {
+                case 'codeBlock':
+                  return (
+                    <CodeBlock key={idx} codeblock={document} />
+                  )
+                case 'notice':
+                  return (
+                    <Notice key={idx} notice={document} />
+                  )
+                case 'quote':
+                  return (
+                    <Quote key={idx} quote={document} />
+                  )
+              }
           }
         })
       }

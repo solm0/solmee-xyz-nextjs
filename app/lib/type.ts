@@ -78,12 +78,6 @@ export type BlockquoteNode = {
   children: ParagraphNode[];
 };
 
-export type CodeBlockNode = {
-  type: 'code';
-  children: FormattedText[];
-  caption?: string;
-};
-
 export type ListItemChild = ParagraphNode | UnorderedListNode | OrderedListNode;
 
 export type ListItemNode = {
@@ -117,10 +111,12 @@ export type RichTextNode =
   | ParagraphNode
   | DividerNode
   | BlockquoteNode
-  | CodeBlockNode
   | OrderedListNode
   | UnorderedListNode
   | LayoutNode
+  | CodeBlockNode
+  | NoticeNode
+  | QuoteNode
 
 export type PostContent = {
   document: RichTextNode[];
@@ -189,4 +185,34 @@ export type InternalLinkComponentNode = {
   }
   children: TextNode[],
   propPath: string[]
+}
+
+export type CodeBlockNode = {
+  type: 'component-block',
+  children: {
+    type: 'component-inline-prop' | 'component-block-prop',
+    children: FormattedText[] | ParagraphNode[],
+  }[],
+  component: 'codeBlock',
+}
+
+export type Intent = 'info' | 'warning' | 'error' | 'success';
+
+export type NoticeNode = {
+  type: 'component-block',
+  props: { intent: Intent },
+  children: {
+    type: 'component-block-prop',
+    children: ParagraphNode[],
+  }[],
+  component: 'notice',
+}
+
+export type QuoteNode = {
+  type: 'component-block',
+  children: {
+    type: 'component-inline-prop' | 'component-block-prop',
+    children: FormattedText[] | ParagraphNode[],
+  }[],
+  component: 'quote',
 }

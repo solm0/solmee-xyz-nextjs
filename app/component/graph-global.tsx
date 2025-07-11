@@ -110,7 +110,7 @@ export default function GlobalGraph({
       enableZoomInteraction={true}
       enablePanInteraction={true}
       linkDirectionalParticles={1}
-      linkDirectionalParticleColor={() => colors.text800}
+      linkDirectionalParticleColor={() => colors.text600}
       linkDirectionalParticleWidth={3}
       linkDirectionalParticleSpeed={0.005}
 

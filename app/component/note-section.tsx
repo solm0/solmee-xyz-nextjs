@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { maruburi } from "@/app/lib/localfont";
 import { useEffect, useRef, useState } from "react";
@@ -12,10 +12,13 @@ export default function NoteSection({
 }) {
   const router = useRouter();
   const rootPath = usePathname().split('/').slice(1, 2).toString();
+  const searchParams = useSearchParams();
 
+  
   useEffect(() => {
     const page: HTMLElement | null = document.getElementById('note_section');
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
+
     if (!page) return;
     
     page.scrollTo({
@@ -25,6 +28,14 @@ export default function NoteSection({
       top: 0,
     })
   }, [rootPath]);
+
+  useEffect(() => {
+    const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
+    
+    wrapper?.scrollTo({
+      top: 0
+    })
+  }, [searchParams]);
 
   // 현재 스크롤 위치가 끝임 && 아래쪽으로 사용자가 끌어내리려 함 -> router.push(뒤로)
   const scrollRef = useRef<HTMLDivElement>(null);

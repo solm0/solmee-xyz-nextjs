@@ -80,7 +80,7 @@ export default function Note({
     <>
       <h1
         ref={headRef}
-        className={`text-3xl text-text-950 ${maruburi_bold.className}`}
+        className={`leading-12 text-3xl text-text-950 ${maruburi_bold.className}`}
       >
         {post?.title}
       </h1>
