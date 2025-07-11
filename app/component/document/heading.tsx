@@ -7,29 +7,32 @@ export default function Headings({
 }: {
   heading: HeadingNode;
 }) {
-  let fontSize: string;
-  
-  switch(heading.level) {
-    case 2: fontSize = '!text-xl'; break;
-    case 3: fontSize = '!text-lg'; break;
-    case 4: fontSize = '!text-base'; break;
-  }
-
   return (
     <>
       {heading.children.map((child) => {
         const text = (child as FormattedText).text || '';
         const id = slugify(text);
-        
-        return (
-          <div
-            key={id}
-            id={id}
-            className={`mb-2 text-text-950 ${maruburi_bold.className} ${fontSize}`}
-          >
-            {text}
-          </div>
-        )
+
+        switch(heading.level) {
+          case 2:
+            return (
+              <h2 key={id} id={id} className={`text-xl mb-2 text-text-950 ${maruburi_bold.className}`}>
+                {text}
+              </h2>
+            )
+          case 3: 
+            return (
+              <h3 key={id} id={id} className={`text-lg mb-2 text-text-950 ${maruburi_bold.className}`}>
+                {text}
+              </h3>
+            )
+          case 4:
+            return (
+              <h4 key={id} id={id} className={`text-base mb-2 text-text-950 ${maruburi_bold.className}`} >
+                {text}
+              </h4>
+            )
+        }
       })}
     </>
   )

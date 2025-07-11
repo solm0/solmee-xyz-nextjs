@@ -80,7 +80,7 @@ export default function RandList({
           hovered && hovered === note.id && 'text-green-500! opacity-100'
         )}
         >
-          {note.preview}
+          {note.excerpt}
         </span>
       </p>
     </div>

@@ -11,6 +11,7 @@ const GET_ALL_POSTS = gql`
   query {
     posts {
       id
+      excerpt
       title
       publishedAt
       meta

@@ -1,7 +1,7 @@
 export type Post = {
   id: string;
   title: string;
-  preview?: string;
+  excerpt?: string;
   publishedAt: string | number | Date;
   content?: PostContent | null;
   author?: User | null;
@@ -39,6 +39,7 @@ export type FormattedText = {
   subscript?: boolean;
   superscript?: boolean;
   type?: string;
+  title?: string;
 };
 
 export type LinkNode = {
@@ -47,7 +48,13 @@ export type LinkNode = {
   children: FormattedText[];
 };
 
-export type TextNode = FormattedText | LinkNode | RelationshipNode;
+export type InternalLinkNode = {
+  type: 'internal-link';
+  id: string;
+  children: FormattedText[];
+};
+
+export type TextNode = FormattedText | LinkNode | RelationshipNode | InternalLinkNode;
 
 export type HeadingNode = {
   type: 'heading';
@@ -113,7 +120,7 @@ export type RichTextNode =
   | CodeBlockNode
   | OrderedListNode
   | UnorderedListNode
-  | LayoutNode;
+  | LayoutNode
 
 export type PostContent = {
   document: RichTextNode[];
@@ -170,3 +177,16 @@ export type Graph = {
 export type KeywordsByTag = {
   [tag: string]: string[];
 };
+
+export type InternalLinkComponentNode = {
+  type: "component-block",
+  props: {
+    post: {
+      id: string,
+      label: string,
+      data: Post[],
+    }
+  }
+  children: TextNode[],
+  propPath: string[]
+}

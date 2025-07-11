@@ -1,4 +1,4 @@
-import { ParagraphNode, LinkNode, RelationshipNode, FormattedText } from "@/app/lib/type";
+import { ParagraphNode, LinkNode, FormattedText, InternalLinkNode } from "@/app/lib/type";
 import InlineLink from "./inline-link";
 import InlineText from "./inline-text";
 import InlineInternalLink from "./inline-internallink";
@@ -23,10 +23,10 @@ export default function Paragraph({
           return (
             <InlineLink key={idx} link={child as LinkNode} />
           )
-        } else if (child.type === 'relationship') {
-          return (
-            <InlineInternalLink key={idx} internalLink={child as RelationshipNode} />
-          )
+        } else if (child.type === 'internal-link') {
+            return (
+              <InlineInternalLink key={idx} internalLink={child as InternalLinkNode} />
+            )
         } else if (child.type === undefined) {
           return (
             <InlineText key={idx} text={child as FormattedText} />

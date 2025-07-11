@@ -5,6 +5,7 @@ import { gql, GraphQLClient } from 'graphql-request';
 import Note from '@/app/component/note';
 import HyperlinkMap from '@/app/component/hyperlink-map';
 import GraphController from '@/app/component/graph-controller';
+import { mergeInlineInternalLinks } from '@/app/lib/merge-inline-internal-link';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -216,6 +217,8 @@ export default async function Page({
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
   const post = data.post;
+
+  post.content.document = mergeInlineInternalLinks(post.content.document)
 
   return (
     <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
