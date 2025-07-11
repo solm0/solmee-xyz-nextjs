@@ -30,7 +30,7 @@ export default function NoteSection({
 
   const tags = searchParams.get('tag');
   const search = searchParams.get('search');
-  const keywords = searchParams.get('keywords');
+  const keywords = searchParams.getAll('keywords');
 
   useEffect(() => {
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
