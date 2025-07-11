@@ -14,7 +14,6 @@ export default function NoteSection({
   const rootPath = usePathname().split('/').slice(1, 2).toString();
   const searchParams = useSearchParams();
 
-  
   useEffect(() => {
     const page: HTMLElement | null = document.getElementById('note_section');
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
@@ -29,13 +28,17 @@ export default function NoteSection({
     })
   }, [rootPath]);
 
+  const tags = searchParams.get('tag');
+  const search = searchParams.get('search');
+  const keywords = searchParams.get('keywords');
+
   useEffect(() => {
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
     
     wrapper?.scrollTo({
-      top: 0
+      top: 0,
     })
-  }, [searchParams]);
+  }, [tags, search, keywords]);
 
   // 현재 스크롤 위치가 끝임 && 아래쪽으로 사용자가 끌어내리려 함 -> router.push(뒤로)
   const scrollRef = useRef<HTMLDivElement>(null);
