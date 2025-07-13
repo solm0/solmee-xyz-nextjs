@@ -12,7 +12,7 @@ export default function InternalLinkTooltip() {
   if (hoveredTitle && tooltip) {
     return (
       <span
-        className="text-sm bg-button-100 text-text-900 rounded-sm flex items-center h-auto w-72 -translate-x-36 break-words px-3 py-2 absolute leading-6 z-80"
+        className="text-sm bg-button-100 text-text-900 rounded-sm flex items-center h-auto w-72 -translate-x-36 break-words px-3 py-2 absolute leading-6 z-10"
         style={{
           bottom: mousePosition.y! + 20 || 0,
           left: mousePosition.x! || 0,

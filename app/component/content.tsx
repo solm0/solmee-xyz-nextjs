@@ -9,6 +9,7 @@ import CodeBlock from "./document/codeblock";
 import Notice from "./document/notice";
 import Quote from "./document/quote";
 import InlineInternalLink from "./document/inline-internallink";
+import Carousel from "./document/carousel";
 
 export default function Content({
   post
@@ -67,6 +68,10 @@ export default function Content({
                 case 'quote':
                   return (
                     <Quote key={idx} quote={document} />
+                  )
+                case 'carousel':
+                  return (
+                    <Carousel key={idx} carIdx={idx} carousel={document} />
                   )
               }
           }

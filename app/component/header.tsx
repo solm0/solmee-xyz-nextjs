@@ -20,19 +20,21 @@ export default function Header({
   }
   return (
     <header className={clsx(
-      "fixed w-[calc(100%-24rem)] max-w-[47rem] flex justify-between h-auto left-[22rem] top-0 gap-2 bg-background border-b border-text-600 pointer-events-none transition-opacity pt-8",
+      "fixed h-auto w-full left-[22rem] top-0 gap-2 bg-background pointer-events-none transition-opacity pt-8",
       !isHeadingVisible ? 'opacity-100' : 'opacity-0',
     )}
     >
-      <div className='text-sm h-auto w-auto rounded-sm flex items-center pointer-events-auto'>
-        {title}
+      <div className="w-[calc(100%-24rem)] max-w-[47rem] flex justify-between border-b border-text-600">
+        <div className='text-sm h-auto w-auto rounded-sm flex items-center pointer-events-auto'>
+          {title}
+        </div>
+        <button
+          onClick={goToTop}
+          className="w-7 h-7 rounded-sm bg-background flex justify-center items-center hover:text-text-700 transition-all duration-300 pointer-events-auto"
+        >
+          <ArrowUpToLine className="w-4 h-4" />
+        </button>
       </div>
-      <button
-        onClick={goToTop}
-        className="w-7 h-7 rounded-sm bg-background flex justify-center items-center hover:text-text-700 transition-all duration-300 pointer-events-auto"
-      >
-        <ArrowUpToLine className="w-4 h-4" />
-      </button>
     </header>
   );
 }

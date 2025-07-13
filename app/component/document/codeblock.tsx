@@ -10,8 +10,6 @@ export default function CodeBlock({
   const caption = (codeblock.children?.filter(ch => ch.type === 'component-inline-prop')?.[0].children?.[0] as FormattedText)?.text;
   const code = codeblock.children?.filter(ch => ch.type === 'component-block-prop')?.[0].children as ParagraphNode[];
 
-  console.log(code)
-
   return (
     <figure className="flex flex-col gap-1 pb-8">
       {caption && <figcaption className={`${pretendard.className} text-sm text-text-700`}>{caption}</figcaption>}

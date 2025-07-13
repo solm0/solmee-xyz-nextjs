@@ -118,6 +118,7 @@ export type RichTextNode =
   | NoticeNode
   | QuoteNode
   | InternalLinkComponentNode
+  | CarouselNode
 
 export type PostContent = {
   document: RichTextNode[];
@@ -203,19 +204,34 @@ export type Intent = 'info' | 'warning' | 'error' | 'success';
 
 export type NoticeNode = {
   type: 'component-block',
+  component: 'notice',
   props: { intent: Intent },
   children: {
     type: 'component-block-prop',
     children: ParagraphNode[],
   }[],
-  component: 'notice',
 }
 
 export type QuoteNode = {
   type: 'component-block',
+  component: 'quote',
   children: {
     type: 'component-inline-prop' | 'component-block-prop',
     children: FormattedText[] | ParagraphNode[],
   }[],
-  component: 'quote',
+}
+
+export type CarouselNode = {
+  type: 'component-block',
+  component: 'carousel',
+  children: {
+    type: 'component-inline-prop',
+    children: ParagraphNode[],
+  }[],
+  props: {
+    items: {
+      alt: string,
+      imageSrc: string,
+    }[],
+  },
 }

@@ -20,7 +20,7 @@ export default function HyperlinkMap({
 
   return (
     <nav className={clsx (
-      `${pretendard.className} fixed top-15 right-8 flex flex-col gap-1 text-text-900 text-sm w-auto h-auto transition-all duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] z-80`,
+      `${pretendard.className} fixed top-15 right-8 flex flex-col gap-1 text-text-900 text-sm w-auto h-auto transition-all duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] z-10`,
       isEnabled ? 'translate-x-0' : 'translate-x-96',
     )}>
       {children}

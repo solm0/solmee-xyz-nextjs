@@ -16,7 +16,7 @@ export default function Quote({
       ))}
       {attr &&
         <div className="flex">
-          <span className={`text-text-700 italic`}>{attr}</span>
+          <span className={`text-text-700`}>{attr}</span>
         </div>
       }
     </blockquote>
