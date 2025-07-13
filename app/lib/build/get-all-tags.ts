@@ -36,14 +36,6 @@ export default async function main() {
   const data: TagsResponse = await client.request(GET_ALL_TAGS);
   const tags: Tag[] = data.tags;
 
-  const allTags = tags.map(tag => ({ id: tag.id, name: tag.name }));
-
-
-  fs.writeFileSync(
-    path.join(dirPath, 'all-tags.json'),
-    JSON.stringify(allTags, null, 2)
-  );
-
   tags.forEach(getKeywordsTag);
   writeKeywordFiles();
 }
