@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { maruburi } from "@/app/lib/localfont";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function NoteSection({
   children,
@@ -18,7 +18,6 @@ export default function NoteSection({
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
 
     if (!page) return;
-    
     page.scrollTo({
       top: 0,
     });
@@ -27,17 +26,16 @@ export default function NoteSection({
     })
   }, [rootPath]);
 
-  const tags = searchParams.get('tag');
-  const search = searchParams.get('search');
-  const keywords = searchParams.getAll('keywords');
+  const tags = useMemo(() => searchParams.get('tag'), [searchParams]);
+  const search = useMemo(() => searchParams.get('search'), [searchParams]);
+  const keywords = useMemo(() => searchParams.getAll('keywords'), [searchParams]);
 
   useEffect(() => {
     const wrapper: HTMLElement | null = document.getElementById('note_wrapper');
-    
     wrapper?.scrollTo({
       top: 0,
     })
-  }, [tags, search, keywords]);
+  }, [tags, search, keywords.join(',')]);
   
   return (
     <div

@@ -12,11 +12,11 @@
     "name": "독서"
   },
   {
-    "id": "cmcbvwck00004116ys3uwtb7m",
-    "name": "창작"
-  },
-  {
     "id": "cmcbvwia50005116ywvcohpor",
     "name": "미분류"
+  },
+  {
+    "id": "cmcbvwck00004116ys3uwtb7m",
+    "name": "시각"
   }
 ]

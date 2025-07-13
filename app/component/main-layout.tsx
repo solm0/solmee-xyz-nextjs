@@ -43,16 +43,6 @@ export default function MainLayout({
           </NoteSection>
         </>
       );
-      break;
-      
-    case '그래픽':
-      return (
-        <div>
-          {children}
-        </div>
-      );
-      break;
-
     case '대해서':
       return (
         <>
@@ -62,7 +52,6 @@ export default function MainLayout({
           </NoteSection>
         </>
       );
-      break
   }
 
 }

@@ -32,7 +32,6 @@ export default function GlobalNav() {
       <ExpandButton name="solmee.xyz" >
         <ParamButton name="무작위" />
         <ParamButton name="최신순" />
-        <ParamButton name="그래픽" />
       </ExpandButton>
 
       <ParamButton name="대해서" backbutton={true} />

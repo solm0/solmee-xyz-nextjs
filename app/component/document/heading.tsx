@@ -28,7 +28,7 @@ export default function Headings({
             )
           case 4:
             return (
-              <h4 key={id} id={id} className={`text-base mb-2 text-text-950 ${maruburi_bold.className}`} >
+              <h4 key={id} id={id} className={`text-base mb-2`} >
                 {text}
               </h4>
             )

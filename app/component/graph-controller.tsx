@@ -70,7 +70,7 @@ export default function GraphController({
 
   return (
     <>
-      <div className="w-80 h-80 border text-text-800 border-text-600 flex items-center justify-center rounded-sm backdrop-blur-md">
+      <div className="w-80 h-80 border text-text-800 border-text-600 flex items-center justify-center rounded-sm backdrop-blur-2xl">
         <GraphRenderer data={graph} />
       </div>
 
