@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import GlobalGraphRenderer from "../component/graph-global-renderer";
 import { gql, GraphQLClient } from "graphql-request";
 import { Suspense } from "react";
+import BackButton from "../component/atoms/back-button";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -44,6 +45,7 @@ export default async function GraphPage() {
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
       <Suspense>
         <GlobalGraphRenderer posts={posts} />
+        <BackButton />
       </Suspense>
     </div>
   )

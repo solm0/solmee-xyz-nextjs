@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import GraphRenderer from './graph-renderer';
 import clsx from 'clsx';
 import expandGraphToDepth from '../lib/expand-graph-to-depth';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 export function ControllerButton({
   role,
@@ -42,6 +42,7 @@ export default function GraphController({
 }: {
   post: Post;
 }) {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -61,6 +62,11 @@ export default function GraphController({
       handleDepthChange(depth);
     }
   }, [post]);
+
+  const handleOpenGraph = () => {
+    sessionStorage.setItem('prevPath', pathname);
+    router.push(`/graph?${searchParams}`);
+  }
 
   return (
     <>
@@ -88,10 +94,7 @@ export default function GraphController({
           <ControllerButton
             role='exp'
             icon={<Expand className="w-4 h-4"/>}
-            onClick={() => {
-              const newParams = new URLSearchParams(searchParams.toString());
-              router.push(`/graph?${newParams.toString()}`);
-            }}
+            onClick={handleOpenGraph}
           />
         </div>
       </div>

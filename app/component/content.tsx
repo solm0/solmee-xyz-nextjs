@@ -8,6 +8,7 @@ import LayoutBlock from "./document/layout-block";
 import CodeBlock from "./document/codeblock";
 import Notice from "./document/notice";
 import Quote from "./document/quote";
+import InlineInternalLink from "./document/inline-internallink";
 
 export default function Content({
   post
@@ -51,6 +52,10 @@ export default function Content({
               )
             case 'component-block':
               switch (document.component) {
+                case 'internalLink': 
+                  return (
+                    <InlineInternalLink key={idx} internalLinkComponent={document} />
+                  )
                 case 'codeBlock':
                   return (
                     <CodeBlock key={idx} codeblock={document} />

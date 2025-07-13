@@ -117,6 +117,7 @@ export type RichTextNode =
   | CodeBlockNode
   | NoticeNode
   | QuoteNode
+  | InternalLinkComponentNode
 
 export type PostContent = {
   document: RichTextNode[];
@@ -183,8 +184,10 @@ export type InternalLinkComponentNode = {
       data: Post[],
     }
   }
-  children: TextNode[],
-  propPath: string[]
+  children: {
+    children: FormattedText[],
+  }[]
+  component: 'internalLink'
 }
 
 export type CodeBlockNode = {

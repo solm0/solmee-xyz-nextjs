@@ -160,6 +160,7 @@ const GET_POST_BY_ID = gql`
         links {
           id
           title
+          order
           links { id title }
           backlinks { id title }
           internalLinks { id title }

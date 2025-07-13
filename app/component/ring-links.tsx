@@ -24,6 +24,9 @@ export default function RingLinks({
   const setHoveredId = useHoveredLink((state) => state.setId);
   const [isOpen, setIsOpen] = useState(true);
 
+  const sortedLinks = links?.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  console.log(links?.[0].order)
+
   return (
     <section className={`text-sm relative flex flex-col gap-3 w-full h-auto items-start text-text-900 bg-button-50 border border-text-600 px-4 py-4 rounded-sm -left-4`}>
       <div className="flex gap-3 items-center">
@@ -56,7 +59,7 @@ export default function RingLinks({
 
       {isOpen &&
         <div className="flex flex-col ml-8">
-          {links && links.map((link) => (
+          {sortedLinks && sortedLinks.map((link) => (
               <Link
                 key={link.id}
                 href={`${link.id}/?${newParams}`}
