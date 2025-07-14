@@ -5,11 +5,50 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { Post } from "../lib/type";
 
-export default function RandList({ 
+export function RandItem({
+  hovered,
+  note
+}: {
+  hovered: string | null,
+  note: Post
+}) {
+  return (
+    <p className="w-full text-text-600 truncate">
+      <span className="text-text-900">{note.title}</span>
+      <span className={clsx (
+        "ml-2 text-text-800 opacity-40 transition-[colors, opacity] duration-300",
+        hovered && hovered !== note.id && 'opacity-0!',
+        hovered && hovered === note.id && 'text-green-500! opacity-100'
+      )}
+      >
+        {note.excerpt}
+      </span>
+    </p>
+  )
+}
+
+export function ChronItem({
+  note,
+}: {
+  note: Post,
+}) {
+  return (
+    <>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.year && `${note.chron.year}년`}</div>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.month && `${note.chron.month}월`}</div>
+      <div className="w-16 shrink-0 text-text-800">{note.chron.day && `${note.chron.day}일`}</div>
+      <p className="col-span-11 w-full text-text-900 truncate">{note.title}</p>
+    </>
+  )
+}
+
+export default function PostList({ 
+  menu,
   note,
   goUp, setGoUp,
   hovered, setHovered,
 }: {
+  menu: string,
   note: Post,
   goUp: boolean,
   setGoUp: (value: boolean) => void,
@@ -72,17 +111,10 @@ export default function RandList({
           hovered && hovered !== note.id && "text-text-600",
         )} />
       }
-      <p className="w-full text-text-600 truncate">
-        <span className="text-text-900">{note.title}</span>
-        <span className={clsx (
-          "ml-2 text-text-800 opacity-40 transition-[colors, opacity] duration-300",
-          hovered && hovered !== note.id && 'opacity-0!',
-          hovered && hovered === note.id && 'text-green-500! opacity-100'
-        )}
-        >
-          {note.excerpt}
-        </span>
-      </p>
+      {menu === '최신순' ?
+        <RandItem hovered={hovered} note={note} />
+        : <ChronItem note={note} />
+      }
     </div>
   )
 }

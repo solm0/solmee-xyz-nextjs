@@ -3,7 +3,7 @@
 import clsx from "clsx"
 import { maruburi } from "@/app/lib/localfont";
 
-export default function RandSection({
+export default function ListSection({
   goUp,
   children
 }: {

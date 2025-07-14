@@ -2,10 +2,9 @@
 
 import clsx from "clsx";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { ChevronRight } from "lucide-react";
 import { Post } from "../lib/type";
 
-export default function ChronList({ 
+export default function PostListThumbnail({ 
   note,
   goUp, setGoUp,
   hovered, setHovered,
@@ -16,7 +15,6 @@ export default function ChronList({
   hovered: string | null;
   setHovered: (id: string | null) => void,
 }) {
-  
   const onMouseEnter = (id: string) => {
     setHovered(id);
   }
@@ -60,24 +58,22 @@ export default function ChronList({
     <div
       key={note.id}
       className={clsx (
-        "text-nowrap h-12 w-full transition-[opacity] duration-300 hover:cursor-pointer flex items-center font-normal",
-        hovered && hovered !== note.id && "opacity-40!",
-        "flex gap-4"
+        "bg-button-200 w-82 h-82 transition-[opacity] duration-300 hover:cursor-pointer flex items-center justify-center rounded-sm",
+        hovered && hovered !== note.id && "opacity-40!"
       )}
       onMouseEnter={() => onMouseEnter(note.id)}
       onMouseLeave={onMouseLeave}
       onClick={() => handleClick(note.id)}
     >
-      {rootPath === note.id &&
-        <ChevronRight className={clsx(
-          "absolute left-0 text-text-900 border-r-0 w-4 h-4",
-          hovered && hovered !== note.id && "text-text-600",
-        )} />
-      }
-      <div className="w-16 shrink-0 text-text-800">{note.chron.year && `${note.chron.year}년`}</div>
-      <div className="w-16 shrink-0 text-text-800">{note.chron.month && `${note.chron.month}월`}</div>
-      <div className="w-16 shrink-0 text-text-800">{note.chron.day && `${note.chron.day}일`}</div>
-      <p className="col-span-11 w-full text-text-900 truncate">{note.title}</p>
+      {rootPath === note.id ? (
+        <div>응</div>
+        // <img
+        //   src={note.thumbnail}
+        //   alt={note.title}
+        // />
+      ) : (
+        <div>아님</div>
+      )}
     </div>
   )
 }

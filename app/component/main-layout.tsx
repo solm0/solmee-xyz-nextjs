@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from "next/navigation";
-import RandSectionWrapper from "@/app/component/rand-section-wrapper";
+import ListSectionWrapper from "@/app/component/list-section-wrapper";
 import NoteSection from "@/app/component/note-section";
 import { Post } from "../lib/type";
 import GenerateChron from "../lib/gererate-chron";
@@ -14,44 +14,36 @@ export default function MainLayout({
   children: React.ReactNode;
   posts: Post[];
 }) {
-  const newParams = new URLSearchParams(useSearchParams().toString());
-  const menu = newParams.get("menu");
-  const tag = newParams.get("tag");
-  const search = newParams.get("search");
-  const keywords = newParams.getAll("keyword");
+  const searchParams = useSearchParams();
+  const menu = searchParams.get("menu") || '메뉴없음';
+  const tag = searchParams.get("tag");
+  const search = searchParams.get("search");
+  const keywords = searchParams.getAll("keyword");
 
-  // insert date
-  const chronPosts = GenerateChron(posts);
+  let finalPosts;
 
-  // filter
-  const metaPosts = posts.filter((post) => post.meta === true);
-  const filteredPosts = filterPosts({
-    posts: chronPosts,
-    tag: tag,
-    search: search,
-    keywords: keywords,
-  })
-  
   switch(menu) {
-    case '무작위': 
+    case '무작위':
     case '최신순':
-      return (
-        <>
-          <RandSectionWrapper posts={filteredPosts} menu={menu} />
-          <NoteSection>
-            {children}
-          </NoteSection>
-        </>
-      );
+      finalPosts = filterPosts({ posts: GenerateChron(posts), tag, search, keywords });
+      break;
+    case '그래픽':
+      finalPosts = filterPosts({ posts, tag: '시각', search, keywords });
+      break;
     case '대해서':
-      return (
-        <>
-          <RandSectionWrapper posts={metaPosts} />
-          <NoteSection>
-            {children}
-          </NoteSection>
-        </>
-      );
+      finalPosts = posts.filter(post => post.meta === true);
+      break;
+    default:
+      finalPosts = posts;
   }
+
+  return (
+    <>
+      <ListSectionWrapper posts={finalPosts} menu={menu} />
+      <NoteSection>
+        {children}
+      </NoteSection>
+    </>
+  )
 
 }
