@@ -112,8 +112,8 @@ export default function PostList({
         )} />
       }
       {menu === '최신순' ?
-        <RandItem hovered={hovered} note={note} />
-        : <ChronItem note={note} />
+        <ChronItem note={note} />
+        : <RandItem hovered={hovered} note={note} />
       }
     </div>
   )
