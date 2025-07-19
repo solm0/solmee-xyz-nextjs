@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import GlobalNav from "./component/global-nav";
-import NoteInspector from "./component/note-inspector";
 import { pretendard } from "./lib/localfont";
-import { Suspense } from 'react';
 import { ThemeProvider } from "next-themes";
 import InternalLinkTooltip from "./component/internallink-tooltip";
 import fs from 'fs';
 import path from 'path';
+import SideNav from "./component/side-nav";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,17 +23,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pretendard.className} antialiased font-normal overflow-hidden`}
+        className={`${pretendard.className} antialiased font-normal md:overflow-hidden`}
       >
         <ThemeProvider disableTransitionOnChange>
-          <div className="flex h-screen w-full p-8 gap-4">
-            <aside className="fixed h-full w-80 shrink-0 z-10 pointer-events-none">
-              <Suspense>
-                <GlobalNav />
-              </Suspense>
-              <NoteInspector tags={tags} kwByTag={keywordsTag} />
-            </aside>
-            <main className="absolute left-[22rem] flex flex-col h-full w-[calc(100vw-22rem)] top-0 flex-1 items-center overflow-hidden">
+          <div className="flex flex-col md:flex-row h-screen w-full p-8 gap-4">
+            <SideNav tags={tags} kwByTag={keywordsTag} />
+            <main className="relative left-0 top-0 md:absolute md:left-[22rem] flex flex-col h-full w-full md:w-[calc(100vw-22rem)] flex-1 items-center overflow-hidden">
               {children}
             </main>
           </div>

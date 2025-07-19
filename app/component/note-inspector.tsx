@@ -50,8 +50,8 @@ export default function NoteInspector({
   return (
     <section
       className={clsx(
-      "mt-24 h-auto w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] overflow-clip",
-      isEnabled ? 'translate-x-0' : '-translate-x-80'
+      "h-auto w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] overflow-clip",
+      isEnabled ? 'translate-x-0 block' : '-translate-x-80 hidden md:block'
     )}>
       <Suspense>
         <FilterComponents

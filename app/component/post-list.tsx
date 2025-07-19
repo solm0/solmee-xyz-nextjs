@@ -107,7 +107,7 @@ export default function PostList({
     >
       {rootPath === note.id &&
         <ChevronRight className={clsx(
-          "absolute left-0 text-text-900 border-r-0 w-4 h-4",
+          "absolute left-0 text-text-900 w-4 h-4",
           hovered && hovered !== note.id && "text-text-600",
         )} />
       }

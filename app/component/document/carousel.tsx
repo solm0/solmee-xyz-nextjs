@@ -87,7 +87,7 @@ export default function Carousel({
 
   return (
     <div
-      className="w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-[32rem] overscroll-auto scrollbar-hide"
+      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-[32rem] overscroll-auto scrollbar-hide"
     >
       {carousel.props.items.map((item, idx) => (
         <div

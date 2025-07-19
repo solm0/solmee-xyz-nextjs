@@ -6,8 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useHoveredLink } from "@/app/lib/use-hovered-link";
 import Link from "next/link";
 import clsx from "clsx";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { FlagTriangleRight } from "lucide-react";
 
 export default function RingLinks({
   id,
@@ -22,21 +21,13 @@ export default function RingLinks({
   const newParams = new URLSearchParams(searchParams.toString());
 
   const setHoveredId = useHoveredLink((state) => state.setId);
-  const [isOpen, setIsOpen] = useState(true);
 
   const sortedLinks = links?.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-  console.log(links?.[0].order)
 
   return (
-    <section className={`text-sm relative flex flex-col gap-3 w-full h-auto items-start text-text-900 bg-button-50 border border-text-600 px-4 py-4 rounded-sm -left-4`}>
-      <div className="flex gap-3 items-center">
-        <ChevronDown
-          className={clsx(
-            "w-5 h-5",
-            isOpen && '-scale-100'
-          )}
-          onClick={() => setIsOpen(!isOpen)}
-        />
+    <section className={`text-sm relative flex flex-col gap-3 w-full h-auto items-start text-text-900`}>
+      <div className="flex gap-4 items-center">
+        <FlagTriangleRight className="w-4 h-4" />
         <Link
           href={`${backlink.id}/?${newParams}`}
           target="_self"
@@ -57,32 +48,30 @@ export default function RingLinks({
         </Link>
       </div>
 
-      {isOpen &&
-        <div className="flex flex-col ml-8">
-          {sortedLinks && sortedLinks.map((link) => (
-              <Link
-                key={link.id}
-                href={`${link.id}/?${newParams}`}
-                target="_self"
-                onMouseEnter={() => {
-                  if (link.id === id) {
-                    setHoveredId(null, null);
-                  } else {
-                    setHoveredId(link.title || null, link.id || null, false);
-                  }
-                }}
-                onMouseLeave={() => setHoveredId(null, null)}
-                onClick={() => setHoveredId(null, null)}
-                className={clsx(
-                  'leading-7 flex items-center',
-                  link.id === id ? `${maruburi_bold.className} pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
-                )}
-              >
-                {link.title}
-              </Link>
-          ))}
-        </div>
-      }
+      <div className="border-l border-text-600 flex flex-col ml-1 px-7">
+        {sortedLinks && sortedLinks.map((link) => (
+            <Link
+              key={link.id}
+              href={`${link.id}/?${newParams}`}
+              target="_self"
+              onMouseEnter={() => {
+                if (link.id === id) {
+                  setHoveredId(null, null);
+                } else {
+                  setHoveredId(link.title || null, link.id || null, false);
+                }
+              }}
+              onMouseLeave={() => setHoveredId(null, null)}
+              onClick={() => setHoveredId(null, null)}
+              className={clsx(
+                'leading-7 flex items-center',
+                link.id === id ? `${maruburi_bold.className} pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
+              )}
+            >
+              {link.title}
+            </Link>
+        ))}
+      </div>
       
     </section>
   )

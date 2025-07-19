@@ -98,7 +98,7 @@ export default function Note({
         <SequenceNav isFirstChild={isFirstChild} prev={prev} next={next} />
       }
 
-      <Footer />
+      <Footer post={post} />
 
       <Toc post={post} />
       <Header title={post.title} isHeadingVisible={isHeadingVisible} />

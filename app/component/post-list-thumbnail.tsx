@@ -58,7 +58,7 @@ export default function PostListThumbnail({
     <div
       key={note.id}
       className={clsx (
-        "bg-button-200 w-82 h-82 transition-[opacity] duration-300 hover:cursor-pointer flex items-center justify-center rounded-sm",
+        "bg-button-200 w-83 h-60 transition-[opacity] duration-300 hover:cursor-pointer flex items-center justify-center rounded-sm",
         hovered && hovered !== note.id && "opacity-40!"
       )}
       onMouseEnter={() => onMouseEnter(note.id)}

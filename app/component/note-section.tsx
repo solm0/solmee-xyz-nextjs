@@ -46,7 +46,7 @@ export default function NoteSection({
         id="note_section"
         className={clsx(
           `${maruburi.className}`,
-          "absolute left-0 right-8 w-full mt-[50vh] border-b border-t border-text-600 pt-8 pl-8 pr-8 bg-background transition-all duration-1000 ease-in-out pointer-events-auto",
+          "absolute left-0 right-8 w-full mt-[50vh] border-b border-t border-text-600 pt-8 md:pl-8 md:pr-8 bg-background transition-all duration-1000 ease-in-out pointer-events-auto",
           rootPath ? 'block' : 'hidden',
         )}
       >

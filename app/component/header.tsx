@@ -20,11 +20,11 @@ export default function Header({
   }
   return (
     <header className={clsx(
-      "fixed h-auto w-full left-[22rem] top-0 gap-2 bg-background pointer-events-none transition-opacity pt-8",
+      "fixed h-auto w-full md:left-[22rem] top-0 gap-2 bg-background pointer-events-none transition-opacity pt-8",
       !isHeadingVisible ? 'opacity-100' : 'opacity-0',
     )}
     >
-      <div className="w-[calc(100%-24rem)] max-w-[47rem] flex justify-between border-b border-text-600">
+      <div className="ml-15 w-[calc(100%-8rem)] md:ml-0 md:w-[calc(100%-24rem)] max-w-[47rem] flex justify-between border-b border-text-600">
         <div className='text-sm h-auto w-auto rounded-sm flex items-center pointer-events-auto'>
           {title}
         </div>
