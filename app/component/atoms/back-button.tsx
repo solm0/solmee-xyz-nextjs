@@ -13,7 +13,7 @@ export default function BackButton() {
         const prevPath = sessionStorage.getItem('prevPath') || '/';
         router.push(`${prevPath}?${searchParams}`)
       }}
-      className="fixed top-8 left-88 bg-button-100 w-8 text-sm h-8 text-text-900 flex items-center justify-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300"
+      className="fixed top-8 right-8 md:left-88 bg-button-100 w-8 text-sm h-8 text-text-900 flex items-center justify-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300"
     >
       <Undo2 className="w-4 h-4 shrink-0" />
     </button>

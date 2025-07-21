@@ -46,13 +46,11 @@ export function mergeInlineInternalLinks(doc: RichTextNode[]): RichTextNode[] {
 
         merged = true;
         j++;
-      } else if (node.type === 'paragraph' && merged) {
-        // Absorb only ONE extra paragraph (optional), only after at least one component-block
+      } else if (node.type === 'paragraph' && doc[j - 1]?.type === 'component-block' && doc[j - 1]?.component === 'internalLink') {
+        // Absorb this paragraph ONLY if it's directly after a component-block
         mergedChildren.push(...node.children);
         j++;
-        break;
       } else {
-        // Stop if it's another paragraph without prior internalLink
         break;
       }
     }

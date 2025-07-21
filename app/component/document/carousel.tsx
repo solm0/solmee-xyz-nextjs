@@ -108,7 +108,7 @@ export default function Carousel({
 
       {isOpen && idx &&
         <div
-          className="fixed backdrop-blur-2xl w-screen h-screen top-0 left-0 z-20"
+          className="fixed backdrop-blur-2xl w-screen h-screen top-0 left-0 z-80"
         >
           <div
             className="absolute w-full h-full backdrop-blur-2xl"

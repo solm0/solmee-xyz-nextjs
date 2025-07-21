@@ -58,7 +58,7 @@ export default function Toc({
 
   // heading 뽑아내서 매핑하기
   const headings: Heading[] | undefined = post.content?.document
-  .filter(doc => doc.type === "heading")
+  .filter(doc => doc.type === "heading" && [2, 3].includes(doc.level))
   .map(doc => {
     const text = (doc.children?.[0] as FormattedText).text || 'undefined-heading';
     return {
