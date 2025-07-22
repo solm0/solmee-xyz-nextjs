@@ -11,7 +11,7 @@ export default function CodeBlock({
   const code = codeblock.children?.filter(ch => ch.type === 'component-block-prop')?.[0].children as ParagraphNode[];
 
   return (
-    <figure className="flex flex-col gap-1 pb-8">
+    <figure className="flex flex-col gap-1 py-4">
       {caption && <figcaption className={`${pretendard.className} text-sm text-text-700`}>{caption}</figcaption>}
 
       <pre className="h-auto bg-button-100 text-sm rounded-sm font-mono p-4 selection:bg-background! overflow-x-auto">

@@ -4,7 +4,7 @@ import { CarouselNode } from "@/app/lib/type";
 import { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import { pretendard } from "@/app/lib/localfont";
-
+import Image from 'next/image';
 
 export default function Carousel({
   carIdx,
@@ -36,7 +36,7 @@ export default function Carousel({
     return (
       <button
         className={`
-          px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm bg-button-100
+          px-2 py-4 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm bg-button-100
           ${disabled ? 'pointer-events-none text-text-600' : 'pointer-events-auto text-text-800'}
         `}
         onClick={onClick}
@@ -85,26 +85,43 @@ export default function Carousel({
     });
   }, [idx]);
 
+  const generateUrl = (idx: number) => {
+    const cloudName = "dpqjfptr6";
+    const publicId = carousel.props.items[idx]?.imageSrc;
+    const transformations = "f_auto,q_auto";
+    return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
+  }
+
   return (
     <div
-      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-[32rem] overscroll-auto scrollbar-hide"
+      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-[32rem] overscroll-auto scrollbar-hide my-4"
     >
-      {carousel.props.items.map((item, idx) => (
-        <div
-          key={idx}
-          className="flex flex-col gap-2 snap-start snap-normal h-full max-w-[45rem]"
-          style={{ minWidth: 'fit-content' }}
-        >
-          <img
-            src={item.imageSrc}
-            className="w-auto h-[30rem] object-left-top rounded-sm cursor-pointer"
-            alt={item.alt}
-            id={`img-${carIdx}-${idx}`}
-            onClick={() => handleModal(idx)}
-          />
-          <p className={`${pretendard.className} text-sm h-4 text-text-700`}>{item.alt}</p>
-        </div>
-      ))}
+      {carousel.props.items.map((item, idx) => {
+        const cloudName = "dpqjfptr6";
+        const publicId = item.imageSrc;
+        const transformations = "f_auto,q_auto";
+        const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
+
+        return (
+          <div
+            key={idx}
+            className="flex flex-col gap-2 snap-start snap-normal h-full max-w-[45rem]"
+            style={{ minWidth: 'fit-content' }}
+          >
+            <Image
+              src={imageUrl}
+              className="w-auto h-[30rem] object-left-top rounded-sm cursor-pointer"
+              alt={item.alt}
+              id={`img-${carIdx}-${idx}`}
+              width={800}
+              height={800}
+              onClick={() => handleModal(idx)}
+              unoptimized={true}
+            />
+            <p className={`${pretendard.className} text-sm h-4 text-text-700`}>{item.alt}</p>
+          </div>
+        )
+      })}
 
       {isOpen && idx &&
         <div
@@ -128,10 +145,13 @@ export default function Carousel({
             }}
             onClick={() => handleModal(-1)}
           >
-            <img
-              src={carousel.props.items[idx-1]?.imageSrc}
+            <Image
+              width={800}
+              height={800}
+              src={generateUrl(idx-1)}
               className="w-auto h-[30rem] object-left-top rounded-sm cursor-pointer"
               alt={carousel.props.items[idx-1]?.alt}
+              unoptimized={true}
             />
           </div>
           <div className="fixed w-screen mb-8 left-0 text-sm bottom-0 flex justify-center items-center gap-4">

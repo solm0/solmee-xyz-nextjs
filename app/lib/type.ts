@@ -2,6 +2,7 @@ export type Post = {
   id: string;
   title: string;
   excerpt?: string;
+  thumbnail?: string;
   publishedAt: string | number | Date;
   content?: PostContent | null;
   author?: User | null;
@@ -119,6 +120,7 @@ export type RichTextNode =
   | QuoteNode
   | InternalLinkComponentNode
   | CarouselNode
+  | IframeNode
 
 export type PostContent = {
   document: RichTextNode[];
@@ -234,4 +236,13 @@ export type CarouselNode = {
       imageSrc: string,
     }[],
   },
+}
+
+export type IframeNode = {
+  type: 'component-block',
+  component: 'iframe',
+  children: {
+    type: 'component-inline-prop',
+    children: { text: string }[],
+  }[],
 }

@@ -16,19 +16,19 @@ export default function Headings({
         switch(heading.level) {
           case 2:
             return (
-              <h2 key={id} id={id} className={`text-xl mb-2 text-text-950 ${maruburi_bold.className}`}>
+              <h2 key={id} id={id} className={`text-xl py-4 pt-16 text-text-950 ${maruburi_bold.className}`}>
                 {text}
               </h2>
             )
           case 3: 
             return (
-              <h3 key={id} id={id} className={`text-lg mb-2 text-text-950 ${maruburi_bold.className}`}>
+              <h3 key={id} id={id} className={`text-lg py-4 pt-16 text-text-950 ${maruburi_bold.className}`}>
                 {text}
               </h3>
             )
           case 4:
             return (
-              <h4 key={id} id={id} className={`text-base mb-2`} >
+              <h4 key={id} id={id} className={`text-base py-4`} >
                 {text}
               </h4>
             )

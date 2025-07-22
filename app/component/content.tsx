@@ -10,6 +10,7 @@ import Notice from "./document/notice";
 import Quote from "./document/quote";
 import InlineInternalLink from "./document/inline-internallink";
 import Carousel from "./document/carousel";
+import Iframe from "./document/iframe";
 
 export default function Content({
   post
@@ -27,7 +28,7 @@ export default function Content({
               )
             case 'paragraph':
               return (
-                <div key={idx} className="pb-8">
+                <div key={idx} className="py-4">
                   <Paragraph p={document} />
                 </div>
               );
@@ -72,6 +73,10 @@ export default function Content({
                 case 'carousel':
                   return (
                     <Carousel key={idx} carIdx={idx} carousel={document} />
+                  )
+                case 'iframe':
+                  return (
+                    <Iframe key={idx} src={document.children?.[0].children?.[0].text} />
                   )
               }
           }
