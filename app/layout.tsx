@@ -6,6 +6,7 @@ import InternalLinkTooltip from "./component/internallink-tooltip";
 import fs from 'fs';
 import path from 'path';
 import SideNav from "./component/side-nav";
+import { Alert } from "./component/alert";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,6 +35,8 @@ export default async function RootLayout({
           </div>
 
           <InternalLinkTooltip />
+
+          <Alert />
         </ThemeProvider>
       </body>
     </html>

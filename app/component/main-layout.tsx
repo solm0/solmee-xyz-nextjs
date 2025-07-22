@@ -24,11 +24,15 @@ export default function MainLayout({
 
   switch(menu) {
     case '무작위':
+      finalPosts = filterPosts({ posts, tag, search, keywords });
+      break;
     case '최신순':
       finalPosts = filterPosts({ posts: GenerateChron(posts), tag, search, keywords });
       break;
     case '그래픽':
-      finalPosts = filterPosts({ posts, tag: '시각', search, keywords });
+      finalPosts = filterPosts({
+        posts: posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()),
+        tag: '시각', search, keywords });
       break;
     case '대해서':
       finalPosts = posts.filter(post => post.meta === true);

@@ -12,7 +12,7 @@ export default function ExpandButton({
   children: React.ReactNode;
   name: string | React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleClick = () => {
     const newOpen = !isOpen;
