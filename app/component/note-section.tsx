@@ -36,11 +36,27 @@ export default function NoteSection({
       top: 0,
     })
   }, [tags, search, keywords.join(',')]);
+
+  useEffect(() => {
+    const wrapper = document.getElementById('note_wrapper');
+    if (!wrapper) return;
+  
+    const handleMouseEnter = () => wrapper.classList.add('overflow-y-scroll');
+    const handleMouseLeave = () => wrapper.classList.remove('overflow-y-scroll');
+  
+    wrapper.addEventListener('mouseenter', handleMouseEnter);
+    wrapper.addEventListener('mouseleave', handleMouseLeave);
+  
+    return () => {
+      wrapper.removeEventListener('mouseenter', handleMouseEnter);
+      wrapper.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
   
   return (
     <div
       id="note_wrapper"
-      className="absolute top-0 w-full h-screen overflow-y-scroll pointer-events-none"
+      className="absolute top-0 w-full h-screen overflow-y-hidden pointer-events-none"
     >
       <section
         id="note_section"
