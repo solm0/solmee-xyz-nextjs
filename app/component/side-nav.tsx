@@ -14,11 +14,11 @@ export default function SideNav({
   tags: Tag[];
   kwByTag: KeywordsByTag;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <aside className={`fixed top-0 left-0 md:p-0 md:top-8 md:left-8 w-84 md:w-80 shrink-0 z-80 md:pointer-events-none ${isOpen ? `h-full`: `h-auto w-auto`}`}>
-      <div className={`top-0 pt-8 pl-8 md:pt-0 md:pl-0 flex flex-col gap-8 bg-background md:bg-transparent rounded-sm ${isOpen ? `pb-8` : `pb-0`}`}>
+      <div className={`mt-4 ml-4 md:mt-0 md:ml-4 pt-4 pl-4 md:pt-0 md:pl-0 flex flex-col gap-8 bg-background md:bg-transparent rounded-sm ${isOpen ? `pb-8` : `pb-0`}`}>
         <button
           className='bg-button-100 w-8 text-sm h-8 text-text-900 flex items-center justify-center px-3 rounded-sm hover:brightness-97 transition-[filter, colors] duration-300 md:hidden'
           onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +35,10 @@ export default function SideNav({
       </div>
 
       {isOpen &&
-        <div className='fixed top-0 left-0 w-screen h-screen bg-button-200 opacity-50 md:hidden -z-10'></div>
+        <div
+          className='fixed top-0 left-0 w-screen h-screen bg-button-200 opacity-50 md:hidden -z-10'
+          onClick={() => setIsOpen(false)}
+        ></div>
       }
     </aside>
   )

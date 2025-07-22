@@ -69,8 +69,6 @@ export default function Toc({
 
   const [isVisible, setIsVisible] = useState(false);
   const [hoverHeading, setHoverHeading] = useState<string | null>();
-
-  // active heading 감지, 스크롤
   const [activeHeading, setActiveHeading] = useState<string | null>();
   
   useIntersectionObserver(headings, setActiveHeading);
@@ -114,8 +112,8 @@ export default function Toc({
           <p
             className={clsx(
               "leading-8 truncate bg-background rounded-sm px-2 transition-all duration-300",
-              !isVisible ? 'opacity-0' : 
-              slug === hoverHeading ? 'opacity-100': 'text-text-700'
+              !isVisible ? 'opacity-0 pointer-events-none' : 
+              slug === hoverHeading ? 'opacity-100 pointer-events-auto': 'text-text-700 pointer-events-auto'
             )}
           >
             {text}

@@ -36,7 +36,7 @@ export default function Carousel({
     return (
       <button
         className={`
-          px-2 py-4 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm bg-button-100
+          px-2 h-8 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm bg-button-100
           ${disabled ? 'pointer-events-none text-text-600' : 'pointer-events-auto text-text-800'}
         `}
         onClick={onClick}
@@ -94,7 +94,7 @@ export default function Carousel({
 
   return (
     <div
-      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-[32rem] overscroll-auto scrollbar-hide my-4"
+      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-96 md:h-[32rem] overscroll-auto scrollbar-hide my-4"
     >
       {carousel.props.items.map((item, idx) => {
         const cloudName = "dpqjfptr6";
@@ -105,16 +105,15 @@ export default function Carousel({
         return (
           <div
             key={idx}
-            className="flex flex-col gap-2 snap-start snap-normal h-full max-w-[45rem]"
-            style={{ minWidth: 'fit-content' }}
+            className="relative flex flex-col gap-1 snap-start snap-normal h-full shrink-0"
           >
             <Image
               src={imageUrl}
-              className="w-auto h-[30rem] object-left-top rounded-sm cursor-pointer"
-              alt={item.alt}
-              id={`img-${carIdx}-${idx}`}
               width={800}
               height={800}
+              className="h-[22rem] md:h-[30rem] w-auto object-contain rounded-sm cursor-pointer"
+              alt={item.alt}
+              id={`img-${carIdx}-${idx}`}
               onClick={() => handleModal(idx)}
               unoptimized={true}
             />
