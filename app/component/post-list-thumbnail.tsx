@@ -63,13 +63,13 @@ export default function PostListThumbnail({
   return (
     <div
       key={note.id}
-      className="relative bg-backgrouond w-50 h-50 hover:cursor-pointer flex items-center justify-center overflow-hidden rounded-sm"
+      className="relative bg-backgrouond w-44 h-44 md:w-50 md:h-50 hover:cursor-pointer flex items-center justify-center overflow-hidden rounded-sm"
       onMouseEnter={() => onMouseEnter(note.id)}
       onMouseLeave={onMouseLeave}
       onClick={() => handleClick(note.id)}
     >
       {rootPath === note.id ? (
-        <div className="absolute text-sm w-50 h-50 flex items-center justify-center">
+        <div className="absolute text-sm w-44 h-44 md:w-50 md:h-50 flex items-center justify-center">
           <p className="bg-background text-text-900! max-w-40 text-wrap text-center py-1 px-3 rounded-sm flex items-center">{note.title}</p>
         </div>
       ) : (

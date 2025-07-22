@@ -112,8 +112,8 @@ export default function Toc({
           <p
             className={clsx(
               "leading-8 truncate bg-background rounded-sm px-2 transition-all duration-300",
-              !isVisible ? 'opacity-0 pointer-events-none' : 
-              slug === hoverHeading ? 'opacity-100 pointer-events-auto': 'text-text-700 pointer-events-auto'
+              !isVisible ? 'opacity-0 hidden md:block' : 
+              slug === hoverHeading ? 'opacity-100': 'text-text-700'
             )}
           >
             {text}
@@ -121,7 +121,7 @@ export default function Toc({
           <div className="flex items-center justify-center w-3 h-3">
             <div
               className={clsx(
-                "rounded-full transition-all duration-300",
+                "rounded-full transition-all duration-300 shrink-0",
                 slug === hoverHeading ? 'bg-green-500' : 'bg-button-200',
                 slug === activeHeading ? 'w-[12px] h-[12px]': 'w-[5px] h-[5px]'
               )}
