@@ -41,15 +41,24 @@ export default function NoteSection({
     const wrapper = document.getElementById('note_wrapper');
     if (!wrapper) return;
   
-    const handleMouseEnter = () => wrapper.classList.add('overflow-y-scroll');
-    const handleMouseLeave = () => wrapper.classList.remove('overflow-y-scroll');
+    const enableScroll = () => wrapper.classList.add('overflow-y-scroll');
+    const disableScroll = () => wrapper.classList.remove('overflow-y-scroll');
   
-    wrapper.addEventListener('mouseenter', handleMouseEnter);
-    wrapper.addEventListener('mouseleave', handleMouseLeave);
+    // Desktop
+    wrapper.addEventListener('mouseenter', enableScroll);
+    wrapper.addEventListener('mouseleave', disableScroll);
+  
+    // Mobile
+    wrapper.addEventListener('touchstart', enableScroll);
+    wrapper.addEventListener('touchend', disableScroll);
+    wrapper.addEventListener('touchcancel', disableScroll); // fallback for interrupted gestures
   
     return () => {
-      wrapper.removeEventListener('mouseenter', handleMouseEnter);
-      wrapper.removeEventListener('mouseleave', handleMouseLeave);
+      wrapper.removeEventListener('mouseenter', enableScroll);
+      wrapper.removeEventListener('mouseleave', disableScroll);
+      wrapper.removeEventListener('touchstart', enableScroll);
+      wrapper.removeEventListener('touchend', disableScroll);
+      wrapper.removeEventListener('touchcancel', disableScroll);
     };
   }, []);
   
