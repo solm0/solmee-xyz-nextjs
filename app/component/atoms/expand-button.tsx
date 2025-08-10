@@ -30,13 +30,13 @@ export default function ExpandButton({
     <div>
       <button
         onClick={handleClick}
-        className={`${isOpen ? `bg-button-200`: `bg-button-100`} w-8 h-8 text-text-900 px-3 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter] duration-300 pointer-events-auto`}
+        className={`${isOpen ? `text-green-500`: `text-text-900`} w-6 h-4 px-3 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300 pointer-events-auto hover:text-text-700`}
       >
         {name}
       </button>
       <div className={clsx(
-        "h-auto flex flex-col items-start gap-1 overflow-clip transition-all",
-        isOpen ? "max-h-96 mt-1" : "max-h-0"
+        "absolute h-auto w-40 flex flex-col p-3 -translate-x-2 items-start gap-1 overflow-clip transition-all bg-background rounded-sm",
+        isOpen ? "max-h-96 mt-3" : "opacity-0 max-h-0"
       )}>
         {children}
       </div>

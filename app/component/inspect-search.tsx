@@ -1,23 +1,17 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import clsx from "clsx";
 
 export default function InspectSearch() {
-  const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
-
-  const [value, setValue] = useState(searchParams.get("search")?.toString() || "");
-
-  useEffect(() => {
-    setValue(searchParams.get("search")?.toString() || "");
-  }, []);
+  const [value, setValue] = useState('');
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
 
     if (term) {
       params.set("search", term);
@@ -25,7 +19,7 @@ export default function InspectSearch() {
       params.delete("search");
     }
 
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, 100);
 
   const handleClear = () => {

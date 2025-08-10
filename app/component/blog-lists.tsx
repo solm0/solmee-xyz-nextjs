@@ -13,7 +13,7 @@ export default function BlogLists({
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section className={`${maruburi.className} font-semibold relative w-full pt-[40%] pb-8 overflow-y-scroll focus:outline-hidden`}>
+    <section className={`${maruburi.className} font-semibold relative w-full pt-[40vh] pb-8 overflow-y-scroll focus:outline-hidden`}>
       {posts && posts.map((note) => (
         <PostList
           key={note.id}

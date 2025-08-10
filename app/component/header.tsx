@@ -3,8 +3,8 @@ import { Settings } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="fixed top-8 left-0 px-8 w-full h-8 flex justify-center z-80">
-      <div className={`h-8 w-auto flex gap-2 text-sm`}>
+    <header className="fixed top-8 left-[50%] backdrop-blur-2xl flex items-center justify-center -translate-x-[50%] px-3 rounded-sm w-auto h-8 z-70">
+      <div className={`h-4 w-auto flex gap-4 text-sm items-center`}>
         <FilterIcon />
         <LinkButton href="" name="solmee.xyz" />
         <LinkButton href="blog" name="블로그" />
@@ -15,14 +15,14 @@ export default function Header() {
   );
 }
 
-// import { Funnel } from "lucide-react";
+import { Funnel } from "lucide-react";
 import EnableButton from "./atoms/enable-button";
 import ThemeButton from "./atoms/theme-button";
 import LinkButton from "./atoms/link-button";
 
 const filterCmp = {
   value: 'note-inspector',
-  name: '노트 탐색기',
+  name: <Funnel className="w-4 h-4" />
 }
 
 export function FilterIcon(){

@@ -27,11 +27,14 @@ export default function ThemeButton() {
   return (
     <button
       onClick={handleTheme}
-      className='h-8 w-8 text-text-900 bg-button-100 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300  pointer-events-auto'
+      className='h-4 w-auto gap-2 text-text-900 flex items-center justify-center rounded-sm pointer-events-auto'
     >
-      {theme === 'light' ?
-        <Moon className='h-3 w-3' /> : <SunMedium className='h-4 w-4' />
-      }
+      <p>테마:</p>
+      <div className='w-auto h-auto hover:text-text-700 transition-colors duration-300 '>
+        {theme === 'light' ?
+          <Moon className='h-4 w-4' /> : <SunMedium className='h-4 w-4' />
+        }
+      </div>
     </button>
   )
 }

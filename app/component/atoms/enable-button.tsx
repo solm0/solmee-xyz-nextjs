@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 export default function EnableButton({
   value,
 }: {
-  value: { value: string, name: string };
+  value: { value: string, name: string | React.ReactNode };
 }) {
   const values = {
     "note-inspector": "noteInspector",
@@ -28,19 +28,32 @@ export default function EnableButton({
   const isEnabled = useToggleStore((s) => s.toggles[key])
 
   const handleClick = () => {
-    const newEnabled = !isEnabled;
-    setIsOpen(key, newEnabled);
+    setIsOpen(key, !isEnabled);
   };
 
-  return (
-    <button
-      className={clsx(
-        "w-auto h-8 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300 pointer-events-auto",
-        isEnabled === true ? "bg-green-100" : "bg-button-100",
-      )}
-      onClick={handleClick}
-    >
-      {value.name}
-    </button>
-  );
+  if (typeof value.name === 'string') {
+    return (
+      <div className='flex text-text-900 items-center gap-2'>
+        <p>{`${value.name}:`}</p>
+        <button
+          className={clsx(
+            "w-auto h-4 text-text-900 flex items-center rounded-sm hover:text-text-700 transition-colors duration-300 pointer-events-auto",
+            isEnabled === true ? "text-green-500!" : "text-text-900",
+          )}
+          onClick={handleClick}
+        >
+          {`${isEnabled === true ? `보임` : `숨김`}`}
+        </button>
+      </div>
+    )
+  } else {
+    return (
+      <div
+        className={`${isEnabled ? `text-green-500`: `text-text-900`} w-8 h-4 flex items-center justify-center rounded-sm transition-colors duration-300 pointer-events-auto hover:text-text-700`}
+        onClick={handleClick}
+      >
+        {value.name}
+      </div>
+    )
+  }
 }

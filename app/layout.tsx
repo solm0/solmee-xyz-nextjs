@@ -57,7 +57,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pretendard.className} antialiased font-normal md:overflow-hidden focus:outline-hidden`}
+        className={`${pretendard.className} antialiased font-normal md:overflow-hidden`}
       >
         <ThemeProvider disableTransitionOnChange>
           <div className="flex flex-col md:flex-row h-screen w-full p-8 gap-4">
@@ -65,7 +65,7 @@ export default async function RootLayout({
               <Header />
             </Suspense>
             <SideNav posts={posts} tags={tags} kwByTag={keywordsTag} />
-            <main className="relative left-0 top-0 md:absolute md:left-[24rem] flex flex-col h-full w-full md:w-[calc(100vw-26rem)] flex-1 items-start overflow-hidden">
+            <main className="relative left-0 top-0 md:absolute md:left-[24rem] flex flex-col h-full w-full md:w-[calc(100vw-26rem)] flex-1 items-start overflow-hidden focus:outline-hidden">
               {children}
             </main>
           </div>

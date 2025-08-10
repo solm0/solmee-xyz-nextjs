@@ -223,7 +223,7 @@ export default async function Page({
   post.content.document = mergeInlineInternalLinks(post.content.document)
 
   return (
-    <article id="note_wrapper" className='flex flex-col gap-12 w-full pt-[40%] text-text-900 leading-8 break-keep overflow-y-scroll'>
+    <article id="note_wrapper" className='flex flex-col gap-12 w-full pt-[40vh] text-text-900 leading-8 break-keep overflow-y-scroll focus:outline-hidden'>
       <Suspense>
         <Note post={post} />
       </Suspense>
