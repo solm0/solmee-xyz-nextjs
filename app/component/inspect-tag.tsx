@@ -21,7 +21,6 @@ export default function InspectTag({
   const setHoveredTag = useHoveredLiquidStore((state) => state.setValue);
 
   const currentTag = searchParams.get("tag");
-  const isGraphic = searchParams.get("menu") === '그래픽';
 
   // 클릭한 태그 저장
   const [tag, setTag] = useState<string | null>(null);
@@ -89,12 +88,7 @@ export default function InspectTag({
         <div
           key={idx}
           id={tag.name}
-          className={clsx(
-            'h-8 px-3 flex items-center justify-center rounded-sm font-medium',
-            isGraphic ? tag.name === '시각' ?
-              'text-text-900' : 'text-text-700'
-              : 'text-text-900',
-          )}
+          className='h-8 px-3 flex items-center justify-center rounded-sm font-medium text-text-900'
           onClick={() => handleClick(tag.name)}
           onMouseOver={(e) => updateHandlePosition(e, tag.name)}
         >
@@ -109,9 +103,8 @@ export default function InspectTag({
       ))}
       <span
         className={clsx(
-          'absolute h-8 rounded-sm -z-10 pl-1 transition-all duration-300 ease-in-out',
+          'absolute h-8 rounded-sm -z-10 pl-1 transition-all duration-300 ease-in-out bg-green-500',
           hoveredTag ? 'opacity-100' : 'opacity-0',
-          isGraphic ? 'bg-button-200' : 'bg-green-500',
         )}
         style={{
           left: `${offsetX!-32}px`,

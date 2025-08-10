@@ -1,40 +1,46 @@
-import clsx from "clsx";
-import { ArrowUpToLine } from "lucide-react";
+import ExpandButton from "./atoms/expand-button";
+import { Settings } from "lucide-react";
 
-export default function Header({
-  title,
-  isHeadingVisible,
-}: {
-  title: string;
-  isHeadingVisible: boolean;
-}) {
-  const goToTop = () => {
-    const page = document.getElementById('note_wrapper');
-    if (!page) return;
-    console.log(page)
-
-    page.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
+export default function Header() {
   return (
-    <header className={clsx(
-      "fixed h-auto w-full md:left-[22rem] top-0 gap-2 bg-background pointer-events-none transition-opacity pt-8",
-      !isHeadingVisible ? 'opacity-100' : 'opacity-0',
-    )}
-    >
-      <div className="ml-15 w-[calc(100%-8rem)] md:ml-0 md:w-[calc(100%-24rem)] max-w-[47rem] flex justify-between border-b border-text-600">
-        <div className='text-sm h-auto w-auto rounded-sm flex items-center pointer-events-auto'>
-          {title}
-        </div>
-        <button
-          onClick={goToTop}
-          className="w-7 h-7 rounded-sm bg-background flex justify-center items-center hover:text-text-700 transition-all duration-300 pointer-events-auto"
-        >
-          <ArrowUpToLine className="w-4 h-4" />
-        </button>
+    <header className="fixed top-8 left-0 px-8 w-full h-8 flex justify-center z-80">
+      <div className={`h-8 w-auto flex gap-2 text-sm`}>
+        <FilterIcon />
+        <LinkButton href="" name="solmee.xyz" />
+        <LinkButton href="blog" name="블로그" />
+        <LinkButton href="work" name="작업" />
+        <SettingsIcon />
       </div>
     </header>
   );
+}
+
+// import { Funnel } from "lucide-react";
+import EnableButton from "./atoms/enable-button";
+import ThemeButton from "./atoms/theme-button";
+import LinkButton from "./atoms/link-button";
+
+const filterCmp = {
+  value: 'note-inspector',
+  name: '노트 탐색기',
+}
+
+export function FilterIcon(){
+  return (
+    <EnableButton value={filterCmp} />
+  )
+}
+
+const cmp = {
+  value: 'hyperlink-map',
+  name: '하이퍼링크 지도',
+}
+
+export function SettingsIcon() {
+  return (
+    <ExpandButton name={<Settings className="w-4 h-4 shrink-0"/>}>
+      <ThemeButton />
+      <EnableButton value={cmp} />
+    </ExpandButton>
+  )
 }

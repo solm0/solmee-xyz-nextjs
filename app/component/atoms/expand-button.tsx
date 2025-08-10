@@ -12,7 +12,7 @@ export default function ExpandButton({
   children: React.ReactNode;
   name: string | React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     const newOpen = !isOpen;
@@ -30,12 +30,12 @@ export default function ExpandButton({
     <div>
       <button
         onClick={handleClick}
-        className="w-auto h-8 bg-button-100 text-text-900 px-3 flex items-center rounded-sm hover:brightness-97 transition-[filter] duration-300 pointer-events-auto"
+        className={`${isOpen ? `bg-button-200`: `bg-button-100`} w-8 h-8 text-text-900 px-3 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter] duration-300 pointer-events-auto`}
       >
         {name}
       </button>
       <div className={clsx(
-        "h-auto flex flex-col items-start gap-1 ml-8 overflow-clip transition-all",
+        "h-auto flex flex-col items-start gap-1 overflow-clip transition-all",
         isOpen ? "max-h-96 mt-1" : "max-h-0"
       )}>
         {children}

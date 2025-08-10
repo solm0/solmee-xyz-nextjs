@@ -7,7 +7,8 @@ import InspectKeyword from './inspect-keyword';
 import { Suspense, useEffect } from 'react';
 import clsx from 'clsx';
 import { useToggleStore } from '../lib/use-enabled';
-import { Tag, KeywordsByTag } from '../lib/type';
+import { Tag, KeywordsByTag, Post } from '../lib/type';
+import InspectResult from './inspect-result';
 
 export function FilterComponents({
   icon,
@@ -32,10 +33,12 @@ export function FilterComponents({
   )
 }
 
-export default function NoteInspector({
+export default function Inspector({
+  posts,
   tags,
   kwByTag
 }: {
+  posts: Post[];
   tags: Tag[];
   kwByTag: KeywordsByTag;
 }) {
@@ -50,8 +53,8 @@ export default function NoteInspector({
   return (
     <section
       className={clsx(
-      "h-auto w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] overflow-clip",
-      isEnabled ? 'translate-x-0 block' : '-translate-x-80 hidden md:block'
+      "h-full w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] overflow-clip",
+      isEnabled ? 'translate-x-0 block' : '-translate-x-88 hidden md:block'
     )}>
       <Suspense>
         <FilterComponents
@@ -74,6 +77,8 @@ export default function NoteInspector({
         >
           <InspectKeyword kwByTag={kwByTag} />
         </FilterComponents>
+
+        <InspectResult posts={posts} />
 
       </Suspense>
     </section>

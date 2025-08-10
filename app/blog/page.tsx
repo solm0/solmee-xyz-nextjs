@@ -1,9 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import type { Metadata } from "next";
 import { gql, GraphQLClient } from "graphql-request";
-import MainLayout from "../component/main-layout";
 import { Suspense } from "react";
+import GenerateChron from "../lib/gererate-chron";
+import BlogLists from "../component/blog-lists";
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -13,35 +15,23 @@ const GET_ALL_POSTS = gql`
       id
       title
       publishedAt
-      meta
-      excerpt
-      thumbnail
-      tags {
-        name
-      }
-      keywords {
-        name
-      }
-      content {
-        document(hydrateRelationships: true)
-      }
     }
   }
 `;
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const metadata: Metadata = {
+  title: "블로그",
+  description: "블로그",
+};
+
+export default async function BlogPage() {
   const data = await client.request(GET_ALL_POSTS);
   const posts = data.posts;
+  const finalPosts = GenerateChron(posts)
 
   return (
     <Suspense>
-      <MainLayout posts={posts}>
-        {children}
-      </MainLayout>
+      <BlogLists posts={finalPosts} />
     </Suspense>
   )
 }

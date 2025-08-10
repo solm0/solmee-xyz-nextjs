@@ -7,9 +7,9 @@ import Toc from '@/app/component/toc';
 import Metadata from '@/app/component/metadata';
 import { maruburi_bold } from '@/app/lib/localfont';
 import { useEffect, useRef, useState } from "react";
-import Header from "./header";
 import RingLinks from "./ring-links";
 import SequenceNav from "./sequence-nav";
+import GoToTop from "./go-to-top";
 
 export default function Note({
   post,
@@ -77,7 +77,7 @@ export default function Note({
   const { prev, next, isFirstChild } = generateSequence();
   
   return (
-    <>
+    <div className="flex flex-col gap-12 w-full max-w-[47rem]">
       <h1
         ref={headRef}
         className={`leading-12 text-3xl text-text-950 ${maruburi_bold.className}`}
@@ -101,7 +101,7 @@ export default function Note({
       <Footer post={post} />
 
       <Toc post={post} />
-      <Header title={post.title} isHeadingVisible={isHeadingVisible} />
-    </>
+      <GoToTop title={post.title} isHeadingVisible={isHeadingVisible} />
+    </div>
   )
 }

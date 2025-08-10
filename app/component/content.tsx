@@ -11,6 +11,7 @@ import Quote from "./document/quote";
 import InlineInternalLink from "./document/inline-internallink";
 import Carousel from "./document/carousel";
 import Iframe from "./document/iframe";
+import { maruburi } from "../lib/localfont";
 
 export default function Content({
   post
@@ -18,7 +19,7 @@ export default function Content({
   post: RichTextNode[];
 }) {
   return (
-    <>
+    <div className={`${maruburi.className}`}>
       {
         post?.map((document, idx) => {
           switch (document.type) {
@@ -82,6 +83,6 @@ export default function Content({
           }
         })
       }
-    </>
+    </div>
   )
 }

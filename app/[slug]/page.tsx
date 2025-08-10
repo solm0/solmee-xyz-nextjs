@@ -6,6 +6,7 @@ import Note from '@/app/component/note';
 import HyperlinkMap from '@/app/component/hyperlink-map';
 import GraphController from '@/app/component/graph-controller';
 import { mergeInlineInternalLinks } from '@/app/lib/merge-inline-internal-link';
+import { Suspense } from 'react';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -222,10 +223,14 @@ export default async function Page({
   post.content.document = mergeInlineInternalLinks(post.content.document)
 
   return (
-    <article className='flex flex-col gap-12 max-w-[45rem] text-text-900 leading-8 break-keep'>
-      <Note post={post} />
+    <article id="note_wrapper" className='flex flex-col gap-12 w-full pt-[40%] text-text-900 leading-8 break-keep overflow-y-scroll'>
+      <Suspense>
+        <Note post={post} />
+      </Suspense>
       <HyperlinkMap>
-        <GraphController post={post} />
+        <Suspense>
+          <GraphController post={post} />
+        </Suspense>
       </HyperlinkMap>
     </article>
   )
