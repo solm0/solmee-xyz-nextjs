@@ -1,11 +1,11 @@
 'use client'
 
 import { ChevronLeft, Expand } from 'lucide-react';
-import { Post, Graph } from '../lib/type';
+import { Post, Graph } from '@/app/lib/type';
 import { useState, useEffect } from 'react';
 import GraphRenderer from './graph-renderer';
 import clsx from 'clsx';
-import expandGraphToDepth from '../lib/expand-graph-to-depth';
+import expandGraphToDepth from '@/app/lib/expand-graph-to-depth';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 export function ControllerButton({

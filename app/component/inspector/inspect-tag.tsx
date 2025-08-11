@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useHoveredLiquidStore } from '../lib/use-hovered-liquid-store';
+import { useHoveredLiquidStore } from '@/app/lib/use-hovered-liquid-store';
 import { useEffect, useState } from 'react';
-import { Tag } from '../lib/type';
+import { Tag } from '@/app/lib/type';
 
 export default function InspectTag({
   tags

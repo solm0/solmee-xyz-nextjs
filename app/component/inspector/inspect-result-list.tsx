@@ -2,7 +2,7 @@
 
 import { useState} from "react"
 import { ChevronRight } from "lucide-react";
-import { Post } from "../lib/type";
+import { Post } from "@/app/lib/type";
 import clsx from "clsx";
 import { usePathname, useSearchParams, useRouter} from "next/navigation";
 

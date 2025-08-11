@@ -2,8 +2,8 @@
 
 import ForceGraph2D from 'react-force-graph-2d';
 import { NodeObject, LinkObject, GraphData } from 'react-force-graph-2d';
-import { Graph, Node, Post } from '../lib/type';
-import { useHoveredLink } from '../lib/use-hovered-link';
+import { Graph, Node, Post } from '@/app/lib/type';
+import { useHoveredLink } from '@/app/lib/use-hovered-link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 

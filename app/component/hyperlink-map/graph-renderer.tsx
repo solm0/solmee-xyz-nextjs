@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Graph } from "../lib/type";
+import { Graph } from "../../lib/type";
 
 export default function GraphRenderer({
   data

@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import type { Metadata } from "next";
-import GlobalGraphRenderer from "../component/graph-global-renderer";
+import GlobalGraphRenderer from "../component/hyperlink-map/graph-global-renderer";
 import { gql, GraphQLClient } from "graphql-request";
 import { Suspense } from "react";
 import BackButton from "../component/atoms/back-button";

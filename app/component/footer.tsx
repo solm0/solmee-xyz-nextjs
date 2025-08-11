@@ -1,7 +1,7 @@
 import { pretendard } from "../lib/localfont"
 import Giscus from "./giscus"
-import HyperlinkMapInline from "./hyper-link-map-inline"
-import GraphController from "./graph-controller"
+import HyperlinkMapInline from "./hyperlink-map/hyper-link-map-inline"
+import GraphController from "./hyperlink-map/graph-controller"
 import { Post } from "../lib/type"
 import Copyright from "./copyright"
 

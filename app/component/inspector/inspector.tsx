@@ -6,12 +6,12 @@ import InspectSearch from './inspect-search';
 import InspectKeyword from './inspect-keyword';
 import { Suspense, useEffect } from 'react';
 import clsx from 'clsx';
-import { useToggleStore } from '../lib/use-enabled';
-import { Tag, KeywordsByTag, Post } from '../lib/type';
-import GenerateChron from "../lib/gererate-chron";
+import { useToggleStore } from '../../lib/use-enabled';
+import { Tag, KeywordsByTag, Post } from '../../lib/type';
+import GenerateChron from "../../lib/gererate-chron";
 import InspectResultList from "./inspect-result-list";
 import { useSearchParams } from "next/navigation";
-import filterPosts from "../lib/filter-posts";
+import filterPosts from "../../lib/filter-posts";
 
 export function FilterComponents({
   icon,
@@ -63,8 +63,8 @@ export default function Inspector({
   return (
     <section
       className={clsx(
-      "h-full w-full flex flex-col gap-8 items-start text-sm transition-transform duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)]",
-      isEnabled ? 'translate-x-0 block' : '-translate-x-88 hidden md:block'
+      "h-full flex flex-col gap-8 items-start text-sm w-screen md:w-full transition-[transform, opacity] duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)]",
+      isEnabled ? 'translate-x-0 opacity-100 bg-background md:bg-transparent' : '-translate-x-88 opacity-0'
     )}>
       <Suspense>
         <FilterComponents

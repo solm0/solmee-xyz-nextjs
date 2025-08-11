@@ -3,8 +3,8 @@
 
 import { gql, GraphQLClient } from 'graphql-request';
 import Note from '@/app/component/note';
-import HyperlinkMap from '@/app/component/hyperlink-map';
-import GraphController from '@/app/component/graph-controller';
+import HyperlinkMap from '../component/hyperlink-map/hyperlink-map';
+import GraphController from '../component/hyperlink-map/graph-controller';
 import { mergeInlineInternalLinks } from '@/app/lib/merge-inline-internal-link';
 import { Suspense } from 'react';
 

@@ -1,8 +1,8 @@
 'use client'
 
-import ParamKwButton from "./atoms/param-kw-button";
+import ParamKwButton from "../atoms/param-kw-button";
 import { useSearchParams } from "next/navigation";
-import { KeywordsByTag } from "../lib/type";
+import { KeywordsByTag } from "@/app/lib/type";
 
 export default function InspectKeyword({
   kwByTag

@@ -1,11 +1,11 @@
 'use client'
 
 import dynamic from "next/dynamic";
-import { Graph, Post } from "../lib/type";
+import { Graph, Post } from "@/app/lib/type";
 import { useEffect, useState } from "react";
-import generateGlobalGraph from "../lib/generate-global-graph";
+import generateGlobalGraph from "@/app/lib/generate-global-graph";
 import { useSearchParams } from "next/navigation";
-import filterPosts from "../lib/filter-posts";
+import filterPosts from "@/app/lib/filter-posts";
 
 export default function GlobalGraphRenderer({
   posts,
