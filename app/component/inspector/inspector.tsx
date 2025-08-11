@@ -64,7 +64,7 @@ export default function Inspector({
   return (
     <section
       className={clsx(
-      "h-full flex flex-col gap-8 items-start text-sm w-screen md:w-full transition-[transform, opacity] duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)]",
+      "h-full flex flex-col gap-8 items-start text-sm w-screen md:w-full transition-[transform, opacity] duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] pointer-events-auto",
       isEnabled ? 'translate-x-0 opacity-100 bg-background md:bg-transparent' : '-translate-x-88 opacity-0'
     )}>
       <Suspense>

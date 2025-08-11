@@ -35,7 +35,7 @@ export default function ExpandButton({
         {name}
       </button>
       <div className={clsx(
-        "absolute h-auto w-40 flex flex-col p-3 -translate-x-2 items-start gap-1 overflow-clip transition-all backdrop-blur-2xl hover:bg-background rounded-sm",
+        "absolute h-auto w-40 flex flex-col p-3 -translate-x-16 md:-translate-x-2 items-start gap-1 overflow-clip transition-all backdrop-blur-2xl hover:bg-background rounded-sm",
         isOpen ? "max-h-96 mt-3" : "opacity-0 max-h-0"
       )}>
         {children}

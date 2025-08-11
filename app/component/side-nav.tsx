@@ -14,7 +14,7 @@ export default function SideNav({
   kwByTag: KeywordsByTag;
 }) {
   return (
-    <aside className={`fixed h-screen top-18 pt-0 md:top-0 md:pt-16 left-8 w-80 shrink-0 z-80`}>
+    <aside className={`fixed h-screen top-18 pt-0 md:top-0 md:pt-16 left-8 w-80 shrink-0 z-80 pointer-events-none`}>
       <Suspense>
         <Inspector posts={posts} tags={tags} kwByTag={kwByTag} />
       </Suspense>
