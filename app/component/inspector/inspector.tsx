@@ -51,7 +51,8 @@ export default function Inspector({
     initializeToggles();
   }, [initializeToggles]);
 
-  const isEnabled = useToggleStore((s) => s.toggles['noteInspector'])
+  const isEnabled = useToggleStore((s) => s.toggles['noteInspector']);
+  const setIsEnabled = useToggleStore((s) => s.setToggle);
 
   const searchParams = useSearchParams();
   const tag = searchParams.get("tag");
@@ -94,7 +95,10 @@ export default function Inspector({
           >
             결과: {finalPosts.length}건
           </label>
-            <div className="flex w-full flex-col gap-2 overflow-hidden">
+            <div
+              className="flex w-full flex-col gap-2 overflow-hidden"
+              onClick={() => setIsEnabled('noteInspector', false)}
+            >
               <InspectResultList posts={finalPosts} />
             </div>
         </div>
