@@ -90,7 +90,7 @@ export default function Inspector({
 
         <div className='flex flex-col gap-1 w-full overflow-hidden items-start select-none'>
           <label
-            className='flex items-center gap-2 text-text-800'
+            className='flex items-center gap-2 text-text-700'
           >
             결과: {finalPosts.length}건
           </label>

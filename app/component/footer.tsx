@@ -1,9 +1,9 @@
 import { pretendard } from "../lib/localfont"
 import Giscus from "./giscus"
-import Link from "next/link"
 import HyperlinkMapInline from "./hyper-link-map-inline"
 import GraphController from "./graph-controller"
 import { Post } from "../lib/type"
+import Copyright from "./copyright"
 
 export default function Footer({
   post,
@@ -16,12 +16,7 @@ export default function Footer({
         <GraphController post={post} />
       </HyperlinkMapInline>
       <Giscus />
-      <div className="flex justify-between items-center">
-        <span>© 2024-2025 정솔미</span>
-        <div className="flex gap-3 items-center">
-          <Link href='https://github.com/solm0/solmee-xyz-nextjs' target="_blank" className="hover:opacity-60 transition-opacity duration-300">소스코드</Link>
-        </div>
-      </div>
+      <Copyright />
     </footer>
   )
 }

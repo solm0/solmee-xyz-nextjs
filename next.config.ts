@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
       },
+      new URL('https://images.unsplash.com/**')
     ],
   },
 };

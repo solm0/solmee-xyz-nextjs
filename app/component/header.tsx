@@ -3,7 +3,7 @@ import { Settings } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="fixed top-8 left-[50%] backdrop-blur-2xl flex items-center justify-center -translate-x-[50%] px-3 rounded-sm w-auto h-8 z-70">
+    <header className="fixed top-8 left-[50%] flex items-center justify-center -translate-x-[50%] px-3 rounded-sm w-auto h-8 z-70 blur-xs hover:blur-none bg-transparent hover:backdrop-blur-2xl transition-all duration-300">
       <div className={`h-4 w-auto flex gap-4 text-sm items-center`}>
         <FilterIcon />
         <LinkButton href="" name="solmee.xyz" />

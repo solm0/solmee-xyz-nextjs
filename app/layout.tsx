@@ -64,6 +64,7 @@ export default async function RootLayout({
             <Suspense>
               <Header />
             </Suspense>
+            <h1 className="hidden">page</h1>
             <SideNav posts={posts} tags={tags} kwByTag={keywordsTag} />
             <main className="relative left-0 top-0 md:absolute md:left-[24rem] flex flex-col h-full w-full md:w-[calc(100vw-26rem)] flex-1 items-start overflow-hidden focus:outline-hidden">
               {children}
