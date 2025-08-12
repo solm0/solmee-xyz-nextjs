@@ -1,7 +1,6 @@
 'use client'
 
 import { Post } from "../lib/type";
-import { maruburi_bold } from '@/app/lib/localfont';
 import { useSearchParams } from "next/navigation";
 import { useHoveredLink } from "@/app/lib/use-hovered-link";
 import Link from "next/link";
@@ -41,7 +40,7 @@ export default function RingLinks({
           onMouseLeave={() => setHoveredId(null, null)}
           onClick={() => setHoveredId(null, null)}
           className={clsx(
-            backlink.id === id ? `${maruburi_bold.className} pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
+            backlink.id === id ? `text-green-600 pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
           )}
         >
           {backlink.title}
@@ -65,7 +64,7 @@ export default function RingLinks({
               onClick={() => setHoveredId(null, null)}
               className={clsx(
                 'leading-7 flex items-center',
-                link.id === id ? `${maruburi_bold.className} pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
+                link.id === id ? `text-green-600 pointer-events-none` : 'pointer-events-auto text-text-800 hover:text-text-700 transition-colors duration-300'
               )}
             >
               {link.title}

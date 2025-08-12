@@ -16,6 +16,7 @@
   --node: #00EB95;
   --green-100: #B8FFCA;
   --green-500: #00EB95;
+  --green-600: #00B975;
   --green-900: #009B71;
   --text-950: #394A54;
   --text-900: #52636E;
@@ -33,6 +34,7 @@
   --node: #00AC73;
   --green-100: #004636;
   --green-500: #006B48;
+  --green-600: #008E5F;
   --green-900: #00B371;
   --text-950: #C6CFDE;
   --text-900: #A6ACB6;
@@ -49,6 +51,7 @@
   --color-button-200: var(--button-200);
   --color-green-100: var(--green-100);
   --color-green-500: var(--green-500);
+  --color-green-600: var(--green-600);
   --color-green-900: var(--green-900);
   --color-text-950: var(--text-950);
   --color-text-900: var(--text-900);
