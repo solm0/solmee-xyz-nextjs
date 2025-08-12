@@ -88,7 +88,7 @@ export default function Carousel({
   const generateUrl = (idx: number) => {
     const cloudName = "dpqjfptr6";
     const publicId = carousel.props.items[idx]?.imageSrc;
-    const transformations = "f_auto,q_auto";
+    const transformations = "f_auto,q_auto,w_800,c_fill";
     return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
   }
 
@@ -99,7 +99,7 @@ export default function Carousel({
       {carousel.props.items.map((item, idx) => {
         const cloudName = "dpqjfptr6";
         const publicId = item.imageSrc;
-        const transformations = "f_auto,q_auto";
+        const transformations = "f_auto,q_auto,w_800,c_fill";
         const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
 
         return (

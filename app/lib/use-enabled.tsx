@@ -10,7 +10,7 @@ type State = {
 
 export const useToggleStore = create<State>((set) => ({
   toggles: {
-    noteInspector: true, // fallback defaults
+    noteInspector: false, // fallback defaults
     hyperlinkMap: true,
   },
 

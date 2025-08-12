@@ -21,7 +21,7 @@ export default function GoToTop({
   
   return (
     <div className={clsx(
-      "fixed bg-button-100 h-8 w-8 md:w-auto right-6 top-6 md:right-8 md:top-8 flex items-center justify-center gap-4 pointer-events-none transition-opacity rounded-sm px-3 z-80",
+      "fixed bg-button-100 h-8 w-8 md:w-auto right-4 top-4 md:right-4 md:top-8 flex items-center justify-center gap-4 pointer-events-none transition-opacity rounded-sm px-3 z-80",
       !isHeadingVisible ? 'opacity-100' : 'opacity-0',
     )}
     >

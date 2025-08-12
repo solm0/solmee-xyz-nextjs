@@ -39,7 +39,7 @@ export default function ThumbnailList({
 
   const cloudName = "dpqjfptr6";
   const publicId = note.thumbnail;
-  const transformations = "f_auto,q_auto,w_800";
+  const transformations = "f_auto,q_auto,w_600,c_fill";
   const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
 
   return (

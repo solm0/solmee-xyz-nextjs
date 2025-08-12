@@ -82,7 +82,7 @@ export default async function HomePage() {
   const unsorted = minimalData.posts.filter(post => (post.tags.name === '미분류' && post.meta === false));
 
   return (
-    <section className="relative flex flex-col gap-24 text-text-900 w-full pt-[20vh] pb-[20vh] overflow-y-scroll focus:outline-hidden">
+    <section className="relative flex flex-col gap-24 text-text-900 w-full pt-[20vh] pb-[20vh] overflow-y-scroll overflow-x-hidden focus:outline-hidden">
       <h2>반갑습니다.</h2>
 
       <article className="flex flex-col gap-4">

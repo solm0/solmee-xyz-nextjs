@@ -64,8 +64,8 @@ export default function Inspector({
   return (
     <section
       className={clsx(
-      "h-full flex flex-col gap-8 items-start text-sm w-screen md:w-full transition-[transform, opacity] duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] pointer-events-auto",
-      isEnabled ? 'translate-x-0 opacity-100 bg-background md:bg-transparent' : '-translate-x-88 opacity-0'
+      "h-full flex-col gap-8 items-start text-sm w-screen md:w-full transition-[transform, opacity] duration-200 ease-[cubic-bezier(0.75,0.05,0.45,0.95)] pl-8",
+      isEnabled ? 'translate-x-0 opacity-100 bg-background md:bg-transparent pointer-events-auto flex md:flex' : '-translate-x-88 opacity-0 pointer-events-none hidden md:flex'
     )}>
       <Suspense>
         <FilterComponents
@@ -97,7 +97,11 @@ export default function Inspector({
           </label>
             <div
               className="flex w-full flex-col gap-2 overflow-hidden"
-              onClick={() => setIsEnabled('noteInspector', false)}
+              onClick={() => {
+                if (window.innerWidth < 768) {
+                  setIsEnabled('noteInspector', false)
+                }
+              }}
             >
               <InspectResultList posts={finalPosts} />
             </div>

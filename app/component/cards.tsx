@@ -22,12 +22,12 @@ export function CardSm({posts}: {posts: Post[]}) {
 
 export function CardMd({posts}: {posts: Post[]}) {
   return (
-    <div className="flex gap-2 w-full flex-wrap">
+    <div className="flex flex-col md:flex-row gap-2 w-full flex-wrap">
       {posts.map((post) => (
         <Link
           key={post.id}
           href={post.id}
-          className={`shrink-0 w-60 h-36 rounded-sm p-4 flex justify-between hover:brightness-95 hover:translate-y-1 transition-[filter, transform] duration-300
+          className={`shrink-0 w-full md:w-60 h-auto md:h-36 rounded-sm p-4 flex justify-between hover:brightness-95 hover:translate-x-1 md:hover:translate-x-0 md:hover:translate-y-1 transition-[filter, transform] duration-300
             ${post.id === 'cmdc93ok7008imdam853f86o2' || post.id ==='cmdc93fii008hmdam1nvhb1c2' ? 'bg-green-500' : 'bg-button-200' }`}
         >
           <h3 className="self-end break-keep">{post.title}</h3>
@@ -39,7 +39,7 @@ export function CardMd({posts}: {posts: Post[]}) {
 }
 
 const cloudName = "dpqjfptr6";
-const transformations = "f_auto,q_auto";
+const transformations = "f_auto,q_auto,w_800,c_fill";
 
 export function CardLg({posts}: {posts: Post[]}) {
   const generateUrl = (id: string) => {
@@ -53,14 +53,14 @@ export function CardLg({posts}: {posts: Post[]}) {
         <Link
           key={post.id}
           href={post.id}
-          className={`relative shrink-0 w-60 h-60 rounded-sm hover:brightness-95 hover:translate-y-1 transition-[filter, transform] duration-300 overflow-clip`}
+          className={`relative shrink-0 w-full md:w-32 h-32 rounded-sm hover:brightness-95 hover:translate-x-1 md:hover:translate-x-0 md:hover:translate-y-1 transition-[filter, transform] duration-300 overflow-clip`}
         >
           {post.thumbnail ?
             <Image
               src={generateUrl(post.thumbnail)}
               width={800}
               height={800}
-              className="h-full w-full object-contain rounded-sm cursor-pointer"
+              className="h-32 w-32 md:h-full md:w-full object-contain rounded-sm cursor-pointer"
               alt={post.id}
             />
             :
@@ -68,11 +68,11 @@ export function CardLg({posts}: {posts: Post[]}) {
               src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809'
               width={800}
               height={800}
-              className="h-full w-full bg-button-50"
+              className="h-32 w-32 md:h-full md:w-full bg-button-50"
               alt={post.id}
             />
           }
-          <div className="absolute bottom-0 left-0 w-full flex bg-button-100 justify-between p-4 text-sm">
+          <div className="absolute bottom-0 left-32 md:left-0 w-[calc(100%-8rem)] md:w-full h-32 md:h-auto flex gap-4 bg-button-100 justify-between p-4 text-sm">
             <h3 className="break-keep">{post.title}</h3>
             <ArrowUpRight className="shrink-0 self-start w-5 h-5" />
           </div>
@@ -92,7 +92,7 @@ export function CardXl({posts}: {posts: Post[]}) {
         return (
           <div
             key={post.id}
-            className="flex h-[60vh] w-full overflow-scroll cursor-default overscroll-x-none"
+            className="flex h-[50vh] md:h-[60vh] w-full overflow-scroll cursor-default overscroll-x-none"
           >
 
             <div className="flex gap-2 ml-72">
@@ -124,10 +124,10 @@ export function CardXl({posts}: {posts: Post[]}) {
             </div>
 
             <Link
-              className="absolute flex flex-col w-80 pr-8 h-auto bg-button-100 p-4 mt-2 ml-2 rounded-sm gap-12 shrink-0 cursor-pointer hover:bg-button-200 hover:translate-y-1 transition-[colors, transform] duration-300"
+              className="absolute flex flex-col w-60 md:w-80 pr-8 h-auto bg-button-100 p-4 mt-2 ml-2 rounded-sm gap-[1rem] shrink-0 cursor-pointer hover:bg-button-200 hover:translate-y-1 transition-[colors, transform] duration-300"
               href={post.id}
             >
-              <div className="flex h-8 justify-between ">
+              <div className="flex h-auto justify-between ">
                 <h3 className="break-keep">{post.title}</h3>
                 <ArrowUpRight className="shrink-0 w-5 h-5" />
               </div>
