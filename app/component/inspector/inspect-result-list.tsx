@@ -19,7 +19,7 @@ export function RandItem({
       <span className={clsx (
         "ml-2 text-text-800 opacity-40 transition-[colors, opacity] duration-300",
         hovered && hovered !== note.id && 'opacity-0!',
-        hovered && hovered === note.id && 'text-green-500! opacity-100'
+        hovered && hovered === note.id && 'text-green-600! opacity-100'
       )}
       >
         {note.excerpt}

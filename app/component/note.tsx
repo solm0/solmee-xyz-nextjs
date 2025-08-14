@@ -5,7 +5,8 @@ import Content from '@/app/component/content';
 import Footer from '@/app/component/footer';
 import Toc from '@/app/component/toc';
 import Metadata from '@/app/component/metadata';
-import { maruburi_bold } from '@/app/lib/localfont';
+import { maruburi, maruburi_bold } from '@/app/lib/localfont';
+import { pretendard } from "@/app/lib/localfont";
 import { useEffect, useRef, useState } from "react";
 import RingLinks from "./ring-links";
 import SequenceNav from "./sequence-nav";
@@ -77,10 +78,10 @@ export default function Note({
   const { prev, next, isFirstChild } = generateSequence();
   
   return (
-    <div className="flex flex-col gap-12 w-full max-w-[47rem]">
+    <div className={`${post.tags.name === '코딩' ? pretendard.className : maruburi.className} flex flex-col gap-12 w-full max-w-[47rem]`}>
       <h1
         ref={headRef}
-        className={`leading-12 text-3xl text-text-950 ${maruburi_bold.className}`}
+        className={`leading-12 text-3xl text-text-950 ${post.tags.name === '코딩' ? `font-bold ${pretendard.className}` : maruburi_bold.className}`}
       >
         {post?.title}
       </h1>
@@ -91,7 +92,7 @@ export default function Note({
       </div>
       
       <div className="flex flex-col">
-        {post.content && <Content post={post.content.document} />}
+        {post.content && <Content post={post.content.document} font={`${post.tags.name === '코딩' ? 'sans' : 'serif'}`} />}
       </div>
 
       {(post.backlinks?.length || (post.links?.length ?? 0) > 0) &&

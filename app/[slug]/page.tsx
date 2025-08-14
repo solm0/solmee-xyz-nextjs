@@ -192,7 +192,7 @@ export async function generateMetadata({
   const post = data.post;
 
   return {
-    title: `${post?.title} | solmee.xyz`,
+    title: `${post?.title} | solmi.wiki`,
     description: `${post?.title}`,
   };
 }

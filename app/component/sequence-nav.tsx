@@ -24,7 +24,7 @@ export default function SequenceNav({
       {prev ?
         <Link
           href={`${prev.id}/?${newParams}`}
-          className="p-4 break-words flex-1 flex flex-col gap-2 min-h-20 bg-button-50 rounded-sm hover:brightness-97 transition-[filter] duration-300"
+          className="p-4 break-words flex-1 flex flex-col gap-2 min-h-20 bg-button-50 rounded-sm hover:bg-button-100 transition-colors duration-300"
           onMouseEnter={() => setHoveredId(prev.title || null, prev.id || null, false)}
           onMouseLeave={() => setHoveredId(null, null)}
           onClick={() => setHoveredId(null, null)}
@@ -38,7 +38,7 @@ export default function SequenceNav({
       {next ?
         <Link
           href={`${next.id}/?${newParams}`}
-          className="p-4 break-words flex-1 flex flex-col gap-2 min-h-20 bg-button-50 rounded-sm hover:brightness-97 transition-[filter] duration-300"
+          className="p-4 break-words flex-1 flex flex-col gap-2 min-h-20 bg-button-50 rounded-sm hover:bg-button-100 transition-colors duration-300"
           onMouseEnter={() => setHoveredId(next.title || null, next.id || null, false)}
           onMouseLeave={() => setHoveredId(null, null)}
           onClick={() => setHoveredId(null, null)}

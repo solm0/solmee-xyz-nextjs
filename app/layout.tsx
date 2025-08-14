@@ -60,7 +60,7 @@ export default async function RootLayout({
         className={`${pretendard.className} antialiased font-normal md:overflow-hidden`}
       >
         <ThemeProvider disableTransitionOnChange>
-          <div className="flex flex-col md:flex-row h-screen w-full p-4 md:p-8 gap-4">
+          <div className="flex flex-col md:flex-row h-screen w-full px-5 md:p-8 gap-4">
             <Suspense>
               <Header />
             </Suspense>

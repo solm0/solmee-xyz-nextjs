@@ -7,7 +7,7 @@ export function Alert() {
   return (
     <>
       {isOpen === true &&
-        <div className="fixed w-64 bg-green-500 px-3 py-2 z-80 h-auto rounded-sm bottom-4 left-4 md:bottom-8 md:left-8 text-sm text-text-900 flex flex-col items-start gap-2">
+        <div className="fixed w-64 bg-green-500 px-3 py-2 z-80 h-auto rounded-sm bottom-5 left-5 md:bottom-8 md:left-8 text-sm text-text-900 flex flex-col items-start gap-2">
           <p className="break-keep">현재 웹사이트의 일부가 미완성 상태로, 이미지가 누락되거나 저화질일 수 있습니다. 8월 안으로 완성 예정입니다.</p>
           <button
             onClick={() => {setIsOpen(false)}}

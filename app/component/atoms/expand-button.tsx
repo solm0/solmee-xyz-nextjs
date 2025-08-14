@@ -30,7 +30,7 @@ export default function ExpandButton({
     <div>
       <button
         onClick={handleClick}
-        className={`${isOpen ? `text-green-500`: `text-text-900`} w-6 h-4 px-3 flex items-center justify-center rounded-sm hover:brightness-97 transition-[filter, colors] duration-300 pointer-events-auto hover:text-text-700`}
+        className={`${isOpen ? `text-green-500`: `text-text-900`} w-6 h-4 px-3 flex items-center justify-center rounded-sm transition-colors duration-300 pointer-events-auto hover:text-text-700`}
       >
         {name}
       </button>

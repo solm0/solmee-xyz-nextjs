@@ -58,7 +58,6 @@
   --color-text-800: var(--text-800);
   --color-text-700: var(--text-700);
   --color-text-600: var(--text-600);
-  --brightness-hover-97: var(--hover-97);
 }
 
 body {
@@ -70,7 +69,7 @@ body {
 
 @media screen and (max-width: 640px) {
   html {
-    font-size: 14.5px;
+    font-size: 14.7px;
   }
 }
 

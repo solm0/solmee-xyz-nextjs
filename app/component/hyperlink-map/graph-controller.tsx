@@ -28,7 +28,7 @@ export function ControllerButton({
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        "px-2 py-2 rounded-sm hover:brightness-97 transition-filter duration-300 backdrop-blur-sm",
+        "px-2 py-2 rounded-sm hover:brightness-90 transition-filter duration-300 backdrop-blur-sm",
         disabled ? 'pointer-events-none text-text-600' : 'pointer-events-auto text-text-800',
       )}
     >

@@ -75,8 +75,8 @@ export default async function HomePage() {
   const minimalData = await client.request(GET_MINIMAL_POSTS_BY_ID, { ids: minimalIds });
 
   const work = hydratedData.posts;
-  const about = minimalData.posts.filter(post => post.tags.name === '미분류' && post.meta === true);
-  const trip = minimalData.posts.filter(post => post.tags.name === '방랑');
+  const meta = minimalData.posts.filter(post => post.tags.name === '미분류' && post.meta === true);
+  const travel = minimalData.posts.filter(post => post.tags.name === '방랑');
   const code = minimalData.posts.filter(post => post.tags.name === '코딩');
   const read = minimalData.posts.filter(post => post.tags.name === '독서');
   const unsorted = minimalData.posts.filter(post => (post.tags.name === '미분류' && post.meta === false));
@@ -86,8 +86,8 @@ export default async function HomePage() {
       <h2>반갑습니다.</h2>
 
       <article className="flex flex-col gap-4">
-        <h2><b>대해서</b><span className="text-text-800"> 이 웹사이트 &apos;solmee.xyz&apos;와 저에 대한 정보입니다.</span></h2>
-        <CardMd posts={about} />
+        <h2><b>대해서</b><span className="text-text-800"> 이 웹사이트 &apos;solmi.wiki&apos;와 저에 대한 정보입니다.</span></h2>
+        <CardMd posts={meta} />
       </article>
 
       <article className="flex flex-col gap-4">
@@ -97,7 +97,7 @@ export default async function HomePage() {
 
       <article className="flex flex-col gap-4">
         <h2><b>방랑</b><span className="text-text-800"> 교환학생 기간의 배낭여행 기록입니다.</span></h2>
-        <CardLg posts={trip} />
+        <CardLg posts={travel} />
       </article>
       
       <article className="flex flex-col gap-4">

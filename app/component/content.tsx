@@ -11,21 +11,22 @@ import Quote from "./document/quote";
 import InlineInternalLink from "./document/inline-internallink";
 import Carousel from "./document/carousel";
 import Iframe from "./document/iframe";
-import { maruburi } from "../lib/localfont";
 
 export default function Content({
-  post
+  post,
+  font
 }: {
   post: RichTextNode[];
+  font?: string;
 }) {
   return (
-    <div className={`${maruburi.className}`}>
+    <div>
       {
         post?.map((document, idx) => {
           switch (document.type) {
             case 'heading':
               return (
-                <Headings key={idx} heading={document} />
+                <Headings key={idx} heading={document} font={font ?? 'serif'} />
               )
             case 'paragraph':
               return (

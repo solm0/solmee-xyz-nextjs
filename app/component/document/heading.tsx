@@ -4,8 +4,10 @@ import { maruburi_bold } from "../../lib/localfont";
 
 export default function Headings({
   heading,
+  font
 }: {
   heading: HeadingNode;
+  font: string
 }) {
   return (
     <>
@@ -16,13 +18,13 @@ export default function Headings({
         switch(heading.level) {
           case 2:
             return (
-              <h2 key={id} id={id} className={`text-xl py-4 pt-16 text-text-950 ${maruburi_bold.className}`}>
+              <h2 key={id} id={id} className={`text-xl py-4 pt-16 text-text-950 ${font === 'serif' ? maruburi_bold.className : 'font-bold'}`}>
                 {text}
               </h2>
             )
           case 3: 
             return (
-              <h3 key={id} id={id} className={`text-lg py-4 pt-16 text-text-950 ${maruburi_bold.className}`}>
+              <h3 key={id} id={id} className={`text-lg py-4 pt-16 text-text-950 ${font === 'serif' ? maruburi_bold.className : 'font-bold'}`}>
                 {text}
               </h3>
             )
