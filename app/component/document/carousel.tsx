@@ -91,7 +91,7 @@ export default function Carousel({
     const isGif = publicId.toLowerCase().startsWith('gif');
         const transformations = isGif
           ? "f_auto,q_auto"
-          : "f_auto,q_auto,w_1800,c_fill";
+          : "f_auto,q_auto,c_fill";
     return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
   }
 
@@ -105,7 +105,7 @@ export default function Carousel({
         const isGif = publicId.toLowerCase().startsWith('gif');
         const transformations = isGif
           ? "f_auto,q_auto"
-          : "f_auto,q_auto,w_1800,c_fill";
+          : "f_auto,q_auto,c_fill";
         const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${publicId}.jpg`;
 
         return (

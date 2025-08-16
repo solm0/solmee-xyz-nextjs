@@ -1,9 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import { Metadata } from "next";
 import { gql, GraphQLClient } from "graphql-request";
 import Copyright from "../component/copyright";
 import { CardSm, CardMd, CardLg, CardXl } from "../component/cards";
+
+export const metadata: Metadata = {
+  title: "solmi.wiki",
+  description: "solmi.wiki",
+};
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL!);
 
@@ -54,6 +60,8 @@ export default async function HomePage() {
     'cmdc68f28007jmdamfoomxsbi',
     'cmdc5xxvn007dmdam3qkfh6ks',
     'cmdc5sw640076mdamz3mvy9gq',
+    'cmedxlusw003ttf6mmmkfwbpk',
+    'cmee9giwo003ztf6m65nt413w',
 
     // 코딩
     'cmder5t660000tf6m7kyppin6',
@@ -73,6 +81,7 @@ export default async function HomePage() {
 
   const hydratedData = await client.request(GET_HYDRATED_POSTS_BY_ID, { ids: hydratedIds });
   const minimalData = await client.request(GET_MINIMAL_POSTS_BY_ID, { ids: minimalIds });
+  const exchangeData = await client.request(GET_MINIMAL_POSTS_BY_ID, {ids: ['cmdbmtpt8005omdamericlkia']});
 
   const work = hydratedData.posts;
   const meta = minimalData.posts.filter(post => post.tags.name === '미분류' && post.meta === true);
@@ -80,6 +89,7 @@ export default async function HomePage() {
   const code = minimalData.posts.filter(post => post.tags.name === '코딩');
   const read = minimalData.posts.filter(post => post.tags.name === '독서');
   const unsorted = minimalData.posts.filter(post => (post.tags.name === '미분류' && post.meta === false));
+  const exchange = exchangeData.posts
 
   return (
     <section className="relative flex flex-col gap-24 text-text-900 w-full pt-[20vh] pb-[20vh] overflow-y-scroll overflow-x-hidden focus:outline-hidden">
@@ -97,6 +107,7 @@ export default async function HomePage() {
 
       <article className="flex flex-col gap-4">
         <h2><b>방랑</b><span className="text-text-800"> 교환학생 기간의 배낭여행 기록입니다.</span></h2>
+        <CardSm posts={exchange} />
         <CardLg posts={travel} />
       </article>
       
