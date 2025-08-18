@@ -7,6 +7,7 @@ import HyperlinkMap from '../component/hyperlink-map/hyperlink-map';
 import GraphController from '../component/hyperlink-map/graph-controller';
 import { mergeInlineInternalLinks } from '@/app/lib/merge-inline-internal-link';
 import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
 
 const client = new GraphQLClient(process.env.GRAPHQL_API_URL);
 
@@ -218,6 +219,10 @@ export default async function Page({
   if (!slug) throw new Error("Missing ID param");
 
   const data = await client.request(GET_POST_BY_ID, { id: slug });
+  if (!data.post) {
+    console.log('fff')
+    return notFound();
+  }
   const post = data.post;
 
   post.content.document = mergeInlineInternalLinks(post.content.document)
