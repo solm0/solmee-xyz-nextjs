@@ -97,7 +97,7 @@ export default function Carousel({
 
   return (
     <div
-      className="w-full md:w-[calc(100vw-26rem)] overflow-scroll flex gap-4 snap-x h-96 md:h-[32rem] overscroll-auto scrollbar-hide my-4"
+      className="w-full md:w-[calc(100vw-26rem)] overflow-y-hidden overflow-x-scroll flex gap-4 snap-x h-auto overscroll-auto scrollbar-hide my-4"
     >
       {carousel.props.items.map((item, idx) => {
         const cloudName = "dpqjfptr6";
@@ -111,7 +111,7 @@ export default function Carousel({
         return (
           <div
             key={idx}
-            className="relative flex flex-col gap-1 snap-start snap-normal h-full shrink-0"
+            className="relative flex flex-col gap-1 snap-start snap-normal h-auto shrink-0"
           >
             <Image
               src={imageUrl}
@@ -123,7 +123,7 @@ export default function Carousel({
               onClick={() => handleModal(idx)}
               unoptimized={true}
             />
-            <p className={`${pretendard.className} text-sm h-4 text-text-700`}>{item.alt}</p>
+            {item.alt && <p className={`${pretendard.className} text-sm h-4 text-text-700`}>{item.alt}</p>}
           </div>
         )
       })}

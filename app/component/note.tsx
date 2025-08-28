@@ -78,7 +78,7 @@ export default function Note({
   const { prev, next, isFirstChild } = generateSequence();
   
   return (
-    <div className={`${post.tags.name === '코딩' ? pretendard.className : maruburi.className} flex flex-col gap-12 w-full max-w-[47rem]`}>
+    <div className={`${post.tags.name === '코딩' ? `${pretendard.className} font-sans` : `${maruburi.className} font-serif`} flex flex-col gap-12 w-full max-w-[47rem]`}>
       <h1
         ref={headRef}
         className={`leading-12 text-3xl text-text-950 ${post.tags.name === '코딩' ? `font-bold ${pretendard.className}` : maruburi_bold.className}`}
