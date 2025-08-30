@@ -62,6 +62,8 @@ export default async function HomePage() {
     'cmdc5sw640076mdamz3mvy9gq',
     'cmedxlusw003ttf6mmmkfwbpk',
     'cmee9giwo003ztf6m65nt413w',
+    'cmex7mm4p004utf6mmdd281s9',
+    'cmera1z1w004ktf6moamgro7r',
 
     // 코딩
     'cmder5t660000tf6m7kyppin6',
@@ -85,7 +87,7 @@ export default async function HomePage() {
 
   const work = hydratedData.posts;
   const meta = minimalData.posts.filter(post => post.tags.name === '미분류' && post.meta === true);
-  const travel = minimalData.posts.filter(post => post.tags.name === '방랑');
+  const travel = minimalData.posts.filter(post => post.tags.name === '방랑').sort((a, b) => a.title.localeCompare(b.title));
   const code = minimalData.posts.filter(post => post.tags.name === '코딩');
   const read = minimalData.posts.filter(post => post.tags.name === '독서');
   const unsorted = minimalData.posts.filter(post => (post.tags.name === '미분류' && post.meta === false));
